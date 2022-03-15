@@ -1831,12 +1831,20 @@ OSD.chooseFields = function() {
         ]);
     }
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
+        F.DJI = {
+            name: 'DJI',
+            text: 'osdWarningTextDji',
+            desc: 'osdWarningDji'
+        };
+
         OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
+            F.DJI
             F.FAILSAFE,
             F.LAUNCH_CONTROL,
             F.GPS_RESCUE_UNAVAILABLE,
             F.GPS_RESCUE_DISABLED,
         ]);
+
     }
 
     OSD.constants.TIMER_TYPES = [
