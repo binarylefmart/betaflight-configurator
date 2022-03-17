@@ -1829,24 +1829,24 @@ OSD.chooseFields = function() {
             F.CORE_TEMPERATURE,
             F.RC_SMOOTHING_FAILURE,
         ]);
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_49)) {
+            F.DJI = {
+                name: 'DJI',
+                text: 'osdWarningTextDji',
+                desc: 'osdWarningDji'
+            };
+
+            OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
+                F.DJI
+            ]);
+        }
     }
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-        F.DJI = {
-            name: 'DJI',
-            text: 'osdWarningTextDji',
-            desc: 'osdWarningDji'
-        };
-
-        OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
-            F.DJI
-            F.FAILSAFE,
-            F.LAUNCH_CONTROL,
-            F.GPS_RESCUE_UNAVAILABLE,
-            F.GPS_RESCUE_DISABLED,
-        ]);
-
-    }
-
+    OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
+        F.FAILSAFE,
+        F.LAUNCH_CONTROL,
+        F.GPS_RESCUE_UNAVAILABLE,
+        F.GPS_RESCUE_DISABLED,
+    ]);
     OSD.constants.TIMER_TYPES = [
         'ON_TIME',
         'TOTAL_ARMED_TIME',
