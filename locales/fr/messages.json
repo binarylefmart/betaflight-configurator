@@ -5337,6 +5337,18 @@
     "configurationSmallAngleHelp": {
         "message": "L'engin ne sera pas armé s'il est incliné plus que le nombre spécifié en degrés. Ne s'applique que si l'accéléromètre est activé. Le réglage sur 180 désactive le contrôle"
     },
+    "configurationAltiLimit": {
+        "message": "Mode permettant au drone d'avoir une altitude maximale qu'il ne pourra pas dépasser."
+    },
+    "configurationAltiStartLim": {
+        "message": "Altitude où drone commencera sa limitation d'altitude."
+    },
+    "configurationAltiCutOff": {
+        "message": "Altitude maximale que le drone pourra atteindre."
+    },
+    "configurationGeofancingWarning": {
+        "message": "Alerte indiquant au pilote que la distance maximale de sa zone est atteinte (en mètres)."
+    },
     "configurationBatteryVoltage": {
         "message": "Tension batterie"
     },

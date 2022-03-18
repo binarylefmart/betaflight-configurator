@@ -117,6 +117,58 @@
                     </div>
                     <!-- END MAXIMUM ARMING ANGLE-->
 
+                    <!-- ALTILIMIT FEATURES -->
+                    <div class="gui_box grey baroNeeded">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="configurationAltiLimit"></div>>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="_AltiStartLim">
+                                <div class="number">
+                                    <label>
+                                        <input type="number" id="configurationAltiStartLim" step="1" min="1" max="1000" />
+                                        <span i18n="configurationAltiStartLim"></span>
+                                    </label>
+                                </div>
+                                <div class="spacer_box">
+                                    <div class="_AltiCutOff">
+                                        <div class="number">
+                                            <label>
+                                                <input type="number" id="configurationAltiCutOff" step="1" min="1" max="1000" />
+                                                <span i18n="configurationAltiCutOff"></span>
+                                            </label>
+                                        </div>
+                                        <div class="hardwareSelection">
+                                    <div class="select">
+                                        <div style="float: left; height: 20px; margin-right: 15px; margin-left: 3px;">
+                                            <input type="checkbox" id="accHardwareSwitch" class="toggle" />
+                                        </div>
+                                        <span class="freelabel" i18n="configurationAccHardware"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ALTILIMIT FEATURES-->
+
+                    <!-- GEOFANCING WARNING FEATURE -->
+                    <div class="gui_box grey gpsNeeded">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="configurationGeofancingWarning"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <div class="_GeofancingWarning">
+                                <div class="number">
+                                    <label>
+                                        <input type="number" id="configurationGeofancingWarning" step="1" min="1" max=20000 />
+                                        <span i18n="configurationGeofancingWarning"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- GEOFANCING WARNING FEATURE-->
+
                     <!-- OTHER FEATURES -->
                     <div class="featuresOther">
                         <div class="gui_box grey">
