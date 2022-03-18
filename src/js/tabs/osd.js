@@ -1539,7 +1539,12 @@ OSD.constants = {
             text: 'osdWarningTextRssiDbm',
             desc: 'osdWarningRssiDbm',
         },
-        OVER_CAP: {
+        DJI: {
+            name: 'DJI',
+            text: 'osdWarningTextDji',
+            desc: 'osdWarningDji'
+        },
+            OVER_CAP: {
             name: 'OVER_CAP',
             text: 'osdWarningTextOverCap',
             desc: 'osdWarningOverCap',
@@ -1829,23 +1834,13 @@ OSD.chooseFields = function() {
             F.CORE_TEMPERATURE,
             F.RC_SMOOTHING_FAILURE,
         ]);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_49)) {
-            F.DJI = {
-                name: 'DJI',
-                text: 'osdWarningTextDji',
-                desc: 'osdWarningDji'
-            };
-
-            OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
-                F.DJI
-            ]);
-        }
     }
     OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
         F.FAILSAFE,
         F.LAUNCH_CONTROL,
         F.GPS_RESCUE_UNAVAILABLE,
         F.GPS_RESCUE_DISABLED,
+        F.DJI,
     ]);
     OSD.constants.TIMER_TYPES = [
         'ON_TIME',

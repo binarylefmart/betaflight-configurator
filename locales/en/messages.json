@@ -5726,6 +5726,10 @@
     "osdWarningRssiDbm": {
         "message": "Warns when RSSI dBm value is below alarm setting"
     },
+    "osdWarningDji": {
+        "message": "DJI OSD Warnings",
+        "description": "Enabling warnings in the DJI OSD"
+    },
     "osdWarningTextOverCap": {
         "message": "Battery over capacity",
         "description": "One of the warnings that can be selected to be shown in the OSD"
