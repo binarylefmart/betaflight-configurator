@@ -4965,8 +4965,7 @@
         "message": "Avertissement lorsque la valeur RSSI en dBm est inférieure au paramètre alarme"
     },
     "osdWarningDji": {
-        "message": "Alertes DJI OSD",
-        "description": "Activation des avertissements dans l'OSD DJI"
+        "message": "Activation des avertissements dans l'OSD DJI"
     },
     "osdWarningTextOverCap": {
         "message": "Décharge batterie supérieur à sa capacité",
@@ -5338,16 +5337,31 @@
         "message": "L'engin ne sera pas armé s'il est incliné plus que le nombre spécifié en degrés. Ne s'applique que si l'accéléromètre est activé. Le réglage sur 180 désactive le contrôle"
     },
     "configurationAltiLimit": {
-        "message": "Mode permettant au drone d'avoir une altitude maximale qu'il ne pourra pas dépasser."
+        "message": "Mode permettant au drone d'avoir une altitude maximale qu'il ne pourra pas dépasser"
+    },
+    "configurationAltiLimitTitle": {
+        "message": "Limitation Altitude"
+    },
+    "configurationAltiLimitSubTitle": {
+        "message": "Activer limitation altitude"
+    },
+    "configurationAltiStartLimTitle": {
+        "message": "Début limitation d'altitude"
+    },
+    "configurationAltiCutOffTitle": {
+        "message": "Limite coupure moteurs"
     },
     "configurationAltiStartLim": {
-        "message": "Altitude où drone commencera sa limitation d'altitude."
+        "message": "Hauteur où le drone commencera la limitation d'altitude (en mètres)"
     },
     "configurationAltiCutOff": {
-        "message": "Altitude maximale que le drone pourra atteindre."
+        "message": "Altitude maximale que le drone pourra atteindre (en mètres)"
+    },
+    "configurationGeofancingWarningTitle": {
+        "message": "Alerte limitation distance"
     },
     "configurationGeofancingWarning": {
-        "message": "Alerte indiquant au pilote que la distance maximale de sa zone est atteinte (en mètres)."
+        "message": "Alerte indiquant au pilote que la distance maximale de sa zone est atteinte (en mètres)"
     },
     "configurationBatteryVoltage": {
         "message": "Tension batterie"

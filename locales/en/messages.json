@@ -5727,8 +5727,7 @@
         "message": "Warns when RSSI dBm value is below alarm setting"
     },
     "osdWarningDji": {
-        "message": "DJI OSD Warnings",
-        "description": "Enabling warnings in the DJI OSD"
+        "message": "Enabling warnings in the DJI OSD"
     },
     "osdWarningTextOverCap": {
         "message": "Battery over capacity",
@@ -6103,17 +6102,32 @@
     "configurationSmallAngleHelp": {
         "message": "Craft will not ARM if tilted more than specified number of degrees. Only applies if accelerometer is enabled. Setting to 180 will effectivly disable check"
     },
+    "configurationAltiLimitTitle": {
+        "message": "Altitude limitation"
+    },
+    "configurationAltiLimitSubTitle": {
+        "message": "Enable altitude limitation"
+    },
+    "configurationAltiStartLimTitle": {
+        "message": "Start limitation"
+    },
+    "configurationAltiCutOffTitle": {
+        "message": "Cutoff motors limitation"
+    },
     "configurationAltiLimit": {
-        "message": "Allowing Mode that the drone have a maximum altitude that it cannot exceed."
+        "message": "Allowing Mode that the drone have a maximum altitude that it cannot exceed"
     },
     "configurationAltiStartLim": {
-        "message": "Altitude where the drone will start its altitude limitation."
+        "message": "Height where the drone will start altitude limitation (in meter)"
     },
     "configurationAltiCutOff": {
-        "message": "Maximum altitude that the drone can reach."
+        "message": "Maximum altitude that the drone can reach (in meter)"
+    },
+    "configurationGeofancingWarningTitle": {
+        "message": "Geofancing Alert"
     },
     "configurationGeofancingWarning": {
-        "message": "Alert indicating to the pilot that the maximum distance of his zone has been reached (in meters)."
+        "message": "Alert indicating to the pilot that the maximum distance of his zone has been reached (in meters)"
     },
     "configurationBatteryVoltage": {
         "message": "Battery Voltage"

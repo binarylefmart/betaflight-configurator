@@ -1539,17 +1539,16 @@ OSD.constants = {
             text: 'osdWarningTextRssiDbm',
             desc: 'osdWarningRssiDbm',
         },
-        DJI: {
-            name: 'DJI',
-            text: 'osdWarningTextDji',
-            desc: 'osdWarningDji'
-        },
-            OVER_CAP: {
+        OVER_CAP: {
             name: 'OVER_CAP',
             text: 'osdWarningTextOverCap',
             desc: 'osdWarningOverCap',
         },
-
+        DJI: {
+            name: 'DJI',
+            text: 'DJI OSD',
+            desc: 'osdWarningDji'
+        },
     },
     FONT_TYPES: [
         { file: "default", name: "Default" },
