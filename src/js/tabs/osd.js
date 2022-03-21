@@ -1489,6 +1489,11 @@ OSD.constants = {
             text: 'osdWarningTextCrashFlipMode',
             desc: 'osdWarningCrashFlipMode',
         },
+        DJI: {
+            name: 'DJI',
+            text: 'osdWarningTextDji',
+            desc: 'osdWarningDji',
+        },
         ESC_FAIL: {
             name: 'ESC_FAIL',
             text: 'osdWarningTextEscFail',
@@ -1543,11 +1548,6 @@ OSD.constants = {
             name: 'OVER_CAP',
             text: 'osdWarningTextOverCap',
             desc: 'osdWarningOverCap',
-        },
-        DJI: {
-            name: 'DJI',
-            text: 'osdWarningTextDji',
-            desc: 'osdWarningDji'
         },
     },
     FONT_TYPES: [
@@ -1832,20 +1832,22 @@ OSD.chooseFields = function() {
             F.ESC_FAIL,
             F.CORE_TEMPERATURE,
             F.RC_SMOOTHING_FAILURE,
+
         ]);
     }
+
     OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
         F.FAILSAFE,
         F.LAUNCH_CONTROL,
         F.GPS_RESCUE_UNAVAILABLE,
         F.GPS_RESCUE_DISABLED,
-        F.DJI,
     ]);
     OSD.constants.TIMER_TYPES = [
         'ON_TIME',
         'TOTAL_ARMED_TIME',
         'LAST_ARMED_TIME',
     ];
+
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
         OSD.constants.TIMER_TYPES = OSD.constants.TIMER_TYPES.concat([
             'ON_ARM_TIME',
@@ -1859,6 +1861,7 @@ OSD.chooseFields = function() {
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
         OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
             F.OVER_CAP,
+            F.DJI,
         ]);
     }
 };
