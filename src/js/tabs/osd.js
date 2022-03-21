@@ -1546,7 +1546,7 @@ OSD.constants = {
         },
         DJI: {
             name: 'DJI',
-            text: 'DJI OSD',
+            text: 'osdWarningTextDji',
             desc: 'osdWarningDji'
         },
     },
