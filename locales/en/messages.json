@@ -6108,6 +6108,9 @@
     "configurationAltiLimitTitle": {
         "message": "Altitude limitation"
     },
+    "configurationHELPAlti": {
+        "message": "Only works if the barometer and/or the gps is activated"
+    },
     "configurationAltiLimitSubTitle": {
         "message": "Enable altitude limitation"
     },
