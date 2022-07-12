@@ -240,6 +240,7 @@ const FC = {
             roll_rate_limit:            1998,
             pitch_rate_limit:           1998,
             yaw_rate_limit:             1998,
+            rates_type:                 0,
         };
 
         this.AUX_CONFIG =               [];
@@ -823,6 +824,15 @@ const FC = {
         return hasVcp;
     },
 
+    boardHasFlashBootloader() {
+        let hasFlashBootloader = false;
+        if (semver.gte(this.CONFIG.apiVersion, API_VERSION_1_42)) {
+            hasFlashBootloader = bit_check(this.CONFIG.targetCapabilities, this.TARGET_CAPABILITIES_FLAGS.HAS_FLASH_BOOTLOADER);
+        }
+
+        return hasFlashBootloader;
+    },
+
     FILTER_TYPE_FLAGS: {
         PT1: 0,
         BIQUAD: 1,
@@ -891,5 +901,13 @@ const FC = {
 
     getSliderDefaults() {
         return this.DEFAULT_TUNING_SLIDERS;
+    },
+
+    RATES_TYPE: {
+        BETAFLIGHT: 0,
+        RACEFLIGHT: 1,
+        KISS: 2,
+        ACTUAL: 3,
+        QUICKRATES: 4,
     },
 };

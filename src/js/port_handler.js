@@ -23,6 +23,9 @@ PortHandler.initialize = function () {
     this.selectList = document.querySelector(portPickerElementSelector);
     this.initialWidth = this.selectList.offsetWidth + 12;
 
+    this.showVirtualMode = ConfigStorage.get('showVirtualMode').showVirtualMode;
+    this.showAllSerialDevices = ConfigStorage.get('showAllSerialDevices').showAllSerialDevices;
+
     // fill dropdown with version numbers
     generateVirtualApiVersions();
 
@@ -33,13 +36,13 @@ PortHandler.initialize = function () {
 PortHandler.check = function () {
     const self = this;
 
-    ConfigStorage.get('showVirtualMode', res => self.showVirtualMode = res.showVirtualMode);
-    ConfigStorage.get('showAllSerialDevices', res => self.showAllSerialDevices = res.showAllSerialDevices);
+    if (!self.port_available) {
+        self.check_usb_devices();
+    }
 
-    self.check_usb_devices();
-    self.check_serial_devices();
-
-    GUI.updateManualPortVisibility();
+    if (!self.dfu_available) {
+        self.check_serial_devices();
+    }
 
     setTimeout(function () {
         self.check();
@@ -84,14 +87,6 @@ PortHandler.check_usb_devices = function (callback) {
                     data: {isDFU: true},
                 }));
 
-                if (self.showVirtualMode) {
-                    self.portPickerElement.append($('<option/>', {
-                        value: 'virtual',
-                        text: i18n.getMessage('portsSelectVirtual'),
-                        data: {isVirtual: true},
-                    }));
-                }
-
                 self.portPickerElement.append($('<option/>', {
                     value: 'manual',
                     text: i18n.getMessage('portsSelectManual'),
@@ -109,14 +104,16 @@ PortHandler.check_usb_devices = function (callback) {
             }
             self.dfu_available = false;
         }
-        if(callback) {
+        if (callback) {
             callback(self.dfu_available);
         }
         if (!$('option:selected', self.portPickerElement).data().isDFU) {
             if (!(GUI.connected_to || GUI.connect_lock)) {
                 FC.resetState();
             }
-            self.portPickerElement.trigger('change');
+            if (self.dfu_available) {
+                self.portPickerElement.trigger('change');
+            }
         }
     });
 };
@@ -156,6 +153,7 @@ PortHandler.removePort = function(currentPorts) {
             self.initialPorts.splice(self.initialPorts.indexOf(removePorts[i]), 1);
         }
         self.updatePortSelect(self.initialPorts);
+        self.portPickerElement.trigger('change');
     }
 };
 
@@ -168,17 +166,16 @@ PortHandler.detectPort = function(currentPorts) {
         currentPorts = self.updatePortSelect(currentPorts);
         console.log(`PortHandler - Found: ${JSON.stringify(newPorts)}`);
 
-        ConfigStorage.get('last_used_port', function (result) {
-            if (result.last_used_port) {
-                if (result.last_used_port.includes('tcp')) {
-                    self.portPickerElement.val('manual');
-                } else if (newPorts.length === 1) {
-                    self.portPickerElement.val(newPorts[0].path);
-                } else if (newPorts.length > 1) {
-                    self.selectPort(currentPorts);
-                }
+        const result = ConfigStorage.get('last_used_port');
+        if (result.last_used_port) {
+            if (result.last_used_port.includes('tcp')) {
+                self.portPickerElement.val('manual');
+            } else if (newPorts.length === 1) {
+                self.portPickerElement.val(newPorts[0].path);
+            } else if (newPorts.length > 1) {
+                self.selectPort(currentPorts);
             }
-        });
+        }
 
         self.port_available = true;
         // Signal board verification
@@ -186,19 +183,13 @@ PortHandler.detectPort = function(currentPorts) {
             TABS.firmware_flasher.boardNeedsVerification = true;
         }
 
+        self.portPickerElement.trigger('change');
+
         // auto-connect if enabled
         if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to) {
             // start connect procedure. We need firmware flasher protection over here
             if (GUI.active_tab !== 'firmware_flasher') {
-                let connectionTimeout = 100;
-                ConfigStorage.get('connectionTimeout', function (result) {
-                    if (result.connectionTimeout) {
-                        connectionTimeout = result.connectionTimeout;
-                    }
-                    GUI.timeout_add('auto-connect_timeout', function () {
-                        $('div#header_btns a.connect').click();
-                    }, connectionTimeout); // timeout so bus have time to initialize after being detected by the system
-                });
+                $('div#header_btns a.connect').click();
             }
         }
         // trigger callbacks
@@ -275,7 +266,7 @@ PortHandler.selectPort = function(ports) {
             const pathSelect = ports[i].path;
             const isWindows = (OS === 'Windows');
             const isTty = pathSelect.includes('tty');
-            const deviceRecognized = portName.includes('STM') || portName.includes('CP210');
+            const deviceRecognized = portName.includes('STM') || portName.includes('CP210') || portName.startsWith('SPR');
             const legacyDeviceRecognized = portName.includes('usb');
             if (isWindows && deviceRecognized || isTty && (deviceRecognized || legacyDeviceRecognized)) {
                 this.portPickerElement.val(pathSelect);
@@ -301,7 +292,7 @@ PortHandler.setPortsInputWidth = function() {
         return max;
     }
 
-    const correction = 24; // account for up/down button and spacing
+    const correction = 32; // account for up/down button and spacing
     let width = findMaxLengthOption(this.selectList) + correction;
 
     width = (width > this.initialWidth) ? width : this.initialWidth;

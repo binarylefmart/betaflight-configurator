@@ -1872,6 +1872,9 @@ OSD.updateDisplaySize = function() {
         y: OSD.constants.VIDEO_LINES[videoType],
         total: null,
     };
+    // Adjust css background grid
+    const previewLayoutElement = $(".tab-osd .display-layout");
+    videoType === 'PAL' ? previewLayoutElement.addClass('video-pal').removeClass('video-ntsc') : previewLayoutElement.addClass('video-ntsc').removeClass('video-pal');
 };
 
 OSD.drawByOrder = function(selectedPosition, field, charCode, x, y) {
@@ -2352,7 +2355,11 @@ OSD.GUI.preview = {
         ev.dataTransfer.setData("text/plain", $(ev.target).data('field').index);
         ev.dataTransfer.setData("x", ev.currentTarget.dataset.x);
         ev.dataTransfer.setData("y", ev.currentTarget.dataset.y);
-        ev.dataTransfer.setDragImage($(this).data('field').preview_img, offsetX, offsetY);
+
+        if (GUI.operating_system !== "Linux") {
+            // latest NW.js (0.6x.x) has introduced an issue with Linux displaying a rectangle while moving an element
+            ev.dataTransfer.setDragImage($(this).data('field').preview_img, offsetX, offsetY);
+        }
     },
     onDragOver(e) {
         const ev = e.originalEvent;
@@ -2636,7 +2643,7 @@ TABS.osd.initialize = function(callback) {
                                 timerTableRow.append(`<td>${tim.index + 1}</td>`);
 
                                 // Source
-                                const sourceTimerTableData = $('<td class="osd_tip"></td>');
+                                const sourceTimerTableData = $('<td class="timer-detail osd_tip"></td>');
                                 sourceTimerTableData.attr('title', i18n.getMessage('osdTimerSourceTooltip'));
                                 sourceTimerTableData.append(`<label for="timerSource_${tim.index}" class="char-label">${i18n.getMessage('osdTimerSource')}</label>`);
                                 const src = $(`<select class="timer-option" id="timerSource_${tim.index}"></select>`);
@@ -2659,7 +2666,7 @@ TABS.osd.initialize = function(callback) {
                                 // Precision
                                 timerTableRow = $('<tr />');
                                 timerTable.append(timerTableRow);
-                                const precisionTimerTableData = $('<td class="osd_tip"></td>');
+                                const precisionTimerTableData = $('<td class="timer-detail osd_tip"></td>');
                                 precisionTimerTableData.attr('title', i18n.getMessage('osdTimerPrecisionTooltip'));
                                 precisionTimerTableData.append(`<label for="timerPrec_${tim.index}" class="char-label">${i18n.getMessage('osdTimerPrecision')}</label>`);
                                 const precision = $(`<select class="timer-option osd_tip" id="timerPrec_${tim.index}"></select>`);
@@ -2683,7 +2690,7 @@ TABS.osd.initialize = function(callback) {
                                 // Alarm
                                 timerTableRow = $('<tr />');
                                 timerTable.append(timerTableRow);
-                                const alarmTimerTableData = $('<td class="osd_tip"></td>');
+                                const alarmTimerTableData = $('<td class="timer-detail osd_tip"></td>');
                                 alarmTimerTableData.attr('title', i18n.getMessage('osdTimerAlarmTooltip'));
                                 alarmTimerTableData.append(`<label for="timerAlarm_${tim.index}" class="char-label">${i18n.getMessage('osdTimerAlarm')}</label>`);
                                 const alarm = $(`<input class="timer-option osd_tip" name="alarm" type="number" min=0 id="timerAlarm_${tim.index}"/>`);
@@ -2877,7 +2884,7 @@ TABS.osd.initialize = function(callback) {
                             enabledCount++;
                         }
 
-                        const $field = $(`<div class="switchable-field field-${field.index}"></div>`);
+                        const $field = $(`<div class="switchable-field switchable-field-flex field-${field.index}"></div>`);
                         let desc = null;
                         if (field.desc && field.desc.length) {
                             desc = i18n.getMessage(field.desc);
@@ -2917,7 +2924,9 @@ TABS.osd.initialize = function(callback) {
                         }
 
                         const finalFieldName = titleizeField(field);
-                        $field.append(`<label for="${field.name}" class="char-label">${finalFieldName}</label>`);
+                        const $labelAndVariant = $('<div class="switchable-field-description"></div>');
+                        $labelAndVariant.append(`<label for="${field.name}" class="char-label">${finalFieldName}</label>`);
+
 
 
                         if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44) && field.variants && field.variants.length > 0) {
@@ -2941,7 +2950,7 @@ TABS.osd.initialize = function(callback) {
 
                             selectVariant.val(field.variant);
 
-                            $field.append(selectVariant);
+                            $labelAndVariant.append(selectVariant);
                         }
 
                         if (field.positionable && field.isVisible[OSD.getCurrentPreviewProfile()]) {
@@ -2961,6 +2970,7 @@ TABS.osd.initialize = function(callback) {
                             );
                         }
 
+                        $field.append($labelAndVariant);
                         // Insert in alphabetical order, with unknown fields at the end
                         $field.name = field.name;
                         insertOrdered($displayFields, $field);

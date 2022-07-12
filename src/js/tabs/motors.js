@@ -44,7 +44,7 @@ TABS.motors = {
     DSHOT_3D_NEUTRAL: 1500,
 };
 
-TABS.motors.initialize = function (callback) {
+TABS.motors.initialize = async function (callback) {
     const self = this;
 
     self.armed = false;
@@ -59,18 +59,25 @@ TABS.motors.initialize = function (callback) {
         GUI.active_tab = 'motors';
     }
 
-    MSP.promise(MSPCodes.MSP_STATUS)
-    .then(() => MSP.promise(MSPCodes.MSP_PID_ADVANCED))
-    .then(() => MSP.promise(MSPCodes.MSP_FEATURE_CONFIG))
-    .then(() => MSP.promise(MSPCodes.MSP_MIXER_CONFIG))
-    .then(() => FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor ? MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY) : true)
-    .then(() => MSP.promise(MSPCodes.MSP_MOTOR_CONFIG))
-    .then(() => MSP.promise(MSPCodes.MSP_MOTOR_3D_CONFIG))
-    .then(() => MSP.promise(MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING))
-    .then(() => MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG))
-    .then(() => semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42) ? MSP.promise(MSPCodes.MSP_FILTER_CONFIG) : true)
-    .then(() => semver.gte(FC.CONFIG.apiVersion, "1.8.0") ? MSP.promise(MSPCodes.MSP_ARMING_CONFIG) : true)
-    .then(() => load_html());
+    await MSP.promise(MSPCodes.MSP_STATUS);
+    await MSP.promise(MSPCodes.MSP_PID_ADVANCED);
+    await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
+    await MSP.promise(MSPCodes.MSP_MIXER_CONFIG);
+    if (FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor) {
+        await MSP.promise(MSPCodes.MSP_MOTOR_TELEMETRY);
+    }
+    await MSP.promise(MSPCodes.MSP_MOTOR_CONFIG);
+    await MSP.promise(MSPCodes.MSP_MOTOR_3D_CONFIG);
+    await MSP.promise(MSPCodes.MSP2_MOTOR_OUTPUT_REORDERING);
+    await MSP.promise(MSPCodes.MSP_ADVANCED_CONFIG);
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
+        await MSP.promise(MSPCodes.MSP_FILTER_CONFIG);
+    }
+    if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
+        await MSP.promise(MSPCodes.MSP_ARMING_CONFIG);
+    }
+
+    load_html();
 
     function load_html() {
         $('#content').load("./tabs/motors.html", process_html);
@@ -226,7 +233,7 @@ TABS.motors.initialize = function (callback) {
         const motorsEnableTestModeElement = $('#motorsEnableTestMode');
         self.analyticsChanges = {};
 
-        motorsEnableTestModeElement.prop('checked', false);
+        motorsEnableTestModeElement.prop('checked', false).trigger('change');
 
         if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_42) || !(FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor)) {
             $(".motor_testing .telemetry").hide();
@@ -240,6 +247,7 @@ TABS.motors.initialize = function (callback) {
         function setContentButtons(motorsTesting=false) {
             $('.btn .tool').toggleClass("disabled", self.configHasChanged || motorsTesting);
             $('.btn .save').toggleClass("disabled", !self.configHasChanged);
+            $('.btn .stop').toggleClass("disabled", !motorsTesting);
         }
 
         const defaultConfiguration = {
@@ -321,7 +329,7 @@ TABS.motors.initialize = function (callback) {
         for (let selectIndex = 0; selectIndex < mixerList.length; selectIndex++) {
             mixerList.forEach(function (mixerEntry, mixerIndex) {
                 if (mixerEntry.pos === selectIndex) {
-                    mixerListElement.append(`<option value="${(mixerIndex + 1)}">${mixerEntry.name}</option>`);
+                    mixerListElement.append(`<option value="${(mixerIndex + 1)}">${mixerEntry.name.toUpperCase()}</option>`);
                 }
             });
         }
@@ -559,28 +567,29 @@ TABS.motors.initialize = function (callback) {
         });
 
         // set refresh speeds according to configuration saved in storage
-        ConfigStorage.get(['motors_tab_sensor_settings', 'motors_tab_gyro_settings', 'motors_tab_accel_settings'], function (result) {
-            if (result.motors_tab_sensor_settings) {
-                $('.tab-motors select[name="sensor_choice"]').val(result.motors_tab_sensor_settings.sensor);
-            }
+        const result = ConfigStorage.get(['motors_tab_sensor_settings', 'motors_tab_gyro_settings', 'motors_tab_accel_settings']);
+        if (result.motors_tab_sensor_settings) {
+            $('.tab-motors select[name="sensor_choice"]').val(result.motors_tab_sensor_settings.sensor);
+        }
 
-            if (result.motors_tab_gyro_settings) {
-                TABS.motors.sensorGyroRate = result.motors_tab_gyro_settings.rate;
-                TABS.motors.sensorGyroScale = result.motors_tab_gyro_settings.scale;
-            }
+        if (result.motors_tab_gyro_settings) {
+            TABS.motors.sensorGyroRate = result.motors_tab_gyro_settings.rate;
+            TABS.motors.sensorGyroScale = result.motors_tab_gyro_settings.scale;
+        }
 
-            if (result.motors_tab_accel_settings) {
-                TABS.motors.sensorAccelRate = result.motors_tab_accel_settings.rate;
-                TABS.motors.sensorAccelScale = result.motors_tab_accel_settings.scale;
-            }
-            $('.tab-motors .sensor select:first').change();
-        });
+        if (result.motors_tab_accel_settings) {
+            TABS.motors.sensorAccelRate = result.motors_tab_accel_settings.rate;
+            TABS.motors.sensorAccelScale = result.motors_tab_accel_settings.scale;
+        }
+        $('.tab-motors .sensor select:first').change();
 
         // Amperage
         function power_data_pull() {
-            motorVoltage.text(i18n.getMessage('motorsVoltageValue', [FC.ANALOG.voltage]));
-            motorMahDrawingElement.text(i18n.getMessage('motorsADrawingValue', [FC.ANALOG.amperage.toFixed(2)]));
-            motorMahDrawnElement.text(i18n.getMessage('motorsmAhDrawnValue', [FC.ANALOG.mAhdrawn]));
+            if (FC.ANALOG.last_received_timestamp) {
+                motorVoltage.text(i18n.getMessage('motorsVoltageValue', [FC.ANALOG.voltage]));
+                motorMahDrawingElement.text(i18n.getMessage('motorsADrawingValue', [FC.ANALOG.amperage.toFixed(2)]));
+                motorMahDrawnElement.text(i18n.getMessage('motorsmAhDrawnValue', [FC.ANALOG.mAhdrawn]));
+            }
         }
 
         GUI.interval_add('motors_power_data_pull_slow', power_data_pull, 250, true); // 4 fps
@@ -665,7 +674,7 @@ TABS.motors.initialize = function (callback) {
         unsyncedPWMSwitchElement.prop('checked', FC.PID_ADVANCED_CONFIG.use_unsyncedPwm !== 0).trigger("change");
         $('input[name="unsyncedpwmfreq"]').val(FC.PID_ADVANCED_CONFIG.motor_pwm_rate);
         $('input[name="digitalIdlePercent"]').val(FC.PID_ADVANCED_CONFIG.digitalIdlePercent);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
             dshotBidirElement.prop('checked', FC.MOTOR_CONFIG.use_dshot_telemetry).trigger("change");
 
             self.previousDshotBidir = FC.MOTOR_CONFIG.use_dshot_telemetry;
@@ -678,33 +687,36 @@ TABS.motors.initialize = function (callback) {
                 self.analyticsChanges['BidirectionalDshot'] = newValue;
                 FC.MOTOR_CONFIG.use_dshot_telemetry = value;
 
-                FC.FILTER_CONFIG.dyn_notch_count = self.previousFilterDynCount;
-                FC.FILTER_CONFIG.dyn_notch_q = self.previousFilterDynQ;
-
-                const dialogSettings = {
-                    title: i18n.getMessage("dialogDynFiltersChangeTitle"),
-                    text: i18n.getMessage("dialogDynFiltersChangeNote"),
-                    buttonYesText: i18n.getMessage("presetsWarningDialogYesButton"),
-                    buttonNoText: i18n.getMessage("presetsWarningDialogNoButton"),
-                    buttonYesCallback: () => _dynFilterChange(),
-                    buttonNoCallback:  null,
-                };
-
-                const _dynFilterChange = function() {
-                    if (value && !self.previousDshotBidir) {
-                        FC.FILTER_CONFIG.dyn_notch_count = FILTER_DEFAULT.dyn_notch_count_rpm;
-                        FC.FILTER_CONFIG.dyn_notch_q = FILTER_DEFAULT.dyn_notch_q_rpm;
-                    } else if (!value && self.previousDshotBidir) {
-                        FC.FILTER_CONFIG.dyn_notch_count = FILTER_DEFAULT.dyn_notch_count;
-                        FC.FILTER_CONFIG.dyn_notch_q = FILTER_DEFAULT.dyn_notch_q;
-                    }
-                };
-
-                if (FC.MOTOR_CONFIG.use_dshot_telemetry !== self.previousDshotBidir) { // if rpmFilterEnabled is not the same value as saved in the fc
-                    GUI.showYesNoDialog(dialogSettings);
-                } else {
+                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
+                    const rpmFilterIsDisabled = FC.FILTER_CONFIG.gyro_rpm_notch_harmonics === 0;
                     FC.FILTER_CONFIG.dyn_notch_count = self.previousFilterDynCount;
                     FC.FILTER_CONFIG.dyn_notch_q = self.previousFilterDynQ;
+
+                    const dialogDynFilterSettings = {
+                        title: i18n.getMessage("dialogDynFiltersChangeTitle"),
+                        text: i18n.getMessage("dialogDynFiltersChangeNote"),
+                        buttonYesText: i18n.getMessage("presetsWarningDialogYesButton"),
+                        buttonNoText: i18n.getMessage("presetsWarningDialogNoButton"),
+                        buttonYesCallback: () => _dynFilterChange(),
+                        buttonNoCallback: null,
+                    };
+
+                    const _dynFilterChange = function() {
+                        if (value && !self.previousDshotBidir) {
+                            FC.FILTER_CONFIG.dyn_notch_count = FILTER_DEFAULT.dyn_notch_count_rpm;
+                            FC.FILTER_CONFIG.dyn_notch_q = FILTER_DEFAULT.dyn_notch_q_rpm;
+                        } else if (!value && self.previousDshotBidir) {
+                            FC.FILTER_CONFIG.dyn_notch_count = FILTER_DEFAULT.dyn_notch_count;
+                            FC.FILTER_CONFIG.dyn_notch_q = FILTER_DEFAULT.dyn_notch_q;
+                        }
+                    };
+
+                    if ((FC.MOTOR_CONFIG.use_dshot_telemetry !== self.previousDshotBidir) && !(rpmFilterIsDisabled)) {
+                        GUI.showYesNoDialog(dialogDynFilterSettings);
+                    } else {
+                        FC.FILTER_CONFIG.dyn_notch_count = self.previousFilterDynCount;
+                        FC.FILTER_CONFIG.dyn_notch_q = self.previousFilterDynQ;
+                    }
                 }
             });
 
@@ -862,7 +874,16 @@ TABS.motors.initialize = function (callback) {
 
         setSlidersDefault();
 
-        motorsEnableTestModeElement.change(function () {
+        const ignoreKeys = [
+            'PageUp',
+            'PageDown',
+            'End',
+            'Home',
+            'ArrowUp',
+            'ArrowDown',
+        ];
+
+        motorsEnableTestModeElement.on('change', function () {
             let enabled = $(this).is(':checked');
             // prevent or disable testing if configHasChanged flag is set.
             if (self.configHasChanged) {
@@ -874,16 +895,35 @@ TABS.motors.initialize = function (callback) {
                 // disable input
                 motorsEnableTestModeElement.prop('checked', false);
             }
+
+            function disableMotorTest(e) {
+                if (motorsEnableTestModeElement.is(':checked')) {
+                    if (!ignoreKeys.includes(e.code)) {
+                        motorsEnableTestModeElement.prop('checked', false).trigger('change');
+                    }
+                }
+            }
+
+            if (enabled) {
+                document.addEventListener('keydown', e => disableMotorTest(e));
+                // enable Status and Motor data pulling
+                GUI.interval_add('motor_and_status_pull', get_status, 50, true);
+            } else {
+                document.removeEventListener('keydown', e => disableMotorTest(e));
+                GUI.interval_remove("motor_and_status_pull");
+            }
+
             setContentButtons(enabled);
             setSlidersEnabled(enabled);
 
             $('div.sliders input').trigger('input');
 
             mspHelper.setArmingEnabled(enabled, enabled);
-        }).change();
+        });
 
         let bufferingSetMotor = [],
         buffer_delay = false;
+
         $('div.sliders input:not(.master)').on('input', function () {
             const index = $(this).index();
             let buffer = [];
@@ -933,7 +973,7 @@ TABS.motors.initialize = function (callback) {
         }
 
         if (motorsRunning) {
-            motorsEnableTestModeElement.prop('checked', true).change();
+            motorsEnableTestModeElement.prop('checked', true).trigger('change');
 
             // motors are running adjust sliders to current values
 
@@ -1060,7 +1100,7 @@ TABS.motors.initialize = function (callback) {
             }
         }
 
-        $('a.save').on('click', function() {
+        $('a.save').on('click', async function() {
             // gather data that doesn't have automatic change event bound
             FC.MOTOR_CONFIG.minthrottle = parseInt($('input[name="minthrottle"]').val());
             FC.MOTOR_CONFIG.maxthrottle = parseInt($('input[name="maxthrottle"]').val());
@@ -1083,24 +1123,28 @@ TABS.motors.initialize = function (callback) {
                 FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
             }
 
-            MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG)))
-            .then(() => MSP.promise(MSPCodes.MSP_SET_ARMING_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ARMING_CONFIG)))
-            .then(() => semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42) ?
-                MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG)) : true)
-            .then(() => MSP.promise(MSPCodes.MSP_EEPROM_WRITE))
-            .then(() => reboot());
+            await MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG));
+            await MSP.promise(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG));
+            await MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG));
+            await MSP.promise(MSPCodes.MSP_SET_MOTOR_3D_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_3D_CONFIG));
+            await MSP.promise(MSPCodes.MSP_SET_ADVANCED_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ADVANCED_CONFIG));
+            await MSP.promise(MSPCodes.MSP_SET_ARMING_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_ARMING_CONFIG));
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
+                await MSP.promise(MSPCodes.MSP_SET_FILTER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FILTER_CONFIG));
+            }
+            await MSP.promise(MSPCodes.MSP_EEPROM_WRITE);
 
             analytics.sendSaveAndChangeEvents(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, self.analyticsChanges, 'motors');
             self.analyticsChanges = {};
             self.configHasChanged = false;
+
+            reboot();
         });
 
-        // enable Status and Motor data pulling
-        GUI.interval_add('motor_and_status_pull', get_status, 50, true);
+        $('a.stop').on('click', () => motorsEnableTestModeElement.prop('checked', false).trigger('change'));
+
+        // get initial motor status values
+        get_status();
 
         setup_motor_output_reordering_dialog(SetupEscDshotDirectionDialogCallback, zeroThrottleValue);
 
@@ -1112,12 +1156,13 @@ TABS.motors.initialize = function (callback) {
             GUI.content_ready(callback);
         }
 
-        GUI.content_ready(callback);
+        content_ready();
     }
 
-    function reboot() {
+    async function reboot() {
         GUI.log(i18n.getMessage('configurationEepromSaved'));
-        MSP.promise(MSPCodes.MSP_SET_REBOOT, false, false).then(() => reinitialiseConnection());
+        await MSP.promise(MSPCodes.MSP_SET_REBOOT);
+        reinitializeConnection(self);
     }
 
     function showDialogMixerReset(message) {

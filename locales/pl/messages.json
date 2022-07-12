@@ -628,9 +628,6 @@
     "defaultSupport2": {
         "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
     },
-    "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Filmy o Betaflight autorstwa Joshuy Bardwell </a>"
-    },
     "defaultSupport4": {
         "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
     },
@@ -2740,12 +2737,6 @@
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Oprogramowanie nie załadowane"
     },
-    "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Załadowane lokalne oprogramowanie: ($1 bajtów)"
-    },
-    "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Załaduj oprogramowanie ze strony online: ($1 bytes)"
-    },
     "firmwareFlasherHexCorrupted": {
         "message": "Plik HEX wydaje się być uszkodzony"
     },
@@ -3398,23 +3389,14 @@
     "failsafeStageTwoSettingsTitle": {
         "message": "Etap 2 - Ustawienia"
     },
-    "failsafeDelayItem": {
-        "message": "Czas zwłoki pomiędzy wykryciem zaniku sygnału a aktywacją etapu 2. [1 = 0.1 sek]"
-    },
     "failsafeDelayHelp": {
         "message": "Czas oczekiwania zanim przejdzie z etapu 1 do trybu ratunkowego \"recovery\""
-    },
-    "failsafeThrottleLowItem": {
-        "message": "Failsafe niskie opóźnienie przepustnicy [1 = 0.1 sec.]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Doprowadza do rozbrojenia maszyny zamiast wykonywać wybraną procedurę awaryjną, gdy gaz był na minimum przez dany okres czasu"
     },
     "failsafeThrottleItem": {
         "message": "Wartość przepustnicy użyta podczas lądowania"
-    },
-    "failsafeOffDelayItem": {
-        "message": "Opóźnienie wyłączenia silnika podczas Failsafe [1 = 0,1 sek]"
     },
     "failsafeOffDelayHelp": {
         "message": "Czas pozostawania w trybie lądowania do momentu wyłączenia silników i wyłączenia jednostki"

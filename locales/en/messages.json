@@ -133,6 +133,10 @@
         "message": "Catal\u00e0",
         "description": "Don't translate!!!"
     },
+    "language_da": {
+        "message": "Dansk",
+        "description": "Don't translate!!!"
+    },
     "language_de": {
         "message": "Deutsch",
         "description": "Don't translate!!!"
@@ -688,9 +692,9 @@
         "message": "Detected device with total flash size $1 KiB"
     },
     "dfu_hex_address_errors": {
-        "message": "<span class=\"message-negative\">Error</span>: Firmware image contains addresses not found on target device"
+        "message": "Firmware image contains addresses not found on target device"
     },
-        "dfu_error_image_size": {
+    "dfu_error_image_size": {
         "message": "<span class=\"message-negative\">Error</span>: Supplied image is larger then flash available on the chip! Image: $1 KiB, limit = $2 KiB"
     },
 
@@ -776,7 +780,7 @@
         "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell Betaflight Videos</a>"
+        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8nT4jjsE4VENEmwu9x8zDiE\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell Betaflight 4.3 Videos</a>"
     },
     "defaultSupport4": {
         "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
@@ -1207,6 +1211,12 @@
     },
     "configurationReceiverMode": {
         "message": "Receiver Mode"
+    },
+    "configurationTelemetry": {
+        "message": "Telemetry"
+    },
+    "configurationTelemetryHelp": {
+        "message": "Telemetry output from receiver"
     },
     "configurationRSSI": {
         "message": "RSSI (Signal Strength)"
@@ -3242,10 +3252,10 @@
         "message": "Firmware not loaded"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Loaded Local Firmware: ($1 bytes)"
+        "message": "Loaded Local Firmware: {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Loaded Online Firmware: ($1 bytes)"
+        "message": "Loaded Online Firmware: {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherHexCorrupted": {
         "message": "HEX file appears to be corrupted"
@@ -3895,7 +3905,7 @@
     },
     "pidTuningGyroLowpassType": {
         "message": "Gyro Lowpass 1 Filter Type"
-    },    
+    },
     "pidTuningGyroLowpass": {
         "message": "Gyro Lowpass 1"
     },
@@ -4014,7 +4024,7 @@
     },
     "pidTuningGyroLowpassType": {
         "message": "Gyro Lowpass 1 Filter Type"
-    },    
+    },
     "pidTuningDynamicNotchCountHelp": {
         "message": "Sets the number of dynamic notches per axis. With RPM filter enabled a value of 1 or 2 is recommended. Without RPM filter a value of 4 or 5 is recommended. Lower numbers will reduce filter delay, however it may increase motor temperature."
     },
@@ -4246,13 +4256,13 @@
         "message": "Stage 2 - Settings"
     },
     "failsafeDelayItem": {
-        "message": "Guard time for stage 2 activation after signal lost [1 = 0.1 sec.]"
+        "message": "Guard time for stage 2 activation after signal lost [seconds]"
     },
     "failsafeDelayHelp": {
         "message": "Time for stage 1 to wait for recovery"
     },
     "failsafeThrottleLowItem": {
-        "message": "Failsafe Throttle Low Delay [1 = 0.1 sec.]"
+        "message": "Failsafe Throttle Low Delay [seconds]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Just disarm the craft instead of executing the selected failsafe procedure when the throttle was low for this amount of time"
@@ -4261,7 +4271,7 @@
         "message": "Throttle value used while landing"
     },
     "failsafeOffDelayItem": {
-        "message": "Delay for turning off the Motors during Failsafe [1 = 0.1 sec.]"
+        "message": "Delay for turning off the Motors during Failsafe [seconds]"
     },
     "failsafeOffDelayHelp": {
         "message": "Time to stay in landing mode until the motors are turned off and the craft is disarmed"
@@ -4311,26 +4321,26 @@
     },
     "failsafeGpsRescueItemDescendRate": {
         "message": "Descend rate (meters/second)"
-    },    
+    },
     "failsafeGpsRescueItemMinSats": {
         "message": "Minimum satellites"
     },
     "failsafeGpsRescueItemAllowArmingWithoutFix": {
         "message": "Allow arming without fix - <span class=\"message-negative\">WARNING: the GPS Rescue will not be available</span>"
     },
-    "failsafeGpsRescueItemAltitudeMode": { 
+    "failsafeGpsRescueItemAltitudeMode": {
         "message": "Altitude mode"
     },
-    "failsafeGpsRescueItemAltitudeModeMaxAlt": { 
+    "failsafeGpsRescueItemAltitudeModeMaxAlt": {
         "message": "Maximum altitude"
     },
-    "failsafeGpsRescueItemAltitudeModeFixedAlt": { 
+    "failsafeGpsRescueItemAltitudeModeFixedAlt": {
         "message": "Fixed altitude"
     },
-    "failsafeGpsRescueItemAltitudeModeCurrentAlt": { 
+    "failsafeGpsRescueItemAltitudeModeCurrentAlt": {
         "message": "Current altitude"
     },
-    "failsafeGpsRescueItemSanityChecks": { 
+    "failsafeGpsRescueItemSanityChecks": {
         "message": "Sanity checks"
     },
     "failsafeGpsRescueItemSanityChecksOff": {
@@ -4992,7 +5002,7 @@
     },
     "osdTextElementGPSVariant4Decimals": {
         "message": "With 4 decimals",
-        "description": "One of the variants for the GPS element of the OSD"        
+        "description": "One of the variants for the GPS element of the OSD"
     },
     "osdTextElementGPSVariantDegMinSec": {
         "message": "Using degrees, minutes and seconds",
@@ -5311,14 +5321,14 @@
     },
     "osdDescElementRcChannels": {
         "message": "Display at most 4 channels values. The channels must be specified with the CLI variable 'osd_rcchannels'"
-    },    
+    },
     "osdTextElementCameraFrame": {
         "message": "Camera frame",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCameraFrame": {
         "message": "Adds an adjustable outline element designed to represent the field of view of the pilot's HD camera for visual framing.<br /><br />You can adjust the width and height in CLI with 'osd_camera_frame_width' and 'osd_camera_frame_height'"
-    },    
+    },
     "osdTextElementEfficiency": {
         "message": "Battery efficiency",
         "description": "One of the elements of the OSD"

@@ -2,7 +2,8 @@
 
 ![Betaflight](http://static.rcgroups.net/forums/attachments/6/1/0/3/7/6/a9088900-228-bf_logo.jpg)
 
-[![Latest version](https://img.shields.io/github/v/release/betaflight/betaflight-configurator)](https://github.com/betaflight/betaflight-configurator/releases) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/betaflight-configurator/localized.svg)](https://crowdin.com/project/betaflight-configurator) [![Build Status](https://travis-ci.com/betaflight/betaflight-configurator.svg?branch=master)](https://travis-ci.com/betaflight/betaflight-configurator) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=betaflight_betaflight-configurator&metric=alert_status)](https://sonarcloud.io/dashboard?id=betaflight_betaflight-configurator) [![Build Status](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_apis/build/status/betaflight.betaflight-configurator?branchName=master)](https://dev.azure.com/Betaflight/Betaflight%20Nightlies/_build/latest?definitionId=1&branchName=master) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Latest version](https://img.shields.io/github/v/release/betaflight/betaflight-configurator)](https://github.com/betaflight/betaflight-configurator/releases) [![Build](https://img.shields.io/github/workflow/status/betaflight/betaflight-configurator/Nightly)](https://github.com/betaflight/betaflight-configurator/actions/workflows/nightly.yml) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/betaflight-configurator/localized.svg)](https://crowdin.com/project/betaflight-configurator) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=betaflight_betaflight-configurator&metric=alert_status)](https://sonarcloud.io/dashboard?id=betaflight_betaflight-configurator) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 
 Betaflight Configurator is a crossplatform configuration tool for the Betaflight flight control system.
 
@@ -62,7 +63,7 @@ If you experience graphics display problems or smudged/dithered fonts display is
 
 ### Unstable Testing Versions
 
-Unstable testing versions of the lates builds of the configurator for most platforms can be downloaded from [here](https://github.com/betaflight/betaflight-configurator-nightlies/releases/).
+Unstable testing versions of the latest builds of the configurator for most platforms can be downloaded from [here](https://github.com/betaflight/betaflight-configurator-nightlies/releases/).
 
 **Be aware that these versions are intended for testing / feedback only, and may be buggy or broken, and can cause flight controller settings to be corrupted. Caution is advised when using these versions.**
 
@@ -116,7 +117,7 @@ If no platform is provided, the build for the host platform is run.
 
 **Note:** Support for cross-platform building is very limited due to the requirement for platform specific build tools. If in doubt, build on the target platform.
 
-You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win32`, `--linux32` and `--armv7` can be used too, but they are not officially supported, so use them at your own risk.
+You can also use multiple platforms e.g. `yarn gulp <taskname> --osx64 --linux64`. Other platforms like `--win32`, `--linux32` and `--armv8` can be used too, but they are not officially supported, so use them at your own risk.
 
 ## Support
 

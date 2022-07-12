@@ -590,7 +590,7 @@
         "message": "Detectat dispositiu amb un total de $1 KiB de memòria flash"
     },
     "dfu_hex_address_errors": {
-        "message": "<span class=\"message-negative\">Error</span>: la imatge del firmware conté adreces que no s'han trobat al dispositiu de destinació"
+        "message": "La imatge del firmware conté adreces que no s'han trobat al dispositiu de destinació"
     },
     "dfu_error_image_size": {
         "message": "<span class=\"message-negative\">Error</span>: La imatge proporcionada és major a la memòria flash disponible al xip! Imatge: $1 KiB, limit = $2 KiB"
@@ -675,7 +675,7 @@
         "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Wiki</a>"
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Videos Betaflight de Joshua Bardwell</a>"
+        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8nT4jjsE4VENEmwu9x8zDiE\" target=\"_blank\" rel=\"noopener noreferrer\">Joshua Bardwell Betaflight 4.3 Videos</a>"
     },
     "defaultSupport4": {
         "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
@@ -1105,6 +1105,12 @@
     },
     "configurationReceiverMode": {
         "message": "Mode del receptor"
+    },
+    "configurationTelemetry": {
+        "message": "Telemetria"
+    },
+    "configurationTelemetryHelp": {
+        "message": "Sortida de Telemetria des de receptor"
     },
     "configurationRSSI": {
         "message": "RSSI (Força de la senyal)"
@@ -3117,10 +3123,10 @@
         "message": "Firmware no carregat"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Firmware Local Carregat ($1 bytes)"
+        "message": "Firmware local carregat: {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Programari local carregat ($1 bytes)"
+        "message": "Firmware en línia carregat: {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherHexCorrupted": {
         "message": "L'arxiu HEX sembla corrupte"
@@ -4115,13 +4121,13 @@
         "message": "Stage 2 - Ajustos"
     },
     "failsafeDelayItem": {
-        "message": "Temps de guarda per activar l'stage 2 després de perdre la senyal [1 = 0.1 sec.]"
+        "message": "Temps de guarda per activar l'stage 2 després de perdre la senyal [seconds]"
     },
     "failsafeDelayHelp": {
         "message": "Temps d'espera de l'stage 1 per a recuperació"
     },
     "failsafeThrottleLowItem": {
-        "message": "Retard de Failsafe Throttle baix [1 = 0.1 seg.]"
+        "message": "Retard de Failsafe Throttle Low [seconds]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Només desarma l'aeronau en comptes d'executar el failsafe si el throttle està baix per un cert temps"
@@ -4130,7 +4136,7 @@
         "message": "Valor de throttle per l'aterrament"
     },
     "failsafeOffDelayItem": {
-        "message": "Retard per aturar els motors en un failsafe [1 = 0.1 sec.]"
+        "message": "Retard per aturar els motors en un failsafe [seconds]"
     },
     "failsafeOffDelayHelp": {
         "message": "Temps de restar en landing mode fins que els motors són apagats i l'aeronau es desarma"

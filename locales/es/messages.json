@@ -582,7 +582,7 @@
         "message": "Detectado dispositivo con un tamaño de flash total de $1 KiB"
     },
     "dfu_hex_address_errors": {
-        "message": "<span class=\"message-negative\">Error</span>: La imagen del firmware contiene direcciones no encontradas en el dispositivo de destino"
+        "message": "La imagen del firmware contiene direcciones no encontradas en el dispositivo de destino"
     },
     "dfu_error_image_size": {
         "message": "<span class=\"message-negative\">Error</span>: ¡La imagen proporcionada es mayor que la flash disponible en el chip! Imagen: $1 KiB, límite = $2 KiB"
@@ -667,7 +667,7 @@
         "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki de Betaflight</a>"
     },
     "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Vídeos Betaflight de Joshua Bardwell</a>"
+        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8nT4jjsE4VENEmwu9x8zDiE\" target=\"_blank\" rel=\"noopener noreferrer\">Vídeos de Joshua Bardwell para Betaflight 4.3</a>"
     },
     "defaultSupport4": {
         "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
@@ -1097,6 +1097,12 @@
     },
     "configurationReceiverMode": {
         "message": "Modo del Receptor"
+    },
+    "configurationTelemetry": {
+        "message": "Telemetría"
+    },
+    "configurationTelemetryHelp": {
+        "message": "Salida de telemetría desde el receptor"
     },
     "configurationRSSI": {
         "message": "RSSI (Fuerza de la Señal)"
@@ -3109,10 +3115,10 @@
         "message": "Firmware no cargado"
     },
     "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Cargado Firmware Local ($1 bytes)"
+        "message": "Cargado Firmware Local {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Cargado Firmware Internet: ($1 bytes)"
+        "message": "Cargado Firmware Internet {{filename}} ({{bytes}} bytes)"
     },
     "firmwareFlasherHexCorrupted": {
         "message": "El archivo HEX parece estar corrupto"
@@ -3880,7 +3886,7 @@
         "message": "Establece el número de filtros notch dinámicos por eje. Con el filtro RPM activado se recomienda un valor de 1 o 2. Sin filtro RPM se recomienda un valor de 4 o 5. Los números más bajos minimizarán el retraso introducido por el filtro, sin embargo puede que aumente la temperatura de los motores."
     },
     "pidTuningRpmFilterGroup": {
-        "message": "Giro Filtro RPM",
+        "message": "Filtro RPM del Giro",
         "description": "Header text for the RPM Filter group"
     },
     "pidTuningRpmFilterHelp": {
@@ -3888,7 +3894,7 @@
         "description": "Header text for the RPM Filter group"
     },
     "pidTuningRpmHarmonics": {
-        "message": "Giro Filtro RPM Número de Armónicos",
+        "message": "Número de armónicos",
         "description": "Text for one of the parameters of the RPM Filter"
     },
     "pidTuningRpmHarmonicsHelp": {
@@ -3945,7 +3951,7 @@
         "message": "Tipo de filtro dinámico"
     },
     "pidTuningDTermNotchFiltersGroup": {
-        "message": "Filtro notch del D Term"
+        "message": "Filtro Notch del D Term"
     },
     "pidTuningDTermNotchFiltersGroupHelp": {
         "message": "Aplica un filtro notch estático (frecuencia constante) a los datos del D Term, en la frecuencia Centro especificada.<br /><br />La amplitud del notch se determina por la frecuencia de corte.<br /><br />Puede ser útil para resonancias aisladas, de frecuencia constante, que son amplificadas por D.<br /><br />Mantén el corte tan cerca del centro como sea posible. Evita ajustar los filtros notch por debajo de 100 Hz excepto en construcciones de bajas RPM."
@@ -4107,13 +4113,13 @@
         "message": "Etapa 2 - Ajustes"
     },
     "failsafeDelayItem": {
-        "message": "Tiempo de guarda para activación de etapa 2 después de perder la señal [1 = 0.1 seg]"
+        "message": "Tiempo de guarda para activación de etapa 2 después de perder la señal [segundos]"
     },
     "failsafeDelayHelp": {
         "message": "Tiempo a esperar en etapa 1 para recuperación"
     },
     "failsafeThrottleLowItem": {
-        "message": "Retardo Acelerador Bajo Modo de Seguridad [1 = 0.1 seg]"
+        "message": "Retardo Acelerador Bajo Modo de Seguridad [segundos]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Simplemente desarma la aeronave en lugar de ejecutar el proceso de modo de seguridad seleccionado cuando el acelerador está al mínimo durante este tiempo"
@@ -4122,7 +4128,7 @@
         "message": "Valor de acelerador para el aterrizaje"
     },
     "failsafeOffDelayItem": {
-        "message": "Retraso para apagar los motores en caso de fallo [1 = 0.1 seg.]"
+        "message": "Retardo para apagar los motores durante el Modo de Seguridad [segundos]"
     },
     "failsafeOffDelayHelp": {
         "message": "Tiempo para permanecer en modo aterrizaje, hasta que los motores se apaguen y se desarmen"

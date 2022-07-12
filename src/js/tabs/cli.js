@@ -363,9 +363,9 @@ const lineFeedCode = 10;
 const carriageReturnCode = 13;
 
 function writeToOutput(text) {
-    const windowWrapper = TABS.cli.GUI.windowWrapper;
-    windowWrapper.append(text);
-    $('.tab-cli .window').scrollTop(windowWrapper.height());
+    TABS.cli.GUI.windowWrapper.append(text);
+    const cliWindow = $('.tab-cli .window');
+    cliWindow.scrollTop(cliWindow.prop("scrollHeight"));
 }
 
 function writeLineToOutput(text) {
@@ -462,7 +462,7 @@ TABS.cli.read = function (readInfo) {
             CONFIGURATOR.cliActive = false;
             CONFIGURATOR.cliValid = false;
             GUI.log(i18n.getMessage('cliReboot'));
-            reinitialiseConnection(self);
+            reinitializeConnection(self);
         }
 
     }

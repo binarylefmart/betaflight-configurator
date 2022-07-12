@@ -640,9 +640,6 @@
     "defaultSupport2": {
         "message": "<a href=\"http://betaflight.info\" target=\"_blank\" rel=\"noopener noreferrer\">Wiki do Betaflight</a>"
     },
-    "defaultSupport3": {
-        "message": "<a href=\"https://www.youtube.com/playlist?list=PLwoDb7WF6c8kdK6yHr7vhsU9iRTr5HxP4\" target=\"_blank\" rel=\"noopener noreferrer\">Vídeos do Betaflight por Joshua Bardwell</a>"
-    },
     "defaultSupport4": {
         "message": "<a href=\"https://github.com/Betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">GitHub</a>"
     },
@@ -2843,12 +2840,6 @@
     "firmwareFlasherFirmwareNotLoaded": {
         "message": "Firmware não carregado"
     },
-    "firmwareFlasherFirmwareLocalLoaded": {
-        "message": "Carregado Firmware Local ($1 bytes)"
-    },
-    "firmwareFlasherFirmwareOnlineLoaded": {
-        "message": "Firmware on-line carregado: ($1 bytes)"
-    },
     "firmwareFlasherHexCorrupted": {
         "message": "Parece que o arquivo HEX está corrompido"
     },
@@ -3539,23 +3530,14 @@
     "failsafeStageTwoSettingsTitle": {
         "message": "Estágio 2 - Configurações"
     },
-    "failsafeDelayItem": {
-        "message": "Tempo de espera antes de ativar o estágio 2 após perder o sinal [1 = 0.1 sec.]"
-    },
     "failsafeDelayHelp": {
         "message": "Tempo para recuperação no estágio 1"
-    },
-    "failsafeThrottleLowItem": {
-        "message": "Tempo até Acelerador Baixo [1 = 0.1 sec.]"
     },
     "failsafeThrottleLowHelp": {
         "message": "Apenas desarme a aeronave ao invés de executar o Failsafe se o acelerador estiver baixo por este determinado período de tempo"
     },
     "failsafeThrottleItem": {
         "message": "Valor do Acelerador utilizado para pousar"
-    },
-    "failsafeOffDelayItem": {
-        "message": "Delay para desligar os motores durante o Failsafe [1 = 0.1 sec.]"
     },
     "failsafeOffDelayHelp": {
         "message": "Tempo para ficar no modo de pouso até que os motores sejam desligados e a aeronave desarmada"
