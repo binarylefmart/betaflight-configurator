@@ -6017,6 +6017,9 @@
     "configurationAltiLimit": {
         "message": "Mode permettant au drone d'avoir une altitude maximale qu'il ne pourra pas dépasser"
     },
+    "configurationHELPAlti": {
+        "message": "Ne fonctionne que si le baromètre et/ou le gps est activé"
+    },
     "configurationAltiLimitTitle": {
         "message": "Limitation Altitude"
     },
