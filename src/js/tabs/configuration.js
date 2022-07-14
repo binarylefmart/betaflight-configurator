@@ -504,6 +504,33 @@ TABS.configuration.initialize = function (callback) {
         }
 
         // UI hooks
+        $('input[id="ALTILIMITswitch"]').change(function() {
+            if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
+              const checked = $(this).is(':checked');
+              $('.AltilimSettings').toggle(checked);
+            }
+        }).change();
+
+        function checkUpdateALTILIMControls() {
+            if (FC.FEATURE_CONFIG.features.isEnabled('isAltiLimit')) {
+                $('.AltilimSettings').show();
+            } else {
+                $('.AltilimSettings').hide();
+            }
+        }
+
+        $('input.feature', features_e).change(function () {
+            const element = $(this);
+
+            FC.FEATURE_CONFIG.features.updateData(element);
+            updateTabList(FC.FEATURE_CONFIG.features);
+
+            if (element.attr('name') === 'ALTILIM') {
+                checkUpdateALTILIMControls();
+            }
+        });
+
+        checkUpdateALTILIMControls();
 
         function checkUpdateGpsControls() {
             if (FC.FEATURE_CONFIG.features.isEnabled('GPS')) {
