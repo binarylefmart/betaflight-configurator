@@ -357,6 +357,7 @@ TABS.configuration.initialize = function (callback) {
         $('input[id="accHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.acc_hardware !== 1);
         $('input[id="baroHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.baro_hardware !== 1);
         $('input[id="magHardwareSwitch"]').prop('checked', FC.SENSOR_CONFIG.mag_hardware !== 1);
+        $('input[id="ALTILIMITswitch"]').prop('checked', FC.SENSOR_CONFIG.altiLimiter !== 1);
 
         // Only show these sections for supported FW
         if (semver.lt(FC.CONFIG.apiVersion, "1.16.0")) {
@@ -512,7 +513,7 @@ TABS.configuration.initialize = function (callback) {
         }).change();
 
         function checkUpdateALTILIMControls() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('isAltiLimit')) {
+            if (FC.FEATURE_CONFIG.features.isEnabled('altilimiter')) {
                 $('.AltilimSettings').show();
             } else {
                 $('.AltilimSettings').hide();
@@ -621,6 +622,7 @@ TABS.configuration.initialize = function (callback) {
             FC.SENSOR_CONFIG.baro_hardware = $('input[id="baroHardwareSwitch"]').is(':checked') ? 0 : 1;
             FC.SENSOR_CONFIG.mag_hardware = $('input[id="magHardwareSwitch"]').is(':checked') ? 0 : 1;
             FC.CONFIG.name = $.trim($('input[name="craftName"]').val());
+            FC.SENSOR_CONFIG.altiLimiter = $('input[id="ALTILIMITswitch"]').is(':checked') ? 0 : 1;
 
             function save_serial_config() {
                 mspHelper.sendSerialConfig(save_config);
