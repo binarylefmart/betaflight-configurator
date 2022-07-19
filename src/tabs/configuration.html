@@ -119,12 +119,24 @@
                 <!-- END MAXIMUM ARMING ANGLE-->
 
                 <!-- ALTILIMIT FEATURES -->
-                <div class="gui_box grey ALTILIMITswitch">
+                <!-- <div class="gui_box grey ALTILIMITswitch">
                     <div class="gui_box_titlebar">
                         <div class="spacer_box_title" i18n="configurationAltiLimitTitle"></div>
                         <div class="helpicon cf_tip" i18n_title="configurationAltiLimit"></div>
                     </div>
                     <div class="spacer_box">
+                        <table class="featuresMultiple">
+                            <thead>
+                                <tr>
+                                    <th i18n="configurationFeatureEnabled"></th>
+                                    <th i18n="configurationFeatureDescription"></th>
+                                    <th i18n="configurationFeatureName"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="features gps"> -->
+                                <!-- table generated here -->
+                            <!-- </tbody>
+                        </table>
                         <div class="select">
                             <input type="checkbox" id="ALTILIMITswitch" class="toggle" />
                             <span class="freelabel" i18n="configurationAltiLimitSubTitle"></span>
@@ -143,7 +155,47 @@
                             </div>
                         </div>
                     </div>
+                </div> -->
+                <!-- JD -->
+                <div class="altilimiter">
+                    <div class="gui_box grey altilimiter">
+                        <div class="gui_box_titlebar">
+                            <div class="spacer_box_title" i18n="configurationAltiLimitTitle"></div>
+                            <div class="helpicon cf_tip" i18n_title="configurationAltiLimit"></div>
+                        </div>
+                        <div class="spacer_box">
+                            <table class="featuresMultiple">
+                                <thead>
+                                    <tr>
+                                        <th i18n="configurationFeatureEnabled"></th>
+                                        <th i18n="configurationFeatureDescription"></th>
+                                        <th i18n="configurationFeatureName"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="features altilimiter">
+                                    <!-- table generated here -->
+                                </tbody>
+                            </table>
+                            <div class="altilimiterSettings">
+                                <div style="float:left; width:100%;">
+                                    <div class="number ">
+                                        <input type="number" id="configurationAltiStartLimTitle" step="1" min="1"
+                                            max=20000 />
+                                        <span i18n="configurationAltiStartLimTitle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="configurationAltiStartLim"></div>
+                                    </div>
+                                    <div class="number ">
+                                        <input type="number" id="configurationAltiCutOffTitle" step="1" min="1"
+                                            max=20000 />
+                                        <span i18n="configurationAltiCutOffTitle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="configurationAltiCutOff"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!-- JD -->
                 <!-- ALTILIMIT FEATURES-->
 
                 <!-- GPS -->

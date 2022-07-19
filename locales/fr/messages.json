@@ -6020,10 +6020,16 @@
     "configurationHELPAlti": {
         "message": "Ne fonctionne que si le baromètre et/ou le gps est activé"
     },
+    "featurealtiLimiterTip":{
+        "message": "Ne fonctionne que si le baromètre et/ou le gps est activé"
+    },
     "configurationAltiLimitTitle": {
         "message": "Limitation Altitude"
     },
     "configurationAltiLimitSubTitle": {
+        "message": "Activer limitation altitude"
+    },
+    "featurealtiLimiter": {
         "message": "Activer limitation altitude"
     },
     "configurationAltiStartLimTitle": {

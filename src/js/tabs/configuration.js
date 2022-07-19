@@ -513,10 +513,10 @@ TABS.configuration.initialize = function (callback) {
         }).change();
 
         function checkUpdateALTILIMControls() {
-            if (FC.FEATURE_CONFIG.features.isEnabled('altilimiter')) {
-                $('.AltilimSettings').show();
+            if (FC.FEATURE_CONFIG.features.isEnabled('altiLimiter')) {
+                $('.altilimiterSettings').show();
             } else {
-                $('.AltilimSettings').hide();
+                $('.altilimiterSettings').hide();
             }
         }
 
@@ -526,7 +526,7 @@ TABS.configuration.initialize = function (callback) {
             FC.FEATURE_CONFIG.features.updateData(element);
             updateTabList(FC.FEATURE_CONFIG.features);
 
-            if (element.attr('name') === 'ALTILIM') {
+            if (element.attr('name') === 'altiLimiter') {
                 checkUpdateALTILIMControls();
             }
         });

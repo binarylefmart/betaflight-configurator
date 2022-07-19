@@ -19,6 +19,7 @@ const Features = function (config) {
         {bit: 15, group: 'rssi', name: 'RSSI_ADC'},
         {bit: 16, group: 'other', name: 'LED_STRIP'},
         {bit: 17, group: 'other', name: 'DISPLAY', haveTip: true},
+        {bit: 30, group: 'altilimiter', name: 'altiLimiter', haveTip: true},
     ];
 
     if (!semver.gte(config.apiVersion, API_VERSION_1_33)) {
@@ -159,6 +160,28 @@ Features.prototype.generateElements = function (featuresElements) {
 
             newElements.push(newElement);
             listElements.push(newElement);
+        } else if (self._features[i].name === 'altiLimiter') {
+            // Mise en forme pour alti limit (plus le nom a coter du bouton)
+            let featureName = '';
+            if (!self._features[i].hideName) {
+                featureName = `<td><div>${rawFeatureName}</div></td>`;
+            }
+
+            let element = `<tr><td><input class="feature toggle" id="feature${i}"`;
+            element += `name="${self._features[i].name}" title="${self._features[i].name}"`;
+            element += `type="checkbox"/></td><td>`;
+            element += `<span class="xs" i18n="feature${self._features[i].name}"></span></td>`;
+            element += `<td><span class="sm-min" i18n="feature${self._features[i].name}"></span>`;
+            element += `${feature_tip_html}</td></tr>`;
+
+            const newElement = $(element);
+
+            const featureElement = newElement.find('input.feature');
+
+            featureElement.prop('checked', bit_check(self._featureMask, featureBit));
+            featureElement.data('bit', featureBit);
+
+            newElements.push(newElement);
         } else {
             let featureName = '';
             if (!self._features[i].hideName) {
