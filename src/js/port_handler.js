@@ -18,19 +18,28 @@ const PortHandler = new function () {
 };
 
 PortHandler.initialize = function () {
-    const portPickerElementSelector = "div#port-picker #port";
-    this.portPickerElement = $(portPickerElementSelector);
-    this.selectList = document.querySelector(portPickerElementSelector);
-    this.initialWidth = this.selectList.offsetWidth + 12;
+    const self = this;
 
-    this.showVirtualMode = ConfigStorage.get('showVirtualMode').showVirtualMode;
-    this.showAllSerialDevices = ConfigStorage.get('showAllSerialDevices').showAllSerialDevices;
+    const portPickerElementSelector = "div#port-picker #port";
+    self.portPickerElement = $(portPickerElementSelector);
+    self.selectList = document.querySelector(portPickerElementSelector);
+    self.initialWidth = self.selectList.offsetWidth + 12;
 
     // fill dropdown with version numbers
     generateVirtualApiVersions();
 
-    // start listening, check after TIMEOUT_CHECK ms
-    this.check();
+    this.reinitialize();    // just to prevent code redundancy
+};
+
+PortHandler.reinitialize = function () {
+    this.initialPorts = false;
+    if (this.usbCheckLoop) {
+        clearTimeout(this.usbCheckLoop);
+    }
+    this.showVirtualMode = ConfigStorage.get('showVirtualMode').showVirtualMode;
+    this.showAllSerialDevices = ConfigStorage.get('showAllSerialDevices').showAllSerialDevices;
+
+    this.check();   // start listening, check after TIMEOUT_CHECK ms
 };
 
 PortHandler.check = function () {
@@ -44,7 +53,7 @@ PortHandler.check = function () {
         self.check_serial_devices();
     }
 
-    setTimeout(function () {
+    self.usbCheckLoop = setTimeout(() => {
         self.check();
     }, TIMEOUT_CHECK);
 };
@@ -52,13 +61,26 @@ PortHandler.check = function () {
 PortHandler.check_serial_devices = function () {
     const self = this;
 
-    serial.getDevices(function(currentPorts) {
+    serial.getDevices(function(cp) {
+
+        let currentPorts = [
+            ...cp,
+            ...(MdnsDiscovery.mdnsBrowser.services?.filter(s => s.txt.vendor === 'elrs' && s.txt.type === 'rx' && s.ready === true)
+                .map(s => s.addresses.map(a => ({
+                    path: `tcp://${a}`,
+                    displayName: `${s.txt.target} - ${s.txt.version}`,
+                    fqdn: s.fqdn,
+                    vendorId: 0,
+                    productId: 0,
+                }))).flat() ?? []),
+        ].filter(Boolean);
 
         // auto-select port (only during initialization)
         if (!self.initialPorts) {
             currentPorts = self.updatePortSelect(currentPorts);
             self.selectPort(currentPorts);
             self.initialPorts = currentPorts;
+            GUI.updateManualPortVisibility();
         } else {
             self.removePort(currentPorts);
             self.detectPort(currentPorts);
@@ -93,7 +115,7 @@ PortHandler.check_usb_devices = function (callback) {
                     data: {isManual: true},
                 }));
 
-                self.portPickerElement.val('DFU').change();
+                self.portPickerElement.val('DFU').trigger('change');
                 self.setPortsInputWidth();
             }
             self.dfu_available = true;
@@ -128,8 +150,9 @@ PortHandler.removePort = function(currentPorts) {
         // disconnect "UI" - routine can't fire during atmega32u4 reboot procedure !!!
         if (GUI.connected_to) {
             for (let i = 0; i < removePorts.length; i++) {
-                if (removePorts[i] === GUI.connected_to) {
-                    $('div#header_btns a.connect').click();
+                if (removePorts[i].path === GUI.connected_to) {
+                    $('div.connect_controls a.connect').click();
+                    $('div.connect_controls a.connect.active').click();
                 }
             }
         }
@@ -162,19 +185,13 @@ PortHandler.detectPort = function(currentPorts) {
     const newPorts = self.array_difference(currentPorts, self.initialPorts);
 
     if (newPorts.length) {
-        // pick last_used_port for manual tcp auto-connect or detect and select new port for serial
         currentPorts = self.updatePortSelect(currentPorts);
         console.log(`PortHandler - Found: ${JSON.stringify(newPorts)}`);
 
-        const result = ConfigStorage.get('last_used_port');
-        if (result.last_used_port) {
-            if (result.last_used_port.includes('tcp')) {
-                self.portPickerElement.val('manual');
-            } else if (newPorts.length === 1) {
-                self.portPickerElement.val(newPorts[0].path);
-            } else if (newPorts.length > 1) {
-                self.selectPort(currentPorts);
-            }
+        if (newPorts.length === 1) {
+            self.portPickerElement.val(newPorts[0].path);
+        } else if (newPorts.length > 1) {
+            self.selectPort(currentPorts);
         }
 
         self.port_available = true;
@@ -189,7 +206,7 @@ PortHandler.detectPort = function(currentPorts) {
         if (GUI.auto_connect && !GUI.connecting_to && !GUI.connected_to) {
             // start connect procedure. We need firmware flasher protection over here
             if (GUI.active_tab !== 'firmware_flasher') {
-                $('div#header_btns a.connect').click();
+                $('div.connect_controls a.connect').click();
             }
         }
         // trigger callbacks

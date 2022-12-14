@@ -1,6 +1,6 @@
-'use strict';
+import { i18n } from "../localization";
 
-TABS.vtx = {
+const vtx = {
     supported: false,
     vtxTableSavePending: false,
     vtxTableFactoryBandsSupported: false,
@@ -17,13 +17,13 @@ TABS.vtx = {
     },
 };
 
-TABS.vtx.isVtxDeviceStatusNotReady = function()
+vtx.isVtxDeviceStatusNotReady = function()
 {
     const isReady = (null !== FC.VTX_DEVICE_STATUS) && (FC.VTX_DEVICE_STATUS.deviceIsReady);
     return !isReady;
 };
 
-TABS.vtx.updateVtxDeviceStatus = function()
+vtx.updateVtxDeviceStatus = function()
 {
     MSP.send_message(MSPCodes.MSP2_GET_VTX_DEVICE_STATUS, false, false, vtxDeviceStatusReceived);
 
@@ -33,7 +33,7 @@ TABS.vtx.updateVtxDeviceStatus = function()
     }
 };
 
-TABS.vtx.getVtxTypeString = function()
+vtx.getVtxTypeString = function()
 {
     let result = i18n.getMessage(`vtxType_${FC.VTX_CONFIG.vtx_type}`);
 
@@ -47,7 +47,7 @@ TABS.vtx.getVtxTypeString = function()
     return result;
 };
 
-TABS.vtx.initialize = function (callback) {
+vtx.initialize = function (callback) {
     const self = this;
 
     if (GUI.active_tab !== 'vtx') {
@@ -574,6 +574,10 @@ TABS.vtx.initialize = function (callback) {
                     powerMinMax = {min: 1, max: 5};
                     break;
 
+                case VtxDeviceTypes.VTXDEV_MSP:
+                    powerMinMax = {min: 1, max: 5};
+                    break;
+
                 case VtxDeviceTypes.VTXDEV_UNKNOWN:
                 default:
                     powerMinMax = {min: 0, max: 7};
@@ -629,7 +633,7 @@ TABS.vtx.initialize = function (callback) {
 
                 writer.onerror = function(){
                     console.error('Failed to write VTX table lua file');
-                    GUI.log(i18n.getMessage('vtxSavedFileKo'));
+                    GUI.log(i18n.getMessage('vtxSavedLuaFileKo'));
                 };
 
                 writer.onwriteend = function() {
@@ -642,7 +646,7 @@ TABS.vtx.initialize = function (callback) {
                     writer.onwriteend = function() {
                         analytics.sendEvent(analytics.EVENT_CATEGORIES.FLIGHT_CONTROLLER, 'VtxTableLuaSave', text.length);
                         console.log('Write VTX table lua file end');
-                        GUI.log(i18n.getMessage('vtxSavedFileOk'));
+                        GUI.log(i18n.getMessage('vtxSavedLuaFileOk'));
                     };
 
                     writer.write(data);
@@ -652,7 +656,7 @@ TABS.vtx.initialize = function (callback) {
 
             }, function (){
                 console.error('Failed to get VTX table lua file writer');
-                GUI.log(i18n.getMessage('vtxSavedFileKo'));
+                GUI.log(i18n.getMessage('vtxSavedLuaFileKo'));
             });
         });
     }
@@ -881,13 +885,21 @@ TABS.vtx.initialize = function (callback) {
 
             TABS.vtx.vtxTableSavePending = false;
 
-            const oldText = $("#save_button").text();
-            $("#save_button").html(i18n.getMessage('vtxButtonSaved'));
-            setTimeout(function () {
-                $("#save_button").html(oldText);
-            }, 2000);
+            const saveButton = $("#save_button");
+            const oldText = saveButton.text();
+            const buttonDelay = 2000;
 
-            TABS.vtx.initialize();
+            saveButton.html(i18n.getMessage('vtxButtonSaving')).addClass('disabled');
+
+             // Allow firmware to make relevant changes before initialization
+            setTimeout(() => {
+                saveButton.html(i18n.getMessage('vtxButtonSaved'));
+
+                setTimeout(() => {
+                    TABS.vtx.initialize();
+                    saveButton.html(oldText).removeClass('disabled');
+                }, buttonDelay);
+            }, buttonDelay);
         }
     }
 
@@ -1004,7 +1016,7 @@ TABS.vtx.initialize = function (callback) {
 
 };
 
-TABS.vtx.cleanup = function (callback) {
+vtx.cleanup = function (callback) {
 
     // Add here things that need to be cleaned or closed before leaving the tab
     this.vtxTableSavePending = false;
@@ -1016,4 +1028,9 @@ TABS.vtx.cleanup = function (callback) {
     if (callback) {
         callback();
     }
+};
+
+window.TABS.vtx = vtx;
+export {
+    vtx,
 };

@@ -315,6 +315,24 @@ button {
 	}
 }
 .tab-firmware_flasher {
+	.build_configuration {
+		.select2 {
+			color: #424242;
+			.selection {
+				.select2-selection {
+					background-color: #575757;
+				}
+			}
+		}
+		input {
+			background-color: #3a3a3a;
+			color: white;
+		}
+		select {
+			background-color: #424242;
+			color: white;
+		}
+	}
 	.options {
 		select {
 			background-color: #3a3a3a;
@@ -332,7 +350,11 @@ button {
 	}
 	.release_info {
 		.target {
-			color: #98ddff;
+			color: white;
+		}
+		.buildProgress {
+			border: 1px solid var(--subtleAccent);
+			border-radius: 2px;
 		}
 	}
 	.cf_table {
@@ -512,15 +534,11 @@ progress[value] {
 	.preview {
 		background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../images/osd-bg-1.jpg);
 		background-size: cover;
-		&:active {
-			background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(../../images/osd-bg-1-grid.png), url(../../images/osd-bg-1.jpg);
-			background-size: cover;
-		}
 	}
 	input[type='checkbox'] {
 		&:after {
 			line-height: 1.5em;
-			content: '';
+			content: none;
 			display: inline-block;
 			width: 12px;
 			height: 12px;

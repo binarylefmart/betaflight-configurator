@@ -194,7 +194,7 @@
         "message": "Si utilitzeu una versió més recent del firmware amb una versió obsoleta de configurador, significa que canviar algunes configuracions tindrà com a resultat una <strong>configuració del firmware corrompuda i un aeronau que no funciona</strong>. A més, algunes funcions del firmware només es podran configurar en CLI.<br><strong> La versió del configurador Betaflight<b>$1</b> està disponible per a la descàrrega en línia</strong>, visiteu <a href=\"$2\" target=\"_ blank\"rel=\"noopener noreferrer\">aquesta pàgina </a> per descarregar i instal·lar la versió més recent amb solucions i millores.<br>Tanqueu la finestra del configurador abans de l’actualització."
     },
     "configuratorUpdateWebsite": {
-        "message": "Ves a la pàgina de llançament"
+        "message": "Ves a la pàgina de publicació"
     },
     "deviceRebooting": {
         "message": "Dispositiu - <span class=\"message-negative\">Reiniciant</span>"
@@ -207,21 +207,6 @@
     },
     "deviceReady": {
         "message": "Device - <span class=\"message-positive\">Preparat</span>"
-    },
-    "backupFileIncompatible": {
-        "message": "La còpia de seguretat va ser generada amb versions antigues del configurador i és incompatible. Perdona"
-    },
-    "backupFileUnmigratable": {
-        "message": "La còpia de seguretat va ser generada amb versions antigues del configurador i no és migrable. Perdona"
-    },
-    "configMigrationFrom": {
-        "message": "Migrant l'arxiu de configuració generada pel configurador: $1"
-    },
-    "configMigratedTo": {
-        "message": "Migrada la configuració al configurador: $1"
-    },
-    "configMigrationSuccessful": {
-        "message": "Migració de configuració completada. migracions aplicades: $1"
     },
     "tabFirmwareFlasher": {
         "message": "Flaixejador de firmware"
@@ -605,7 +590,7 @@
         "message": "Maquinari"
     },
     "defaultWelcomeText": {
-        "message": "L'aplicació és compatible amb tot el maquinari que pot executar Betaflight. Comproveu la pestanya Flash per obtenir la llista completa de maquinari.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Descarregueu Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel =\"noopener noreferrer\">Descarregueu scripts Betaflight TX Lua</a><br /><br />El codi font del microprogramari es pot descarregar des de <a href=\"https://github.com/betaflight/betaflight\" target= \"_blank\" rel=\"noopener noreferrer\">aquí</a><br /><br />Els darrers <b>Controladors STM USB VCP</b> es poden baixar des de <a href=\"http://www..st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a><br />Per al maquinari heretat que utilitza un xip USB a sèrie CP210x:<br />Els <b>controladors CP210x</b> més recents es poden baixar des de <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers \" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a><br />El La darrera instal·lació del controlador USB de <b>Zadig</b> per a Windows es pot descarregar des d'<a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a ><br /><b>ImpulseRC Driver Fixer</b> es pot descarregar <a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">aquí</a>"
+        "message": "L'aplicació és compatible amb tot el maquinari que pot executar Betaflight. Comproveu la pestanya Flash per obtenir la llista completa de maquinari.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Descarregueu Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel =\"noopener noreferrer\">Descarregueu scripts Betaflight TX Lua</a><br /><br />El codi font del microprogramari es pot descarregar des de <a href=\"https://github.com/betaflight/betaflight\" target= \"_blank\" rel=\"noopener noreferrer\">aquí</a><br /><br />Per al maquinari heretat que utilitza un xip USB a sèrie CP210x:<br />Els <b>controladors CP210x</b> més recents es poden baixar des de <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers \" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a><br />El La darrera instal·lació del controlador USB de <b>Zadig</b> per a Windows es pot descarregar des d'<a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">aquí</a ><br /><b>ImpulseRC Driver Fixer</b> es pot descarregar <a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">aquí</a>"
     },
     "defaultContributingHead": {
         "message": "Contribuir"
@@ -682,9 +667,6 @@
     },
     "defaultSupport5": {
         "message": "<a href=\"http://betaflight.tk/slack\" target=\"_blank\" rel=\"noopener noreferrer\">Desenvolupadors Betaflight a slack</a>"
-    },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">Funcionalitats de còpia de seguretat i restauració deshabilitades.</span> La teva versió de la API és <span class=\"message-negative\">$1</span>, la còpia i restauració requereix <span class=\"message-positive\">$2</span>. Si us plau, desa la teva configuració mitjançant el CLI, revisa la documentació de Betaflight per saber com procedir."
     },
     "initialSetupButtonCalibrateAccel": {
         "message": "Calibrar acceleròmetre"
@@ -1518,6 +1500,9 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD (Protocol FrSky)"
     },
+    "portsFunction_VTX_MSP": {
+        "message": "VTX (MSP + Displayport)"
+    },
     "pidTuningProfileOption": {
         "message": "Perfil $1"
     },
@@ -1566,6 +1551,10 @@
     "pidTuningAntiGravityGain": {
         "message": "Guany",
         "description": "Anti Gravity Gain Parameter"
+    },
+    "pidTuningAntiGravityGainHelp": {
+        "message": "Augmenta iTerm i augmenta P durant els canvis ràpids de l'accelerador.<br><br>8.0 significa aproximadament 8 vegades l'augment iTerm",
+        "description": "Anti Gravity Gain Parameter Help Icon"
     },
     "pidTuningAntiGravityThres": {
         "message": "Llindar",
@@ -1861,11 +1850,23 @@
     "pidTuningRcExpo": {
         "message": "RC Expo"
     },
+    "pidTuningTPAMode": {
+        "message": "TPA Mode"
+    },
     "pidTuningTPA": {
         "message": "TPA"
     },
+    "pidTuningTPARate": {
+        "message": "TPA Rate"
+    },
     "pidTuningTPABreakPoint": {
         "message": "TPA Breakpoint"
+    },
+    "pidTuningTPAPD": {
+        "message": "PD"
+    },
+    "pidTuningTPAD": {
+        "message": "D"
     },
     "pidTuningThrottleCurvePreview": {
         "message": "Vista prèvia de la corba d’acceleració (Throttle)"
@@ -2060,6 +2061,9 @@
     },
     "receiverButtonBindMessage": {
         "message": "Sol·licitud d’enllaç enviada al controlador de vol."
+    },
+    "receiverButtonPassphrase": {
+        "message": "Contrasenya"
     },
     "receiverButtonSticks": {
         "message": "Sticks de control"
@@ -2933,8 +2937,11 @@
     "sdcardStatusUnknown": {
         "message": "Estat desconegut $1"
     },
+    "firmwareFlasherBranch": {
+        "message": "Selecciona aplicar"
+    },
     "firmwareFlasherReleaseSummaryHead": {
-        "message": "Informació de la publicació"
+        "message": "Versió i informació de compilació"
     },
     "firmwareFlasherReleaseManufacturer": {
         "message": "ID Fabricant:"
@@ -2954,17 +2961,35 @@
     "firmwareFlasherReleaseTarget": {
         "message": "Model:"
     },
-    "firmwareFlasherReleaseFile": {
-        "message": "Binari:"
+    "firmwareFlasherReleaseMCU": {
+        "message": "MCU:"
     },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Plataforma Unificada:"
+    "firmwareFlasherCloudBuildDetails": {
+        "message": "Detalls de l'estructura del nuvol:"
     },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "Mostra config."
+    "firmwareFlasherCloudBuildLogUrl": {
+        "message": "Mostrar Log."
     },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "Data:"
+    "firmwareFlasherCloudBuildStatus": {
+        "message": "Estat:"
+    },
+    "firmwareFlasherCloudBuildPending": {
+        "message": "pendent"
+    },
+    "firmwareFlasherCloudBuildProcessing": {
+        "message": "processant"
+    },
+    "firmwareFlasherCloudBuildSuccessCached": {
+        "message": "éxit (caché)"
+    },
+    "firmwareFlasherCloudBuildSuccess": {
+        "message": "èxit"
+    },
+    "firmwareFlasherCloudBuildTimedOut": {
+        "message": "s'ha esgotat el temps d'espera (torneu-ho a provar)"
+    },
+    "firmwareFlasherCloudBuildFailed": {
+        "message": "ha fallat (comproveu el registre)"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "Descarrega manualment."
@@ -3579,7 +3604,39 @@
         "message": "Recompte de cèl·lules: per al canvi automàtic de perfil"
     },
     "pidTuningCellCountHelp": {
-        "message": "Activa automàticament el primer perfil que té un nombre de cel·les igual a la bateria connectada."
+        "message": "Activa automàticament el primer perfil que té un recompte de cel·les igual al de la bateria connectada.<br><br><ul><li><b>Canvia</b>: Canvia sempre a un perfil amb un recompte de cel·les coincident si hi ha és un.</li><li><b>Desactiva</b>: Desactiva el canvi automàtic de perfil</li><b>1S-8S</b>: Seleccioneu el recompte de cel·les del perfil que s'utilitzarà per a aquest perfil</li></ul>"
+    },
+    "pidTuningCellCountChange": {
+        "message": "Interruptor",
+        "description": "Switch profile if there are no profiles matching cell count"
+    },
+    "pidTuningCellCountStay": {
+        "message": "Deshabilita",
+        "description": "Disable cell count for this profile"
+    },
+    "pidTuningCellCount1S": {
+        "message": "1S"
+    },
+    "pidTuningCellCount2S": {
+        "message": "2S"
+    },
+    "pidTuningCellCount3S": {
+        "message": "3S"
+    },
+    "pidTuningCellCount4S": {
+        "message": "4S"
+    },
+    "pidTuningCellCount5S": {
+        "message": "5S"
+    },
+    "pidTuningCellCount6S": {
+        "message": "6S"
+    },
+    "pidTuningCellCount7S": {
+        "message": "7S"
+    },
+    "pidTuningCellCount8S": {
+        "message": "8S"
     },
     "pidTuningNonProfileFilterSettings": {
         "message": "Ajustament de Filtres independents del perfil"
@@ -3666,7 +3723,7 @@
     },
     "pidTuningSlidersExpertSettingsDetectedNote": {
         "message": "<strong>Nota:</strong> els controls lliscants estan desactivats perquè els valors actuals estan fora de l'interval d'ajust del mode bàsic. Canvia al mode expert per fer canvis",
-        "desciption": "Slider expert settings detected while in non-expert mode"
+        "description": "Slider expert settings detected while in non-expert mode"
     },
     "pidTuningSliderLow": {
         "message": "Baix",
@@ -4575,6 +4632,10 @@
         "message": "NTSC",
         "description": "Option for the video format in the OSD"
     },
+    "osdSetupVideoFormatOptionHd": {
+        "message": "HD",
+        "description": "Option for the video format in the OSD"
+    },
     "osdSetupUnitsTitle": {
         "message": "Unitats"
     },
@@ -4723,6 +4784,14 @@
     "osdDescElementVtxChannel": {
         "message": "Canal i potencia actual del VTX"
     },
+    "osdTextElementVTXchannelVariantPower": {
+        "message": "Potència VTX",
+        "description": "One of the variants of the VTX channel element of the OSD"
+    },
+    "osdTextElementVTXchannelVariantFull": {
+        "message": "Banda:Canal:Pot:Pit",
+        "description": "One of the variants of the VTX channel element of the OSD"
+    },
     "osdTextElementVoltageWarning": {
         "message": "Advertiment voltatge de bateria",
         "description": "One of the elements of the OSD"
@@ -4779,12 +4848,104 @@
     "osdDescElementMahDrawn": {
         "message": "Capacitat total usada de la bateria"
     },
+    "osdTextElementWhDrawn": {
+        "message": "Descàrrega actual Wh de la bateria",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementWhDrawn": {
+        "message": "Capacitat total usada de la bateria en Wh"
+    },
+    "osdDescElementAuxValue": {
+        "message": "Valor auxiliar",
+        "description": "Displays a receiver AUX channel see PR 10789"
+    },
+    "osdTextElementAuxValue": {
+        "message": "Valor auxiliar",
+        "description": "One of the elements of the OSD"
+    },
+    "osdTextElementSysGoggleVoltage": {
+        "message": "Tensió de les ulleres",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleVoltage": {
+        "message": "Tensió de les ulleres proporcionada per les ulleres"
+    },
+    "osdTextElementSysVtxVoltage": {
+        "message": "Voltage VTX",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxVoltage": {
+        "message": "Tensió de les ulleres proporcionada per les ulleres"
+    },
+    "osdTextElementSysBitrate": {
+        "message": "Bitrate VTX",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysBitrate": {
+        "message": "Tensió de les ulleres proporcionada per les ulleres"
+    },
+    "osdTextElementSysDelay": {
+        "message": "Retard VTX",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDelay": {
+        "message": "Retard de vídeo proporcionat per les ulleres"
+    },
+    "osdTextElementSysDistance": {
+        "message": "Un dels elements de sistema del OSD",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDistance": {
+        "message": "Distància de transmissió de vídeo representada per les ulleres"
+    },
+    "osdTextElementSysLQ": {
+        "message": "Qualitat del enllaç de les ulleres",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysLQ": {
+        "message": "Qualitat del enllaç de les ulleres proporcionada per les ulleres"
+    },
+    "osdTextElementSysGoggleDVR": {
+        "message": "Estat del DVR de les ulleres",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleDVR": {
+        "message": "Estat del DVR proporcionat per les ulleres"
+    },
+    "osdTextElementSysVtxDVR": {
+        "message": "Estat del VTX DVR",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxDVR": {
+        "message": "Estat del DVR VTX proporcionat per les ulleres"
+    },
+    "osdTextElementSysWarnings": {
+        "message": "Avisos de sistema de les ulleres",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysWarnings": {
+        "message": "Avisos del sistema de vídeo proporcionat per les ulleres"
+    },
+    "osdTextElementSysVtxTemp": {
+        "message": "Temperatura VTX",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxTemp": {
+        "message": "Temperatura del VTX proporcionat per les ulleres"
+    },
+    "osdTextElementSysFanSpeed": {
+        "message": "Velocitta del ventilador de les ulleres",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysFanSpeed": {
+        "message": "Velocitat del ventilador proporcionat per les ulleres"
+    },
     "osdTextElementCraftName": {
         "message": "Nom de l'aeronau",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
-        "message": "Nom de l'aeronau inficat a la pestanya de Configuració"
+        "message": "Nom de l'aparell tal com s'estableix a la pestanya Configuració.</br>També es pot definir mitjançant la variable CLI \"craft_name\"."
     },
     "osdTextElementAltitude": {
         "message": "Altitud",
@@ -5132,7 +5293,14 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementDisplayName": {
-        "message": "Mostra el nom tal com s'ha escrit a l'ordre de CLI \"display_name\""
+        "message": "També es pot configurar mitjançant la variable CLI \"display_name\"."
+    },
+    "osdTextElementPilotName": {
+        "message": "Nom del pilot",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPilotName": {
+        "message": "Nom del pilot tal com s'estableix a la pestanya Configuració.</br>També es pot definir mitjançant la variable CLI \"pilot_name\"."
     },
     "osdTextElementEscRpmFreq": {
         "message": "Freqüència RPM ESC",
@@ -5211,6 +5379,20 @@
     "osdDescTxUplinkPower": {
         "message": "Mostra un valor de la potència Tx (mW o W). Útil quan <i>Potència dinàmica</i> està activat per suportar ràdios"
     },
+    "osdTextElementReadyMode": {
+        "message": "Mode llest",
+        "description": "When active READY will be displayed until flying"
+    },
+    "osdDescElementReadyMode": {
+        "message": "Quan estigui actiu, es mostrarà READY fins a volar"
+    },
+    "osdTextElementRSNRValue": {
+        "message": "Valor RSNR",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRSNRValue": {
+        "message": "Valor RSNR"
+    },
     "osdTextElementUnknown": {
         "message": "Desconegut $1",
         "description": "One of the elements of the OSD"
@@ -5252,6 +5434,13 @@
     },
     "osdDescStatUsedMah": {
         "message": "Capacitat de la bateria utilitzada"
+    },
+    "osdTextStatUsedWh": {
+        "message": "Wh usats de bateria",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatUsedWh": {
+        "message": "Capacitat de la bateria utilitzada en Wh"
     },
     "osdTextStatMaxAltitude": {
         "message": "Altitud màxima",
@@ -5399,6 +5588,13 @@
     },
     "osdDescStatMinRssiDbm": {
         "message": "Valor mínim RSSI dBm"
+    },
+    "osdTextStatMinRSNR": {
+        "message": "Valor mínim RSNR",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatMinRSNR": {
+        "message": "Valor mínim RSNR"
     },
     "osdTextStatUnknown": {
         "message": "Desconegut $1",
@@ -5593,6 +5789,13 @@
     "osdWarningOverCap": {
         "message": "Adverteix quan els mAh consumits superan el límit de capacitat configurat"
     },
+    "osdWarningTextRSNR": {
+        "message": "RSNR",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRSNR": {
+        "message": "Avisa quan el RSNR està per sota del ajust d'alarma"
+    },
     "osdWarningTextUnknown": {
         "message": "Desconegut $1"
     },
@@ -5683,6 +5886,10 @@
     },
     "vtxType_4": {
         "message": "Tramp",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_5": {
+        "message": "MSP",
         "description": "Text for one of the types of the VTX type in VTX tab"
     },
     "vtxType_255": {
@@ -5845,6 +6052,14 @@
         "message": "<span class=\"message-negative\">Error</span> al desar l'arxiu de configuració del VTX",
         "description": "Message in the GUI log when the VTX Config file is saved"
     },
+    "vtxSavedLuaFileOk": {
+        "message": "arxiu de configuració LUA VTX <span class=\"message-positive\">carregat</span>",
+        "description": "Message in the GUI log when the lua VTX Config file is saved"
+    },
+    "vtxSavedLuaFileKo": {
+        "message": "<span class=\"message-negative\">Error</span> al desar l'arxiu de configuració del LUA VTX",
+        "description": "Message in the GUI log when the lua VTX Config file saving has failed"
+    },
     "vtxLoadFileOk": {
         "message": "Arxiu de configuració VTX <span class=\"message-positive\">carregat</span>",
         "description": "Message in the GUI log when the VTX Config file is loaded"
@@ -5884,6 +6099,10 @@
     "vtxButtonSave": {
         "message": "Desa",
         "description": "Save button in the VTX tab"
+    },
+    "vtxButtonSaving": {
+        "message": "Desant",
+        "description": "Show state of the Save button in the VTX tab"
     },
     "vtxButtonSaved": {
         "message": "Desat",
@@ -6039,6 +6258,15 @@
     },
     "craftName": {
         "message": "Nom de l'aeronau"
+    },
+    "configurationCraftNameHelp": {
+        "message": "Es pot mostrar als registres, als noms dels fitxers de còpia de seguretat i a l'OSD.</br>Es pot configurar mitjançant la variable CLI <b>craft_name</b>."
+    },
+    "configurationPilotName": {
+        "message": "Nom del pilot"
+    },
+    "configurationPilotNameHelp": {
+        "message": "Es pot mostrar a l'OSD.</br>Es pot configurar mitjançant la variable CLI <b>pilot_name</b>."
     },
     "configurationFpvCamAngleDegrees": {
         "message": "Angle de la càmera FPV [graus]"
@@ -6450,5 +6678,50 @@
     "presetsReviewOptionsWarning": {
         "message": "Si us plau, reviseu la llista d'opcions abans d'escollir aquest valor predefinit.",
         "description": "Dialog text to prompt user to review options for the preset"
+    },
+    "firmwareFlasherBuildConfigurationHead": {
+        "message": "Configuració de compilació"
+    },
+    "firmwareFlasherBuildOptions": {
+        "message": "Altres opciones"
+    },
+    "firmwareFlasherBuildRadioProtocols": {
+        "message": "Protocols de ràdio"
+    },
+    "firmwareFlasherBuildTelemetryProtocols": {
+        "message": "Protocols de telemetria"
+    },
+    "firmwareFlasherBuildMotorProtocols": {
+        "message": "Protocols motors"
+    },
+    "firmwareFlasherConfigurationFile": {
+        "message": "Configuració del arxiu:"
+    },
+    "firmwareFlasherRadioProtocolDescription": {
+        "message": "Seleccioneu els protocols de ràdio que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un menú desplegable i que es poden seleccionar diversos elements."
+    },
+    "firmwareFlasherTelemetryProtocolDescription": {
+        "message": "Seleccioneu els protocols de telemetria que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un menú desplegable i que es poden seleccionar diversos elements. També hi ha alguns protocols de telemetria que s'habilitaran, independentment de la vostra selecció aquí en funció del protocol de ràdio seleccionat, p. CRSF."
+    },
+    "firmwareFlasherOptionsDescription": {
+        "message": "Seleccioneu les opcions genèriques que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un menú desplegable i que es poden seleccionar diversos elements. Elements com ara correccions, p. AKK VTX, s'inclouen aquí."
+    },
+    "firmwareFlasherMotorProtocolDescription": {
+        "message": "Seleccioneu els protocols motor (ESC) que voleu incloure en aquesta compilació. Tingueu en compte que aquest és un menú desplegable i que es poden seleccionar diversos elements."
+    },
+    "firmwareFlasherBranchDescription": {
+        "message": "Especialment útil per als desenvolupadors, podeu seleccionar un PR combinat, especificar un commit sha o especificar un PR \"encara per combinar\" escrivint: pull/{PR number}/head ."
+    },
+    "firmwareFlasherCustomDefinesDescription": {
+        "message": "Per als desenvolupadors, podeu afegir qualsevol definició que necessiteu, separades per un `espai`, però sense el prefix `USE_`, s'afegirà automàticament."
+    },
+    "firmwareFlasherBuildCustomDefines": {
+        "message": "Definicions personalitzades"
+    },
+    "classicBuild": {
+        "message": "Mode clàssic"
+    },
+    "classicBuildModeDescription": {
+        "message": "Aquest mode ignora tots els paràmetres aquí, excepte el commit. Això bàsicament aconsegueix el mateix que les clàssiques versions intermitjas, i es proporciona per comoditat."
     }
 }

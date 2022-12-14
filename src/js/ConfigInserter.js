@@ -8,7 +8,9 @@ const BLOCK_SIZE = 16384;
 
 function seek(firmware, address) {
     let index = 0;
-    for (; index < firmware.data.length && address >= firmware.data[index].address + firmware.data[index].bytes; index++);
+    for (; index < firmware.data.length && address >= firmware.data[index].address + firmware.data[index].bytes; index++) {
+        // empty for loop to increment index
+    }
 
     const result = {
         lineIndex: index,
@@ -58,9 +60,6 @@ function generateData(firmware, input, startAddress) {
         throw new Error('Configuration area in firmware not free.');
     }
 
-    // Add 0 terminator
-    input = `${input}\0`;
-
     let inputIndex = 0;
     while (inputIndex < input.length) {
         const remaining = input.length - inputIndex;
@@ -88,9 +87,10 @@ function generateData(firmware, input, startAddress) {
 
 const CONFIG_LABEL = `Custom defaults inserted in`;
 
-ConfigInserter.prototype.insertConfig = function (firmware, input) {
+ConfigInserter.prototype.insertConfig = function (firmware, config) {
     console.time(CONFIG_LABEL);
 
+    const input = `# Betaflight\n${config}\0`;
     const customDefaultsArea = getCustomDefaultsArea(firmware);
 
     if (!customDefaultsArea || customDefaultsArea.endAddress - customDefaultsArea.startAddress === 0) {

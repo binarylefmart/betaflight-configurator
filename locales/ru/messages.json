@@ -200,21 +200,6 @@
     "deviceReady": {
         "message": "Устройство - <span class=\"message-positive\">Готово</span>"
     },
-    "backupFileIncompatible": {
-        "message": "Файл резервной копии был сгенерирован для предыдущей версии и несовместим с текущей версией конфигуратора. Извините"
-    },
-    "backupFileUnmigratable": {
-        "message": "Файл резервной копии был сгенерирован старой версией конфигуратора и не является мигрируемым для этой версии конфигуратора. Сожалеем."
-    },
-    "configMigrationFrom": {
-        "message": "Миграция файла конфигурации была сгенерирована конфигуратором версии: $1"
-    },
-    "configMigratedTo": {
-        "message": "Конфигурация мигрирована для конфигуратора версии: $1"
-    },
-    "configMigrationSuccessful": {
-        "message": "Миграция конфигурации завершена, применено миграций: $1"
-    },
     "tabFirmwareFlasher": {
         "message": "Программатор"
     },
@@ -663,9 +648,6 @@
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\"> Разработчики Betaflight на Slack</a>"
     },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">Функционал создания и восстановления из резервной копии не доступен.</span> Ваша прошивка имеет API версию конфигуратора <span class=\"message-negative\">$1</span>, создание и восстановление из резервной копии требует версию <span class=\"message-positive\">$2</span>. Пожалуйста, создайте резервную копию ваших настроек через командную строку; загляните в документацию Betaflight, чтобы узнать как это сделать."
-    },
     "initialSetupButtonCalibrateAccel": {
         "message": "Калибровать Акселерометр"
     },
@@ -687,29 +669,11 @@
     "initialSetupResetText": {
         "message": "Сбросить настройки <strong>до заводских</strong>"
     },
-    "initialSetupButtonBackup": {
-        "message": "Резервное копирование JSON"
-    },
-    "initialSetupButtonRestore": {
-        "message": "Восстановление резервной копии JSON"
-    },
     "initialSetupButtonRebootBootloader": {
         "message": "Активировать загрузчик / DFU"
     },
-    "initialSetupBackupRestoreHeader": {
-        "message": "Экспериментальное резервное копирование и восстановление"
-    },
-    "initialSetupBackupRestoreText": {
-        "message": "<strong>Резервное копирование</strong> вашей конфигурации в случае аварии, <strong>CLI</strong> настройки <span class=\"message-negative\">не</span> включены - используете команду «diff all» в CLI для этого."
-    },
     "initialSetupRebootBootloaderText": {
         "message": "Перезагрузить в режим <strong>загрузчика / DFU</strong>."
-    },
-    "initialSetupBackupSuccess": {
-        "message": "Конфигурация <span class=\"message-positive\">успешно</span> сохранена"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "Конфигурация <span class=\"message-positive\">успешно</span> восстановлена"
     },
     "initialSetupButtonResetZaxis": {
         "message": "Сбросить ось Z (ось вращения), смещение: 0 град"
@@ -2712,9 +2676,6 @@
     "sdcardStatusUnknown": {
         "message": "Неизвестное состояние $1"
     },
-    "firmwareFlasherReleaseSummaryHead": {
-        "message": "Информация о выпуске"
-    },
     "firmwareFlasherReleaseManufacturer": {
         "message": "ID производителя:"
     },
@@ -2732,18 +2693,6 @@
     },
     "firmwareFlasherReleaseTarget": {
         "message": "Объект:"
-    },
-    "firmwareFlasherReleaseFile": {
-        "message": "Файл прошивки:"
-    },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Unified Target:"
-    },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "Показать конфигурацию."
-    },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "Дата:"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "Скачать самостоятельно."
@@ -4301,9 +4250,6 @@
         "message": "Позывной пилота",
         "description": "One of the elements of the OSD"
     },
-    "osdDescElementCraftName": {
-        "message": "Позывной пилота, установленный во вкладке \"Конфигурация\""
-    },
     "osdTextElementAltitude": {
         "message": "Высота",
         "description": "One of the elements of the OSD"
@@ -4648,9 +4594,6 @@
     "osdTextElementDisplayName": {
         "message": "Отображаемое имя",
         "description": "One of the elements of the OSD"
-    },
-    "osdDescElementDisplayName": {
-        "message": "Отображать имя, которое установлено консольной командой \"display_name\""
     },
     "osdTextElementEscRpmFreq": {
         "message": "Частота вращения, полученная от ESC",
@@ -5948,10 +5891,6 @@
     "presetsWarningWrongVersionConfirmation": {
         "message": "Выбранная предустановка требует версию прошивки $1<br/> Текущая версия прошивки $2",
         "description": "Warning message that shows up at the top of the preset sources dialog"
-    },
-    "presetsNoPresetsFound": {
-        "message": "Предустановки с указанными параметрами не найдены",
-        "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "Достигнуто максимальное количество отображаемых предустановок",

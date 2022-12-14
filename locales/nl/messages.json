@@ -199,21 +199,6 @@
     "deviceReady": {
         "message": "Apparaat - <span class=\"message-positive\">gereed</span>"
     },
-    "backupFileIncompatible": {
-        "message": "Het backup bestand was gemaakt voor een vorige versie van de configurator en is incompatibel met deze versie van de configurator. Sorry"
-    },
-    "backupFileUnmigratable": {
-        "message": "Dit backup bestand was gemaakt door een vorige versie van de configurator en kan niet worden toegevoegd. Sorry."
-    },
-    "configMigrationFrom": {
-        "message": "Configuratie bestand die is gemaakt door de configurator aan het migreren: $1"
-    },
-    "configMigratedTo": {
-        "message": "Configuratie gemigreerd naar de configurator: $1"
-    },
-    "configMigrationSuccessful": {
-        "message": "Configuratie migratie gelukt, migraties toegepast: $1"
-    },
     "tabFirmwareFlasher": {
         "message": "Besturingssysteem Flasher"
     },
@@ -662,9 +647,6 @@
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight devs op slack</a>"
     },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">Back-up en herstel functionaliteit uitgeschakeld.</span> U heeft firmware met API versie <span class=\"message-negative\">$1</span>, back-up en terugzetten vereist <span class=\"message-positive\">$2-</span>.  Maak alstublieft een backup via de CLI. Raadpleeg de Betaflight documentatie voor de procedure."
-    },
     "initialSetupButtonCalibrateAccel": {
         "message": "Kalibreer Versnellingsmeter"
     },
@@ -689,17 +671,8 @@
     "initialSetupButtonRebootBootloader": {
         "message": "Zet Boot Loader / DFU aan"
     },
-    "initialSetupBackupRestoreText": {
-        "message": "<strong>Backup</strong> uw configuratie in het geval van een ongeluk, <strong>CLI</strong> instellingen worden <span class=\"message-negative\">niet</span> meegenomen - gebruik het commando 'diff all' in de CLI."
-    },
     "initialSetupRebootBootloaderText": {
         "message": "Herstart in <strong>boot lader / DFU</strong> modus."
-    },
-    "initialSetupBackupSuccess": {
-        "message": "Backup <span class=\"message-positive\">succesvol opgeslagen</span>"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "Configuratie hersteld <span class=\"message-positive\">met succes</span>"
     },
     "initialSetupButtonResetZaxis": {
         "message": "Herstel Z axis, verschil: 0 deg"
@@ -2637,9 +2610,6 @@
     "sdcardStatusUnknown": {
         "message": "Onbekende staat $1"
     },
-    "firmwareFlasherReleaseSummaryHead": {
-        "message": "Release informatie"
-    },
     "firmwareFlasherReleaseManufacturer": {
         "message": "Fabrikant-ID:"
     },
@@ -2657,18 +2627,6 @@
     },
     "firmwareFlasherReleaseTarget": {
         "message": "Doel:"
-    },
-    "firmwareFlasherReleaseFile": {
-        "message": "Binary:"
-    },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Uniform doel:"
-    },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "Toon configuratie."
-    },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "Datum:"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "Download handmatig."
@@ -4157,9 +4115,6 @@
         "message": "Naam drone",
         "description": "One of the elements of the OSD"
     },
-    "osdDescElementCraftName": {
-        "message": "Naam drone zoals ingesteld op het configuratie-tabblad"
-    },
     "osdTextElementAltitude": {
         "message": "Hoogte",
         "description": "One of the elements of the OSD"
@@ -4504,9 +4459,6 @@
     "osdTextElementDisplayName": {
         "message": "Toon naam",
         "description": "One of the elements of the OSD"
-    },
-    "osdDescElementDisplayName": {
-        "message": "Toon naam zoals is ingesteld door de \"display_name\" cli commando"
     },
     "osdTextElementEscRpmFreq": {
         "message": "ESC RPM frequentie",

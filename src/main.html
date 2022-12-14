@@ -52,7 +52,6 @@
 
     <link type="text/css" rel="stylesheet" href="./css/dark-theme.css" media="all" disabled/>
 
-    <script type="module" src="./components/init.js"></script>
     <!-- TODO: probably won't need this here once everything is imported -->
     <script type="module" src="./js/utils/common.js"></script>
     <!-- CORDOVA_INCLUDE js/cordova_chromeapi.js -->
@@ -77,10 +76,8 @@
     <script type="text/javascript" src="./node_modules/switchery-latest/dist/switchery.min.js"></script>
     <script type="text/javascript" src="./node_modules/bluebird/js/browser/bluebird.min.js"></script>
     <script type="text/javascript" src="./js/libraries/jquery.ba-throttle-debounce.min.js"></script>
-    <script type="text/javascript" src="./node_modules/inflection/inflection.min.js"></script>
+    <script type="text/javascript" src="./node_modules/inflection/lib/inflection.js"></script>
     <script type="text/javascript" src="./js/libraries/analytics.js"></script>
-    <!-- TODO: remove when using modules fully -->
-    <script type="module" src="./js/utils/css.js"></script>
     <script type="text/javascript" src="./js/utils/window_watchers.js"></script>
     <script type="text/javascript" src="./js/utils/VtxDeviceStatus/VtxDeviceStatusFactory.js"></script>
     <script type="text/javascript" src="./js/utils/VtxDeviceStatus/VtxDeviceStatus.js"></script>
@@ -96,6 +93,7 @@
     <script type="text/javascript" src="./js/port_usage.js"></script>
     <script type="text/javascript" src="./js/serial.js"></script>
     <script type="text/javascript" src="./js/gui.js"></script>
+    <script type="text/javascript" src="./js/mdns_discovery.js"></script>
     <script type="text/javascript" src="./js/huffman.js"></script>
     <script type="text/javascript" src="./js/default_huffman_tree.js"></script>
     <script type="text/javascript" src="./js/model.js"></script>
@@ -113,28 +111,13 @@
     <script type="text/javascript" src="./js/Features.js"></script>
     <script type="text/javascript" src="./js/Beepers.js"></script>
     <script type="text/javascript" src="./js/release_checker.js"></script>
-    <script type="text/javascript" src="./js/jenkins_loader.js"></script>
+    <script type="text/javascript" src="./js/release_loader.js"></script>
+    <script type="text/javascript" src="./js/ConfigInserter.js"></script>
     <script type="text/javascript" src="./js/Analytics.js"></script>
     <script type="text/javascript" src="./js/GitHubApi.js"></script>
     <script type="module" src="./js/main.js"></script>
     <script type="text/javascript" src="./js/Clipboard.js"></script>
-    <script type="text/javascript" src="./js/tabs/setup.js"></script>
-    <script type="text/javascript" src="./js/tabs/setup_osd.js"></script>
-    <script type="text/javascript" src="./js/tabs/ports.js"></script>
-    <script type="text/javascript" src="./js/tabs/configuration.js"></script>
-    <script type="text/javascript" src="./js/tabs/pid_tuning.js"></script>
-    <script type="text/javascript" src="./js/tabs/receiver.js"></script>
-    <script type="text/javascript" src="./js/tabs/auxiliary.js"></script>
-    <script type="text/javascript" src="./js/tabs/adjustments.js"></script>
-    <script type="text/javascript" src="./js/tabs/servos.js"></script>
-    <script type="text/javascript" src="./js/tabs/gps.js"></script>
-    <script type="text/javascript" src="./js/tabs/motors.js"></script>
-    <script type="text/javascript" src="./js/tabs/led_strip.js"></script>
-    <script type="text/javascript" src="./js/tabs/sensors.js"></script>
-    <script type="text/javascript" src="./js/tabs/cli.js"></script>
     <!-- TODO: might be removed when everythign is in modules -->
-    <script type="module" src="./js/tabs/logging.js"></script>
-    <script type="text/javascript" src="./tabs/presets/presets.js"></script>
     <script type="text/javascript" src="./tabs/presets/CliEngine.js"></script>
     <script type="text/javascript" src="./tabs/presets/PickedPreset.js"></script>
     <script type="text/javascript" src="./tabs/presets/DetailedDialog/PresetsDetailedDialog.js"></script>
@@ -146,18 +129,10 @@
     <script type="text/javascript" src="./tabs/presets/SourcesDialog/SourcesDialog.js"></script>
     <script type="text/javascript" src="./tabs/presets/SourcesDialog/SourcePanel.js"></script>
     <script type="text/javascript" src="./tabs/presets/SourcesDialog/PresetSource.js"></script>
-    <script type="text/javascript" src="./js/tabs/onboard_logging.js"></script>
-    <script type="text/javascript" src="./js/FirmwareCache.js"></script>
-    <script type="text/javascript" src="./js/tabs/failsafe.js"></script>
     <script type="text/javascript" src="./js/LogoManager.js"></script>
-    <script type="text/javascript" src="./js/tabs/osd.js"></script>
-    <script type="text/javascript" src="./js/tabs/vtx.js"></script>
-    <script type="text/javascript" src="./js/tabs/power.js"></script>
-    <script type="text/javascript" src="./js/tabs/transponder.js"></script>
     <script type="text/javascript" src="./node_modules/jquery-textcomplete/dist/jquery.textcomplete.min.js"></script>
     <script type="text/javascript" src="./js/CliAutoComplete.js"></script>
     <script type="text/javascript" src="./js/DarkTheme.js"></script>
-    <script type="text/javascript" src="./js/ConfigInserter.js"></script>
     <script type="text/javascript" src="./js/TuningSliders.js"></script>
     <script type="text/javascript" src="./js/phones_ui.js"></script>
     <script type="text/javascript" src="./node_modules/jquery-touchswipe/jquery.touchSwipe.min.js"></script>
@@ -184,9 +159,9 @@
         </div>
         <betaflight-logo
             :configurator-version="CONFIGURATOR.getDisplayVersion()"
-            :firmware-version="FC.CONFIG.flightControllerVersion" 
-            :firmware-id="FC.CONFIG.flightControllerIdentifier" 
-            :hardware-id="FC.CONFIG.hardwareName" 
+            :firmware-version="FC.CONFIG.flightControllerVersion"
+            :firmware-id="FC.CONFIG.flightControllerIdentifier"
+            :hardware-id="FC.CONFIG.hardwareName"
         ></betaflight-logo>
         <div id="port-picker">
             <div id="port-override-option">
@@ -243,7 +218,7 @@
                         <div class="battery-status"></div>
                     </div>
                 </div>
-                <battery-legend 
+                <battery-legend
                     :voltage="FC.ANALOG.voltage"
                     :vbatmaxcellvoltage="FC.BATTERY_CONFIG.vbatmaxcellvoltage"
                 ></battery-legend>
@@ -319,9 +294,9 @@
         <div class="tab_container">
             <betaflight-logo
                 :configurator-version="CONFIGURATOR.getDisplayVersion()"
-                :firmware-version="FC.CONFIG.flightControllerVersion" 
-                :firmware-id="FC.CONFIG.flightControllerIdentifier" 
-                :hardware-id="FC.CONFIG.hardwareName" 
+                :firmware-version="FC.CONFIG.flightControllerVersion"
+                :firmware-id="FC.CONFIG.flightControllerIdentifier"
+                :hardware-id="FC.CONFIG.hardwareName"
             ></betaflight-logo>
             <div id="tabs">
                 <ul class="mode-disconnected">
@@ -398,9 +373,9 @@
             :cpu-load="FC.CONFIG.cpuload"
 
             :configurator-version="CONFIGURATOR.getDisplayVersion()"
-            :firmware-version="FC.CONFIG.flightControllerVersion" 
-            :firmware-id="FC.CONFIG.flightControllerIdentifier" 
-            :hardware-id="FC.CONFIG.hardwareName" 
+            :firmware-version="FC.CONFIG.flightControllerVersion"
+            :firmware-id="FC.CONFIG.flightControllerIdentifier"
+            :hardware-id="FC.CONFIG.hardwareName"
     ></status-bar>
     <div id="cache">
         <div class="data-loading">

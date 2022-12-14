@@ -1439,6 +1439,9 @@ dialog {
 	float: left;
 	margin-bottom: 7px;
 	font-weight: 600;
+	.switchery {
+		margin-top: -3px;
+	}
 }
 .gui_box_bottombar {
 	background-color: #e4e4e4;
@@ -2147,14 +2150,14 @@ button.active {
 		top: 0;
 		left: -304px;
 		bottom: 0;
-		width: 300px;
+		width: 300px !important;
 		transition: all 0.3s;
 	}
 	.tab_container.reveal {
 		left: 0;
 	}
 	#content {
-		width: 100%;
+		width: 100% !important;
 	}
 	dialog {
 		position: fixed;
@@ -2359,12 +2362,18 @@ button.active {
 	.default_btn {
 		margin-bottom: 10px;
 	}
-	.gui_box_titlebar {
+	.gui_box .gui_box_titlebar {
 		font-size: 12px;
 		height: 24px;
 		padding-bottom: 0;
 		margin-bottom: 5px;
 		float: left;
+		.switchery {
+			margin-top: -3px;
+		}
+		.helpicon {
+			margin-top: 1px;
+		}
 	}
 	.spacer_box_title {
 		padding-left: 10px;
@@ -2464,6 +2473,9 @@ button.active {
 		padding-bottom: 0;
 		margin-bottom: 5px;
 		float: left;
+		.switchery {
+			margin-top: -3px;
+		}
 	}
 	.spacer_box_title {
 		padding-left: 10px;

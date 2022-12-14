@@ -2,6 +2,7 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 2020,
         sourceType: "module",
+        allowImportExportEverywhere: true,
     },
     extends: ["plugin:vue/recommended"],
     env: {
@@ -15,6 +16,7 @@ module.exports = {
         "no-trailing-spaces": "error",
         "eol-last": "error",
         semi: "error",
+        "no-extra-semi": "error",
         "comma-dangle": ["error", "always-multiline"],
         "no-var": "error",
         "prefer-template": "error",

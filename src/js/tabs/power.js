@@ -1,11 +1,11 @@
-'use strict';
+import { i18n } from '../localization';
 
-TABS.power = {
+const power = {
     supported: false,
     analyticsChanges: {},
 };
 
-TABS.power.initialize = function (callback) {
+power.initialize = function (callback) {
     const self = this;
 
     if (GUI.active_tab != 'power') {
@@ -53,13 +53,9 @@ TABS.power.initialize = function (callback) {
         $('#content').load("./tabs/power.html", process_html);
     }
 
-    this.supported = semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33);
+    this.supported = true;
 
-    if (!this.supported) {
-        load_html();
-    } else {
-        load_status();
-    }
+    load_status();
 
     function updateDisplay(voltageDataSource, currentDataSource) {
         // voltage meters
@@ -226,18 +222,16 @@ TABS.power.initialize = function (callback) {
         const elementBatteryConfiguration = templateBatteryConfiguration.clone();
         destinationBatteryConfiguration.append(elementBatteryConfiguration);
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-            $('input[name="mincellvoltage"]').prop('step','0.01');
-            $('input[name="maxcellvoltage"]').prop('step','0.01');
-            $('input[name="warningcellvoltage"]').prop('step','0.01');
-        }
+        $('input[name="mincellvoltage"]').prop('step','0.01');
+        $('input[name="maxcellvoltage"]').prop('step','0.01');
+        $('input[name="warningcellvoltage"]').prop('step','0.01');
 
         $('input[name="mincellvoltage"]').val(FC.BATTERY_CONFIG.vbatmincellvoltage);
         $('input[name="maxcellvoltage"]').val(FC.BATTERY_CONFIG.vbatmaxcellvoltage);
         $('input[name="warningcellvoltage"]').val(FC.BATTERY_CONFIG.vbatwarningcellvoltage);
         $('input[name="capacity"]').val(FC.BATTERY_CONFIG.capacity);
 
-        const haveFc = (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_35) || (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2));
+        const haveFc = FC.CONFIG.boardType === 0 || FC.CONFIG.boardType === 2;
 
         const batteryMeterTypes = [
             i18n.getMessage('powerBatteryVoltageMeterTypeNone'),
@@ -263,10 +257,7 @@ TABS.power.initialize = function (callback) {
         if (haveFc) {
             currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeVirtual'));
             currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeEsc'));
-
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeMsp'));
-            }
+            currentMeterTypes.push(i18n.getMessage('powerBatteryCurrentMeterTypeMsp'));
         }
 
         let currentMeterType_e = $('select.currentmetersource');
@@ -494,19 +485,11 @@ TABS.power.initialize = function (callback) {
         }
 
         function save_voltage_config() {
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                mspHelper.sendVoltageConfig(save_amperage_config);
-            } else {
-                MSP.send_message(MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_VOLTAGE_METER_CONFIG), false, save_amperage_config);
-            }
+            mspHelper.sendVoltageConfig(save_amperage_config);
         }
 
         function save_amperage_config() {
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                mspHelper.sendCurrentConfig(save_to_eeprom);
-            } else {
-                MSP.send_message(MSPCodes.MSP_SET_CURRENT_METER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_CURRENT_METER_CONFIG), false, save_to_eeprom);
-            }
+            mspHelper.sendCurrentConfig(save_to_eeprom);
         }
 
         function save_to_eeprom() {
@@ -534,7 +517,7 @@ TABS.power.initialize = function (callback) {
     }
 };
 
-TABS.power.cleanup = function (callback) {
+power.cleanup = function (callback) {
     if (callback) callback();
 
     if (GUI.calibrationManager) {
@@ -544,3 +527,6 @@ TABS.power.cleanup = function (callback) {
         GUI.calibrationManagerConfirmation.destroy();
     }
 };
+
+window.TABS.power = power;
+export { power };

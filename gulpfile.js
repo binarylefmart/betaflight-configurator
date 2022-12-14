@@ -50,7 +50,7 @@ const NODE_ENV = process.env.NODE_ENV || 'production';
 const NAME_REGEX = /-/g;
 
 const nwBuilderOptions = {
-    version: '0.62.0',
+    version: '0.67.1',
     files: `${DIST_DIR}**/*`,
     macIcns: './src/images/bf_icon.icns',
     macPlist: { 'CFBundleDisplayName': 'Betaflight Configurator'},
@@ -407,10 +407,8 @@ function dist_rollup() {
                 // If all the things used by other files are importing
                 // it with `import/export` file doesn't have to be here.
                 // I will be picked up by rollup and bundled accordingly.
-                'components/init': 'src/components/init.js',
                 'js/main_cordova': 'src/js/main_cordova.js',
                 'js/utils/common': 'src/js/utils/common.js',
-                'js/tabs/logging': 'src/js/tabs/logging.js',
                 'js/main': 'src/js/main.js',
             },
             plugins: [
@@ -739,6 +737,9 @@ function release_deb(arch, appDirectory, done) {
                 `chown root:root ${LINUX_INSTALL_DIR}`,
                 `chown -R root:root ${LINUX_INSTALL_DIR}/${metadata.name}`,
                 `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${metadata.name}/${metadata.name}.desktop`,
+                `chmod +xr ${LINUX_INSTALL_DIR}/${metadata.name}/chrome_crashpad_handler`,
+                `chmod +xr ${LINUX_INSTALL_DIR}/${metadata.name}/${metadata.name}`,
+                `chmod -R +Xr ${LINUX_INSTALL_DIR}/${metadata.name}/`,
             ],
             prerm: [`xdg-desktop-menu uninstall ${metadata.name}.desktop`],
             depends: ['libgconf-2-4', 'libatomic1'],
@@ -776,7 +777,14 @@ function release_rpm(arch, appDirectory, done) {
                 src: '*',
                 dest: `${LINUX_INSTALL_DIR}/${metadata.name}`,
             }],
-            postInstallScript: [`xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${metadata.name}/${metadata.name}.desktop`],
+            postInstallScript: [
+                `chown root:root ${LINUX_INSTALL_DIR}`,
+                `chown -R root:root ${LINUX_INSTALL_DIR}/${metadata.name}`,
+                `xdg-desktop-menu install ${LINUX_INSTALL_DIR}/${metadata.name}/${metadata.name}.desktop`,
+                `chmod +xr ${LINUX_INSTALL_DIR}/${metadata.name}/chrome_crashpad_handler`,
+                `chmod +xr ${LINUX_INSTALL_DIR}/${metadata.name}/${metadata.name}`,
+                `chmod -R +Xr ${LINUX_INSTALL_DIR}/${metadata.name}/`,
+            ],
             preUninstallScript: [`xdg-desktop-menu uninstall ${metadata.name}.desktop`],
             tempDir: path.join(RELEASE_DIR, `tmp-rpm-build-${arch}`),
             keepTemp: false,
@@ -1100,6 +1108,11 @@ function cordova_execbrowserify(file) {
     const destpath = file.replace(filename, '');
     console.log(`Include required modules in ${file}`);
     return browserify(file, { ignoreMissing: true })
+        .transform("babelify", {
+            presets: ["@babel/preset-env"],
+            sourceMaps: false,
+            global:true,
+            ignore: [/\/node_modules\/(?!md5.js\/)/] })
         .bundle()
         .pipe(source(filename))
         .pipe(gulp.dest(destpath));

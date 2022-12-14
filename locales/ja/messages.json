@@ -200,21 +200,6 @@
     "deviceReady": {
         "message": "デバイス - <span class=\"message-positive\">準備完了</span>"
     },
-    "backupFileIncompatible": {
-        "message": "申し訳ありませんが、指定されたバックアップファイルは以前のバージョンで作成されているため、このバージョンと互換性がありません。"
-    },
-    "backupFileUnmigratable": {
-        "message": "申し訳ありませんが、指定されたバックアップファイルは以前のバージョンで作成されているため、移行できません。"
-    },
-    "configMigrationFrom": {
-        "message": "Configuratorによって作られた設定ファイルの移行: $1"
-    },
-    "configMigratedTo": {
-        "message": "設定をConfiguratorへ移行: $1"
-    },
-    "configMigrationSuccessful": {
-        "message": "設定の移行成功、適用します: $1"
-    },
     "tabFirmwareFlasher": {
         "message": "ファームフラッシャー"
     },
@@ -597,7 +582,7 @@
         "message": "ハードウェア"
     },
     "defaultWelcomeText": {
-        "message": "このアプリケーションは、Betaflightを実行するすべてのハードウェアをサポートします。対応するハードウェアの完全なリストについては、 [ファームフラッシャー] タブをご確認ください。<br /><br /><a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Blackbox Log Viewerをダウンロード</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight TX Lua Script</a><br /><br />ファームウェアのソースコードのダウンロード先は<a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br /><br />最新の<b>STM USB VCPドライバ</b>のダウンロード先は<a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br />CP210X USBシリアルチップを使用するレガシーハードウェアの場合:<br />最新の<b>CP210Xドライバ</b>のダウンロード先は<a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br />最新のWindows用 <b>Zadig</b> USBドライバインストーラのダウンロード先は<a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br /><b>ImpulseRC Driver Fixer</b>のダウンロードは<a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">こちら</a>"
+        "message": "このアプリケーションは、Betaflightを実行可能なハードウェアすべてをサポートします。対応ハードウェア一覧は [ファームフラッシャー] タブをご確認ください。<br /><br /><a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Blackbox Log Viewerをダウンロード</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight TX Lua Scriptsをダウンロード</a><br /><br />ファームウェアのソースコードのダウンロード先は<a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br /><br />CP210X USBシリアルチップを使用するレガシーハードウェアの場合:<br />最新の<b>CP210xドライバ</b>のダウンロード先は<a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br />最新のWindows用<b>Zadig</b>USBドライバインストーラのダウンロード先は<a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">こちら</a><br /><b>ImpulseRC Driver Fixer</b>のダウンロード先は<a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">こちら</a>"
     },
     "defaultContributingHead": {
         "message": "開発への協力・貢献"
@@ -675,9 +660,6 @@
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight devs on slack</a>"
     },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">バックアップと復元の機能が無効です。</span>ファームウェアのAPIバージョンは<span class=\"message-negative\">$1</span>ですが、バックアップと復元には<span class=\"message-positive\">$2</span>が必要です。バックアップにはCLIをご利用ください。方法についてはBetaflightドキュメントを参照してください。"
-    },
     "initialSetupButtonCalibrateAccel": {
         "message": "水平 キャリブレーション"
     },
@@ -699,29 +681,11 @@
     "initialSetupResetText": {
         "message": "<strong>デフォルト</strong>設定に戻します。"
     },
-    "initialSetupButtonBackup": {
-        "message": "JSONのバックアップ"
-    },
-    "initialSetupButtonRestore": {
-        "message": "JSONのリストア"
-    },
     "initialSetupButtonRebootBootloader": {
         "message": "ブートローダー / DFU を有効化"
     },
-    "initialSetupBackupRestoreHeader": {
-        "message": "試験的なバックアップとリストア"
-    },
-    "initialSetupBackupRestoreText": {
-        "message": "不測の事態に備え必ず設定の<strong>バックアップ</strong>を行ってください。また<strong>CLIのみで行った設定</strong>は<span class=\"message-negative\">このバックアップには含まれません</span>。- そのため、CLIコマンド [diff all] をご利用ください。"
-    },
     "initialSetupRebootBootloaderText": {
         "message": "<strong>ブートローダー / DFU</strong> モードで再起動します。"
-    },
-    "initialSetupBackupSuccess": {
-        "message": "バックアップが<span class=\"message-positive\">正常</span>に保存されました"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "設定のリストアが<span class=\"message-positive\">成功</span>しました"
     },
     "initialSetupButtonResetZaxis": {
         "message": "リセット Z 軸、オフセット: 0 度"
@@ -1510,6 +1474,9 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD (FrSkyプロトコル)"
     },
+    "portsFunction_VTX_MSP": {
+        "message": "VTX (MSP + ディスプレイポート)"
+    },
     "pidTuningProfileOption": {
         "message": "Profile $1"
     },
@@ -1558,6 +1525,10 @@
     "pidTuningAntiGravityGain": {
         "message": "強度[ゲイン]",
         "description": "Anti Gravity Gain Parameter"
+    },
+    "pidTuningAntiGravityGainHelp": {
+        "message": "I値をブーストし、速いスロットル可変時にP値を増加させます。<br><br>8.0はI値を約8倍ブーストすることを意味します。",
+        "description": "Anti Gravity Gain Parameter Help Icon"
     },
     "pidTuningAntiGravityThres": {
         "message": "しきい値",
@@ -1853,11 +1824,23 @@
     "pidTuningRcExpo": {
         "message": "RC Expo"
     },
+    "pidTuningTPAMode": {
+        "message": "TPA モード"
+    },
     "pidTuningTPA": {
         "message": "TPA"
     },
+    "pidTuningTPARate": {
+        "message": "TPA レート"
+    },
     "pidTuningTPABreakPoint": {
         "message": "TPA 区切り点"
+    },
+    "pidTuningTPAPD": {
+        "message": "PD"
+    },
+    "pidTuningTPAD": {
+        "message": "D"
     },
     "pidTuningThrottleCurvePreview": {
         "message": "スロットルカーブ プレビュー"
@@ -2052,6 +2035,9 @@
     },
     "receiverButtonBindMessage": {
         "message": "フライトコントローラにバインド要求を送信します。"
+    },
+    "receiverButtonPassphrase": {
+        "message": "パスワード"
     },
     "receiverButtonSticks": {
         "message": "コントロールスティック"
@@ -2925,8 +2911,11 @@
     "sdcardStatusUnknown": {
         "message": "不明な状態 $1"
     },
+    "firmwareFlasherBranch": {
+        "message": "コミットを選択"
+    },
     "firmwareFlasherReleaseSummaryHead": {
-        "message": "リリース情報"
+        "message": "リリースおよびビルド情報"
     },
     "firmwareFlasherReleaseManufacturer": {
         "message": "製造元 ID:"
@@ -2946,17 +2935,35 @@
     "firmwareFlasherReleaseTarget": {
         "message": "ターゲット:"
     },
-    "firmwareFlasherReleaseFile": {
-        "message": "Binary:"
+    "firmwareFlasherReleaseMCU": {
+        "message": "MCU:"
     },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Unified Target:"
+    "firmwareFlasherCloudBuildDetails": {
+        "message": "クラウド ビルド詳細:"
     },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "設定を表示します。"
+    "firmwareFlasherCloudBuildLogUrl": {
+        "message": "ログ表示."
     },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "日時:"
+    "firmwareFlasherCloudBuildStatus": {
+        "message": "状態:"
+    },
+    "firmwareFlasherCloudBuildPending": {
+        "message": "保留中"
+    },
+    "firmwareFlasherCloudBuildProcessing": {
+        "message": "処理中"
+    },
+    "firmwareFlasherCloudBuildSuccessCached": {
+        "message": "成功しました (キャッシュ)"
+    },
+    "firmwareFlasherCloudBuildSuccess": {
+        "message": "成功しました"
+    },
+    "firmwareFlasherCloudBuildTimedOut": {
+        "message": "タイムアウトしました (再試行してください)"
+    },
+    "firmwareFlasherCloudBuildFailed": {
+        "message": "失敗しました (ログを確認してください)"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "手動でダウンロードしてください。"
@@ -3571,7 +3578,39 @@
         "message": "セル数 - プロファイル自動切替用"
     },
     "pidTuningCellCountHelp": {
-        "message": "接続されたバッテリーと同じセル数を設定している最初のプロファイルを自動的に有効にします。"
+        "message": "接続されているバッテリーセル数と等しい値を初期プロファイルとして自動的に有効にします。<br><br><ul><li><b>切り替え</b>: \nバッテリーセル数と等しい値のプロファイルがある場合、常にそのプロファイルへ切り替えます。</li><li><b>無効</b>: プロファイルの自動切り替えを無効にします。</li><b>1S～8S</b>: この設定に使用するプロファイルのセル数を選択します。</li></ul>"
+    },
+    "pidTuningCellCountChange": {
+        "message": "切り替え",
+        "description": "Switch profile if there are no profiles matching cell count"
+    },
+    "pidTuningCellCountStay": {
+        "message": "無効",
+        "description": "Disable cell count for this profile"
+    },
+    "pidTuningCellCount1S": {
+        "message": "1S"
+    },
+    "pidTuningCellCount2S": {
+        "message": "2S"
+    },
+    "pidTuningCellCount3S": {
+        "message": "3S"
+    },
+    "pidTuningCellCount4S": {
+        "message": "4S"
+    },
+    "pidTuningCellCount5S": {
+        "message": "5S"
+    },
+    "pidTuningCellCount6S": {
+        "message": "6S"
+    },
+    "pidTuningCellCount7S": {
+        "message": "7S"
+    },
+    "pidTuningCellCount8S": {
+        "message": "8S"
     },
     "pidTuningNonProfileFilterSettings": {
         "message": "Profile毎のPID制御設定"
@@ -3658,7 +3697,7 @@
     },
     "pidTuningSlidersExpertSettingsDetectedNote": {
         "message": "<strong>注:</strong> 現在の値が基本モードの調整範囲外であるため、スライダーが無効になっています。Expertモードに切り替えてください。",
-        "desciption": "Slider expert settings detected while in non-expert mode"
+        "description": "Slider expert settings detected while in non-expert mode"
     },
     "pidTuningSliderLow": {
         "message": "低",
@@ -3709,7 +3748,7 @@
         "description": "D Gain (Damping) tuning slider label"
     },
     "pidTuningDGainSliderHelp": {
-        "message": "D値を比較的高くするとスティック応答性が鈍くなり、モーターが高温になりますが、P値の振動を抑え、プロップウォッシュの振動を改善します。<br /><br />D値が比較的低いとスティック応答性は速くなりますが、プロップウォッシュの処理や外力 (風) への反応が弱くなります。",
+        "message": "D値を比較的高くするとスティック応答性が鈍くなり、モーターが高温になりますが、素早い振動を抑えプロップウォッシュを改善します。<br /><br />D値が比較的低いとスティック応答性は速くなりますが、プロップウォッシュの処理や外力 (風) に対する反応が弱くなります。",
         "description": "D gain balance tuning slider helpicon message"
     },
     "pidTuningPIGainSlider": {
@@ -3733,7 +3772,7 @@
         "description": "I-term slider label"
     },
     "pidTuningIGainSliderHelp": {
-        "message": "I値を増加または減少させます。I値を高くすると、スパイラルターンやオービット、スロットルゼロでの操作のトラッキングが向上する場合があります。Iが高過ぎると、特にP値が足りない場合フリップ/ロールの後やスロットルを0%にしたときに、ふらつきやバウンスバックが発生することがあります。<br /><br />一般的に『ドリフト - ふらつき』スライダーは、スパイラルターンやオービットなどで機体のトラッキングを維持するために、できるだけ値を高くしますが、スロットルを0%にしたときにふらつきが発生するほど高くはしません。<br /><br /><strong>注:</strong><br />目に見える形でバウンスバックが発生した場合は、『I値リラックス』が有効になっていることを確認し iterm_relax_cutoff の値を下げてみてください。",
+        "message": "I値を増加または減少させます。I値を高くすると、スパイラルターンやオービット、スロットルゼロでの操作追従性が向上します。I値が高過ぎると、特にP値が足りない場合フリップ/ロールの後やスロットルを0%にしたときに、ふらつきやバウンスバックが発生することがあります。<br /><br />一般的に『ドリフト - ふらつき』スライダーは、スパイラルターンやオービットなどで機体の追従性を維持するために、できるだけ値を高くしますが、スロットルを0%にしたときにふらつきが発生するほど高くはしません。<br /><br /><strong>注:</strong><br />目に見える形でバウンスバックが発生した場合は、『I値リラックス』が有効になっていることを確認し iterm_relax_cutoff の値を下げてみてください。",
         "description": "I-gain Gain tuning slider helpicon message"
     },
     "pidTuningDMaxGainSlider": {
@@ -4567,6 +4606,10 @@
         "message": "NTSC",
         "description": "Option for the video format in the OSD"
     },
+    "osdSetupVideoFormatOptionHd": {
+        "message": "HD",
+        "description": "Option for the video format in the OSD"
+    },
     "osdSetupUnitsTitle": {
         "message": "単位"
     },
@@ -4715,6 +4758,14 @@
     "osdDescElementVtxChannel": {
         "message": "現在のVTX ChとVTX出力"
     },
+    "osdTextElementVTXchannelVariantPower": {
+        "message": "VTX出力",
+        "description": "One of the variants of the VTX channel element of the OSD"
+    },
+    "osdTextElementVTXchannelVariantFull": {
+        "message": "バンド:チャンネル:出力:ピット",
+        "description": "One of the variants of the VTX channel element of the OSD"
+    },
     "osdTextElementVoltageWarning": {
         "message": "バッテリー電圧警告",
         "description": "One of the elements of the OSD"
@@ -4758,25 +4809,117 @@
         "message": "ピッチ表示"
     },
     "osdTextElementCurrentDraw": {
-        "message": "バッテリー瞬間電流値",
+        "message": "バッテリー電流値",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCurrentDraw": {
-        "message": "瞬間電流量"
+        "message": "バッテリー瞬間電流値"
     },
     "osdTextElementMahDrawn": {
-        "message": "バッテリー総容量",
+        "message": "バッテリー電流値 (mAh)",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementMahDrawn": {
         "message": "使用バッテリー総容量"
+    },
+    "osdTextElementWhDrawn": {
+        "message": "バッテリー電流値 (Wh)",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementWhDrawn": {
+        "message": "使用バッテリー総容量 (Wh)"
+    },
+    "osdDescElementAuxValue": {
+        "message": "AUX値",
+        "description": "Displays a receiver AUX channel see PR 10789"
+    },
+    "osdTextElementAuxValue": {
+        "message": "AUX値",
+        "description": "One of the elements of the OSD"
+    },
+    "osdTextElementSysGoggleVoltage": {
+        "message": "ゴーグル 電圧",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleVoltage": {
+        "message": "ゴーグルで表示されるゴーグル 電圧"
+    },
+    "osdTextElementSysVtxVoltage": {
+        "message": "VTX 電圧",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxVoltage": {
+        "message": "ゴーグルで表示されるVTX 電圧"
+    },
+    "osdTextElementSysBitrate": {
+        "message": "VTX ビットレート",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysBitrate": {
+        "message": "ゴーグルで表示されるVTX ビットレート"
+    },
+    "osdTextElementSysDelay": {
+        "message": "VTX 遅延",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDelay": {
+        "message": "ゴーグルで描画されるVTX 遅延"
+    },
+    "osdTextElementSysDistance": {
+        "message": "VTX 伝送距離",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDistance": {
+        "message": "ゴーグルで表示されるVTX 伝送距離"
+    },
+    "osdTextElementSysLQ": {
+        "message": "ゴーグル リンク品質",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysLQ": {
+        "message": "ゴーグルで描画されるVTX リンク品質"
+    },
+    "osdTextElementSysGoggleDVR": {
+        "message": "ゴーグル DVR状態",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleDVR": {
+        "message": "ゴーグルで表示されるゴーグル DVR状態"
+    },
+    "osdTextElementSysVtxDVR": {
+        "message": "VTX DVR状態",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxDVR": {
+        "message": "ゴーグルで表示されるVTX DVR状態"
+    },
+    "osdTextElementSysWarnings": {
+        "message": "ゴーグル システム警告",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysWarnings": {
+        "message": "ゴーグルで表示されるVTX システム警告"
+    },
+    "osdTextElementSysVtxTemp": {
+        "message": "VTX 温度",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxTemp": {
+        "message": "ゴーグルで表示されるVTX 温度"
+    },
+    "osdTextElementSysFanSpeed": {
+        "message": "ゴーグル FAN速度",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysFanSpeed": {
+        "message": "ゴーグルで表示されるゴーグル FAN速度"
     },
     "osdTextElementCraftName": {
         "message": "機体名",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
-        "message": "[設定] タブで設定した機体名"
+        "message": "【基本設定】タブで設定した機体名。</br>CLI変数『craft_name』でも設定可能です。"
     },
     "osdTextElementAltitude": {
         "message": "高度",
@@ -5124,7 +5267,14 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementDisplayName": {
-        "message": "CLIコマンド『display_name』で設定した表示名"
+        "message": "CLI変数『display_name』でも設定可能です。"
+    },
+    "osdTextElementPilotName": {
+        "message": "パイロット名",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPilotName": {
+        "message": "【基本設定】タブで設定されたパイロット名。</br>CLI変数『pilot_name』でも設定可能です。"
     },
     "osdTextElementEscRpmFreq": {
         "message": "ESC RPM 周波数",
@@ -5203,6 +5353,20 @@
     "osdDescTxUplinkPower": {
         "message": "送信出力値 (mW or W) を表示します。対応する送信機で<i>Dynamic Power</i>が有効になっている場合に使用できます。"
     },
+    "osdTextElementReadyMode": {
+        "message": "準備モード",
+        "description": "When active READY will be displayed until flying"
+    },
+    "osdDescElementReadyMode": {
+        "message": "有効な場合、飛行するまで READY を表示"
+    },
+    "osdTextElementRSNRValue": {
+        "message": "RSNR値",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRSNRValue": {
+        "message": "RSNR値"
+    },
     "osdTextElementUnknown": {
         "message": "不明 $1",
         "description": "One of the elements of the OSD"
@@ -5243,7 +5407,14 @@
         "description": "One of the statistics that can be shown at the end of the flight in the OSD"
     },
     "osdDescStatUsedMah": {
-        "message": "バッテリー容量"
+        "message": "使用バッテリー容量"
+    },
+    "osdTextStatUsedWh": {
+        "message": "バッテリー使用量 (Wh)",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatUsedWh": {
+        "message": "使用バッテリー容量 (Wh)"
     },
     "osdTextStatMaxAltitude": {
         "message": "最大高度",
@@ -5391,6 +5562,13 @@
     },
     "osdDescStatMinRssiDbm": {
         "message": "認識されたRSSI最小値 (dBm)"
+    },
+    "osdTextStatMinRSNR": {
+        "message": "最小RSNR値",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatMinRSNR": {
+        "message": "最小RSNR値"
     },
     "osdTextStatUnknown": {
         "message": "不明 $1",
@@ -5585,6 +5763,13 @@
     "osdWarningOverCap": {
         "message": "消費されたmAhが設定された容量制限を超えると警告"
     },
+    "osdWarningTextRSNR": {
+        "message": "RSNR",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRSNR": {
+        "message": "RSNR値がアラーム設定を下回ったときの警告"
+    },
     "osdWarningTextUnknown": {
         "message": "不明 $1"
     },
@@ -5675,6 +5860,10 @@
     },
     "vtxType_4": {
         "message": "Tramp",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_5": {
+        "message": "MSP",
         "description": "Text for one of the types of the VTX type in VTX tab"
     },
     "vtxType_255": {
@@ -5837,6 +6026,14 @@
         "message": "VTX設定ファイルの保存中に<span class=\"message-negative\">エラーが発生しました</span>",
         "description": "Message in the GUI log when the VTX Config file is saved"
     },
+    "vtxSavedLuaFileOk": {
+        "message": "Lua VTX設定ファイルを<span class=\"message-positive\">保存しました</span>",
+        "description": "Message in the GUI log when the lua VTX Config file is saved"
+    },
+    "vtxSavedLuaFileKo": {
+        "message": "Lua VTX設定ファイルの保存中に<span class=\"message-negative\">エラーが発生しました</span>",
+        "description": "Message in the GUI log when the lua VTX Config file saving has failed"
+    },
     "vtxLoadFileOk": {
         "message": "VTX設定ファイルを<span class=\"message-positive\">ロードしました</span>",
         "description": "Message in the GUI log when the VTX Config file is loaded"
@@ -5876,6 +6073,10 @@
     "vtxButtonSave": {
         "message": "保存",
         "description": "Save button in the VTX tab"
+    },
+    "vtxButtonSaving": {
+        "message": "保存中",
+        "description": "Show state of the Save button in the VTX tab"
     },
     "vtxButtonSaved": {
         "message": "保存しました",
@@ -6031,6 +6232,15 @@
     },
     "craftName": {
         "message": "機体名"
+    },
+    "configurationCraftNameHelp": {
+        "message": "ログ、バックアップファイル名、OSDに表示できます。</br>CLI変数『<b>craft_name</b>』でも設定可能です。"
+    },
+    "configurationPilotName": {
+        "message": "パイロット名"
+    },
+    "configurationPilotNameHelp": {
+        "message": "OSDで表示できます。</br>CLI変数『<b>pilot_name</b>』でも設定可能です。"
     },
     "configurationFpvCamAngleDegrees": {
         "message": "FPVカメラアングル [degrees]"
@@ -6424,7 +6634,7 @@
         "description": "Warning message that shows up at the top of the preset sources dialog"
     },
     "presetsNoPresetsFound": {
-        "message": "指定された検索パラメータに対応するプリセットが見つかりません",
+        "message": "指定された検索パラメータに該当するプリセットが見つかりません",
         "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
@@ -6442,5 +6652,50 @@
     "presetsReviewOptionsWarning": {
         "message": "このプリセットを選択する前に、オプションリストを確認してください。",
         "description": "Dialog text to prompt user to review options for the preset"
+    },
+    "firmwareFlasherBuildConfigurationHead": {
+        "message": "ビルド設定"
+    },
+    "firmwareFlasherBuildOptions": {
+        "message": "その他のオプション"
+    },
+    "firmwareFlasherBuildRadioProtocols": {
+        "message": "送信機プロトコル"
+    },
+    "firmwareFlasherBuildTelemetryProtocols": {
+        "message": "テレメトリープロトコル"
+    },
+    "firmwareFlasherBuildMotorProtocols": {
+        "message": "モータープロトコル"
+    },
+    "firmwareFlasherConfigurationFile": {
+        "message": "設定ファイル名:"
+    },
+    "firmwareFlasherRadioProtocolDescription": {
+        "message": "このビルドに含まれる送信プロトコルを選択します。ドロップダウンの操作により複数項目を選択できますのでご注意ください。"
+    },
+    "firmwareFlasherTelemetryProtocolDescription": {
+        "message": "このビルドに含まれるテレメトリープロトコルを選択します。ドロップダウンの操作により複数項目を選択できますのでご注意ください。またCRSFなど、選択した送信プロトコルに関係なく有効となるテレメトリープロトコルもあります。"
+    },
+    "firmwareFlasherOptionsDescription": {
+        "message": "このビルドに含まれる一般的なオプションを選択します。ドロップダウンの操作により複数項目を選択できますのでご注意ください。AKK VTXのような修正項目はこちらに含まれます。"
+    },
+    "firmwareFlasherMotorProtocolDescription": {
+        "message": "このビルドに含まれるモーター (ESC) プロトコルを選択します。ドロップダウンの操作により複数項目を選択できますのでご注意ください。"
+    },
+    "firmwareFlasherBranchDescription": {
+        "message": "特に開発者にとっては便利な機能として、次のように入力することでマージされたPRを選択したり、コミットハッシュ値を指定したり『まだマージされていない』PRを指定したりすることができます: pull/{PR number}/head ."
+    },
+    "firmwareFlasherCustomDefinesDescription": {
+        "message": "開発者向けには必要な定義を『スペース』で区切って追加することができますが、接頭辞【USE_】がなければ自動的に追加されます。"
+    },
+    "firmwareFlasherBuildCustomDefines": {
+        "message": "カスタム定義"
+    },
+    "classicBuild": {
+        "message": "クラシックモード"
+    },
+    "classicBuildModeDescription": {
+        "message": "このモードでは、Commit以外のパラメータはすべて無視されます。これは基本的に古典的なナイトリービルドと同様なことを実現するもので、利便性のために提供されています。"
     }
 }

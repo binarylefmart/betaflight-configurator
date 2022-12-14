@@ -1,7 +1,11 @@
+# ID used by the upload action to Crowdin
+project_id_env: CROWDIN_PROJECT_ID
+api_token_env: CROWDIN_PERSONAL_TOKEN
+
 #
 # Files configuration
 #
-"preserve_hierarchy": false
+"preserve_hierarchy": true
 
 files: [
  {
@@ -23,8 +27,9 @@ files: [
   "languages_mapping" : {
     "two_letters_code" : {
       "pt-BR" : "pt_BR",
-      "zh-CN" : "zh_CN"
-     }
+      "zh-CN" : "zh_CN",
+      "zh-TW" : "zh_TW"
+    }
   }
  }
 ]

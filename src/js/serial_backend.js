@@ -145,6 +145,7 @@ function initializeSerialBackend() {
         ConfigStorage.set({'auto_connect': GUI.auto_connect});
     });
 
+    MdnsDiscovery.initialize();
     PortHandler.initialize();
     PortUsage.initialize();
 }
@@ -244,6 +245,7 @@ function onOpen(openInfo) {
         FC.resetState();
         mspHelper = new MspHelper();
         MSP.listen(mspHelper.process_data.bind(mspHelper));
+        MSP.timeout = 250;
         console.log(`Requesting configuration data`);
 
         MSP.send_message(MSPCodes.MSP_API_VERSION, false, false, function () {
@@ -443,37 +445,34 @@ function processUid() {
         connectionTimestamp = Date.now();
         GUI.log(i18n.getMessage('uniqueDeviceIdReceived', [uniqueDeviceIdentifier]));
 
-        if (semver.gte(FC.CONFIG.apiVersion, "1.20.0")) {
-            processName();
-        } else {
-            setRtc();
-        }
+        processCraftName();
     });
 }
 
-function processName() {
-    MSP.send_message(MSPCodes.MSP_NAME, false, false, function () {
-        GUI.log(i18n.getMessage('craftNameReceived', [FC.CONFIG.name]));
+async function processCraftName() {
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)) {
+        await MSP.promise(MSPCodes.MSP2_GET_TEXT, mspHelper.crunch(MSPCodes.MSP2_GET_TEXT, MSPCodes.CRAFT_NAME));
+    } else {
+        await MSP.promise(MSPCodes.MSP_NAME);
+    }
 
-        FC.CONFIG.armingDisabled = false;
-        mspHelper.setArmingEnabled(false, false, setRtc);
-    });
+    GUI.log(i18n.getMessage('craftNameReceived', semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45) ? [FC.CONFIG.craftName] : [FC.CONFIG.name]));
+
+    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)) {
+        await MSP.promise(MSPCodes.MSP2_GET_TEXT, mspHelper.crunch(MSPCodes.MSP2_GET_TEXT, MSPCodes.PILOT_NAME));
+    }
+
+    FC.CONFIG.armingDisabled = false;
+    mspHelper.setArmingEnabled(false, false, setRtc);
 }
 
 function setRtc() {
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
-        MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, finishOpen);
-    } else {
-        finishOpen();
-    }
+    MSP.send_message(MSPCodes.MSP_SET_RTC, mspHelper.crunch(MSPCodes.MSP_SET_RTC), false, finishOpen);
 }
 
 function finishOpen() {
     CONFIGURATOR.connectionValid = true;
     GUI.allowedTabs = GUI.defaultAllowedFCTabsWhenConnected.slice();
-    if (semver.lt(FC.CONFIG.apiVersion, "1.4.0")) {
-        GUI.allowedTabs.splice(GUI.allowedTabs.indexOf('led_strip'), 1);
-    }
 
     if (GUI.isCordova()) {
         UI_PHONES.reset();
@@ -491,30 +490,32 @@ function connectCli() {
     $('#tabs .tab_cli a').click();
 }
 
-async function onConnect() {
+function onConnect() {
     if ($('div#flashbutton a.flash_state').hasClass('active') && $('div#flashbutton a.flash').hasClass('active')) {
         $('div#flashbutton a.flash_state').removeClass('active');
         $('div#flashbutton a.flash').removeClass('active');
     }
+
     GUI.timeout_remove('connecting'); // kill connecting timer
+
     $('div#connectbutton div.connect_state').text(i18n.getMessage('disconnect')).addClass('active');
     $('div#connectbutton a.connect').addClass('active');
 
     $('#tabs ul.mode-disconnected').hide();
     $('#tabs ul.mode-connected-cli').show();
 
-
     // show only appropriate tabs
     $('#tabs ul.mode-connected li').hide();
     $('#tabs ul.mode-connected li').filter(function (index) {
         const classes = $(this).attr("class").split(/\s+/);
         let found = false;
+
         $.each(GUI.allowedTabs, (_index, value) => {
-                const tabName = `tab_${value}`;
-                if ($.inArray(tabName, classes) >= 0) {
-                    found = true;
-                }
-            });
+            const tabName = `tab_${value}`;
+            if ($.inArray(tabName, classes) >= 0) {
+                found = true;
+            }
+        });
 
         if (FC.CONFIG.boardType == 0) {
             if (classes.indexOf("osd-required") >= 0) {
@@ -532,13 +533,14 @@ async function onConnect() {
 
         $('#tabs ul.mode-connected').show();
 
-        await MSP.promise(MSPCodes.MSP_FEATURE_CONFIG);
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_33)) {
-            await MSP.promise(MSPCodes.MSP_BATTERY_CONFIG);
-        }
-        await MSP.promise(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_32) ? MSPCodes.MSP_STATUS_EX : MSPCodes.MSP_STATUS);
-        await MSP.promise(MSPCodes.MSP_DATAFLASH_SUMMARY);
-        if (FC.CONFIG.boardType == 0 || FC.CONFIG.boardType == 2) {
+        MSP.send_message(MSPCodes.MSP_FEATURE_CONFIG, false, false);
+        MSP.send_message(MSPCodes.MSP_BATTERY_CONFIG, false, false);
+
+        getStatus();
+
+        MSP.send_message(MSPCodes.MSP_DATAFLASH_SUMMARY, false, false);
+
+        if (FC.CONFIG.boardType === 0 || FC.CONFIG.boardType === 2) {
             startLiveDataRefreshTimer();
         }
     }
@@ -587,6 +589,8 @@ function onClosed(result) {
 
 function read_serial(info) {
     if (CONFIGURATOR.cliActive) {
+        MSP.clearListeners();
+        MSP.disconnect_cleanup();
         TABS.cli.read(info);
     } else if (CONFIGURATOR.cliEngineActive) {
         TABS.presets.read(info);
@@ -674,11 +678,7 @@ function have_sensor(sensors_detected, sensor_code) {
         case 'sonar':
             return bit_check(sensors_detected, 4);
         case 'gyro':
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-                return bit_check(sensors_detected, 5);
-            } else {
-                return true;
-            }
+            return bit_check(sensors_detected, 5);
     }
     return false;
 }
@@ -688,8 +688,11 @@ function startLiveDataRefreshTimer() {
     GUI.timeout_add('data_refresh', update_live_status, 100);
 }
 
-async function update_live_status() {
+async function getStatus() {
+    return MSP.promise(MSPCodes.MSP_STATUS_EX);
+}
 
+async function update_live_status() {
     const statuswrapper = $('#quad-status_wrapper');
 
     $(".quad-status-contents").css({
@@ -698,7 +701,7 @@ async function update_live_status() {
 
     if (GUI.active_tab !== 'cli' && GUI.active_tab !== 'presets') {
         await MSP.promise(MSPCodes.MSP_BOXNAMES);
-        await MSP.promise(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_32) ? MSPCodes.MSP_STATUS_EX : MSPCodes.MSP_STATUS);
+        await getStatus();
         await MSP.promise(MSPCodes.MSP_ANALOG);
 
         const active = ((Date.now() - FC.ANALOG.last_received_timestamp) < 300);
@@ -806,7 +809,7 @@ function update_dataflash_global() {
      }
 }
 
-function reinitializeConnection(originatorTab, callback) {
+function reinitializeConnection(callback) {
 
     // Close connection gracefully if it still exists.
     const previousTimeStamp = connectionTimestamp;
@@ -824,14 +827,15 @@ function reinitializeConnection(originatorTab, callback) {
     let attempts = 0;
     const reconnect = setInterval(waitforSerial, 100);
 
-    async function waitforSerial() {
+    function waitforSerial() {
         if (connectionTimestamp !== previousTimeStamp && CONFIGURATOR.connectionValid) {
             console.log(`Serial connection available after ${attempts / 10} seconds`);
             clearInterval(reconnect);
-            await MSP.promise(MSPCodes.MSP_STATUS);
+            getStatus();
             GUI.log(i18n.getMessage('deviceReady'));
-            originatorTab.initialize(false, $('#content').scrollTop());
-            callback?.();
+            if (callback === typeof('function')) {
+                callback();
+            }
         } else {
             attempts++;
             if (attempts > 100) {

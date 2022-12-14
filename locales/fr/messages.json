@@ -126,70 +126,6 @@
     "language_default_pretty": {
         "message": "Sélection par défaut ($t(detectedLanguage))"
     },
-    "language_ca": {
-        "message": "Català",
-        "description": "Don't translate!!!"
-    },
-    "language_de": {
-        "message": "Deutsch",
-        "description": "Don't translate!!!"
-    },
-    "language_en": {
-        "message": "English",
-        "description": "Don't translate!!!"
-    },
-    "language_es": {
-        "message": "Español",
-        "description": "Don't translate!!!"
-    },
-    "language_fr": {
-        "message": "Français",
-        "description": "Don't translate!!!"
-    },
-    "language_gl": {
-        "message": "Galego",
-        "description": "Don't translate!!!"
-    },
-    "language_hr": {
-        "message": "Hrvatski",
-        "description": "Don't translate!!!"
-    },
-    "language_id": {
-        "message": "Bahasa Indonesia",
-        "description": "Don't translate!!!"
-    },
-    "language_it": {
-        "message": "Italiano",
-        "description": "Don't translate!!!"
-    },
-    "language_ja": {
-        "message": "日本語",
-        "description": "Don't translate!!!"
-    },
-    "language_ko": {
-        "message": "한국어",
-        "description": "Don't translate!!!"
-    },
-    "language_lv": {
-        "message": "Latviešu",
-        "description": "Don't translate!!!"
-    },
-    "language_pt": {
-        "message": "Português",
-        "description": "Don't translate!!!"
-    },
-    "language_ru": {
-        "message": "Русский язык",
-        "description": "Don't translate!!!"
-    },
-    "language_sv": {
-        "message": "Svenska",
-        "description": "Don't translate!!!"
-    },
-    "language_zh_CN": {
-        "message": "简体中文",
-        "description": "Don't translate!!!"
-    },
     "sensorDataFlashNotFound": {
         "message": "Aucune donnée de flash<br>puce trouvée",
         "description": "Text of the dataflash image in the header of the page."
@@ -263,21 +199,6 @@
     },
     "deviceReady": {
         "message": "Périphérique - <span class=\"message-positive\">Prêt</span>"
-    },
-    "backupFileIncompatible": {
-        "message": "Ce fichier de sauvegarde a été généré avec une version précédente du configurateur et n'est pas compatible. Désolé."
-    },
-    "backupFileUnmigratable": {
-        "message": "Ce fichier de sauvegarde a été généré à partir d'une version précédente du configurateur et ne peut pas être migré. Désolé."
-    },
-    "configMigrationFrom": {
-        "message": "Fichier de configuration de migration généré par le configurateur: $1"
-    },
-    "configMigratedTo": {
-        "message": "Configuration migrée vers le configurateur: $1"
-    },
-    "configMigrationSuccessful": {
-        "message": "Migration de la configuration effectuée, migrations appliquées: $1"
     },
     "tabFirmwareFlasher": {
         "message": "Flasher un microprogramme"
@@ -661,7 +582,7 @@
         "message": "Matériel"
     },
     "defaultWelcomeText": {
-        "message": "L'application est compatible avec toute carte sous Betaflight. La liste complète est disponible dans l'onglet flash.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Télécharger Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Télécharger les Scripts TX Lua Betaflight</a><br /><br />Le code source du firmware est disponible <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br /><br />La dernière version du <b>pilote STM USB VCP</b> peut être téléchargée <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br />Pour les cartes plus anciennes avec puce CP210x USB vers Série:<br />La dernière version <b>du pilote CP210x</b> est disponible <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br />La dernière version de <b>Zadig</b> utilitaire pour l'installation de pilotes USB pour Windows est <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br /><b>ImpulseRC Driver Fixer</b> peut être téléchargé <a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">ici</a>"
+        "message": "L'application est compatible avec toute carte sous Betaflight. La liste complète est disponible dans l'onglet flash.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Télécharger Betaflight Blackbox Log Viewer</a><br /><br /><a href=\"https://github.com/betaflight/betaflight-tx-lua-scripts/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Télécharger les Scripts TX Lua Betaflight</a><br /><br />Le code source du firmware est disponible <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br /><br />Pour les cartes plus anciennes avec puce CP210x USB vers Série:<br />La dernière version <b>des pilotes CP210x</b> peut être téléchargé <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br />La dernière version de<b>Zadig</b> utilitaire pour l'installation de pilotes USB pour Windows est <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">ici</a><br /><b>ImpulseRC Driver Fixer</b> peut être téléchargé <a href=\"https://impulserc.com/pages/downloads\" target=\"blank\" rel=\"noopener noreferrer\">ici</a>"
     },
     "defaultContributingHead": {
         "message": "Participation"
@@ -739,9 +660,6 @@
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Développeurs de Betaflight sur Slack</a>"
     },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">La sauvegarde et la restauration sont désactivés.</span> La version API de votre microprogramme est <span class=\"message-negative\">$1</span>, la version minimum requise est <span class=\"message-positive\">$2</span>.  Veuillez sauvegarder vos paramètres en CLI, voir la procédure dans l'aide Betaflight."
-    },
     "initialSetupButtonCalibrateAccel": {
         "message": "Calibrer l'accéléromètre"
     },
@@ -767,7 +685,7 @@
         "message": "Sauvegarde JSON"
     },
     "initialSetupButtonRestore": {
-        "message": "Rétablir JSON"
+        "message": "Restaurer JSON"
     },
     "initialSetupButtonRebootBootloader": {
         "message": "Activer le Boot Loader / DFU"
@@ -776,7 +694,7 @@
         "message": "Sauvegarde et restauration expérimentales"
     },
     "initialSetupBackupRestoreText": {
-        "message": "<strong>Sauvegardez</strong> votre configuration, les paramètres <strong>CLI</strong> ne seront <span class=\"message-negative\">pas</span> inclus - utilisez la commande CLI 'diff all' afin de les sauver."
+        "message": "<strong>Sauvegardez</strong> votre configuration en cas d'accident, les paramètres <strong>CLI</strong> ne seront <span class=\"message-negative\">pas</span> inclus - utilisez la commande CLI 'diff all' afin de les sauver."
     },
     "initialSetupRebootBootloaderText": {
         "message": "Redémarrer en mode <strong>boot loader / DFU</strong>."
@@ -1574,6 +1492,9 @@
     "portsFunction_FRSKY_OSD": {
         "message": "OSD (Protocole FrSky)"
     },
+    "portsFunction_VTX_MSP": {
+        "message": "VTX (MSP + Displayport)"
+    },
     "pidTuningProfileOption": {
         "message": "Profile $1"
     },
@@ -1622,6 +1543,10 @@
     "pidTuningAntiGravityGain": {
         "message": "Gain",
         "description": "Anti Gravity Gain Parameter"
+    },
+    "pidTuningAntiGravityGainHelp": {
+        "message": "Boost iTerm et augmentation de P lors des changements rapides de l'accélérateur.<br><br>8.0 signifie environ 8x iTerm boost",
+        "description": "Anti Gravity Gain Parameter Help Icon"
     },
     "pidTuningAntiGravityThres": {
         "message": "Seuil",
@@ -1917,11 +1842,23 @@
     "pidTuningRcExpo": {
         "message": "RC Expo"
     },
+    "pidTuningTPAMode": {
+        "message": "Mode TPA"
+    },
     "pidTuningTPA": {
         "message": "TPA"
     },
+    "pidTuningTPARate": {
+        "message": "Rate TPA"
+    },
     "pidTuningTPABreakPoint": {
         "message": "TPA Breakpoint"
+    },
+    "pidTuningTPAPD": {
+        "message": "PD"
+    },
+    "pidTuningTPAD": {
+        "message": "D"
     },
     "pidTuningThrottleCurvePreview": {
         "message": "Aperçu de la courbe des Gaz"
@@ -2113,6 +2050,9 @@
     },
     "receiverButtonBindMessage": {
         "message": "Demande d'appairage envoyée au contrôleur de vol."
+    },
+    "receiverButtonPassphrase": {
+        "message": "Phrase secrète"
     },
     "receiverButtonSticks": {
         "message": "Contrôle des manches"
@@ -2986,8 +2926,11 @@
     "sdcardStatusUnknown": {
         "message": "état inconnu $1"
     },
+    "firmwareFlasherBranch": {
+        "message": "Sélectionner un commit"
+    },
     "firmwareFlasherReleaseSummaryHead": {
-        "message": "Informations de la version"
+        "message": "Informations sur la version et le Build"
     },
     "firmwareFlasherReleaseManufacturer": {
         "message": "ID du fabricant :"
@@ -3007,17 +2950,35 @@
     "firmwareFlasherReleaseTarget": {
         "message": "Cible:"
     },
-    "firmwareFlasherReleaseFile": {
-        "message": "Exécutable:"
+    "firmwareFlasherReleaseMCU": {
+        "message": "MCU:"
     },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Cible unifiée :"
+    "firmwareFlasherCloudBuildDetails": {
+        "message": "Détails de la Construction du Cloud:"
     },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "Afficher la configuration."
+    "firmwareFlasherCloudBuildLogUrl": {
+        "message": "Afficher les logs."
     },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "Date:"
+    "firmwareFlasherCloudBuildStatus": {
+        "message": "Status:"
+    },
+    "firmwareFlasherCloudBuildPending": {
+        "message": "en attente"
+    },
+    "firmwareFlasherCloudBuildProcessing": {
+        "message": "traitement en cours"
+    },
+    "firmwareFlasherCloudBuildSuccessCached": {
+        "message": "succès (en cache)"
+    },
+    "firmwareFlasherCloudBuildSuccess": {
+        "message": "succès"
+    },
+    "firmwareFlasherCloudBuildTimedOut": {
+        "message": "temps expiré (veuillez réessayer)"
+    },
+    "firmwareFlasherCloudBuildFailed": {
+        "message": "échec (veuillez vérifier le log)"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "Téléchargement manuel."
@@ -3632,7 +3593,39 @@
         "message": "Nombre de cellules - pour le changement automatique de profil"
     },
     "pidTuningCellCountHelp": {
-        "message": "Activez automatiquement le premier profil dont le nombre de cellules est égal à celui de la batterie connectée."
+        "message": "Active automatiquement le premier profil qui a un nombre de cellules égal à celui de la batterie connectée.<br><br><ul><li><b>Changer</b>: Passez toujours à un profil avec le nombre de cellules correspondantes s'il y en a un.</li><li><b>Désactiver</b>: Désactiver le changement de profil automatique</li><b>1S-8S</b>: Sélectionnez le profil du nombre de cellules à utiliser pour ce profil</li></ul>"
+    },
+    "pidTuningCellCountChange": {
+        "message": "Changer",
+        "description": "Switch profile if there are no profiles matching cell count"
+    },
+    "pidTuningCellCountStay": {
+        "message": "Désactiver",
+        "description": "Disable cell count for this profile"
+    },
+    "pidTuningCellCount1S": {
+        "message": "1S"
+    },
+    "pidTuningCellCount2S": {
+        "message": "2S"
+    },
+    "pidTuningCellCount3S": {
+        "message": "3S"
+    },
+    "pidTuningCellCount4S": {
+        "message": "4S"
+    },
+    "pidTuningCellCount5S": {
+        "message": "5S"
+    },
+    "pidTuningCellCount6S": {
+        "message": "6S"
+    },
+    "pidTuningCellCount7S": {
+        "message": "7S"
+    },
+    "pidTuningCellCount8S": {
+        "message": "8S"
     },
     "pidTuningNonProfileFilterSettings": {
         "message": "Paramètres de filtre indépendants du profil"
@@ -3719,7 +3712,7 @@
     },
     "pidTuningSlidersExpertSettingsDetectedNote": {
         "message": "<strong>Note :</strong> Des curseur(s) sont désactivés car les valeurs actuelles sont au-delà du mode de réglage basique. Passez en mode Expert pour procéder à des changements",
-        "desciption": "Slider expert settings detected while in non-expert mode"
+        "description": "Slider expert settings detected while in non-expert mode"
     },
     "pidTuningSliderLow": {
         "message": "Faible",
@@ -3770,7 +3763,7 @@
         "description": "D Gain (Damping) tuning slider label"
     },
     "pidTuningDGainSliderHelp": {
-        "message": "Un gain relativement élevé en D atténuera la réactivité des sticks et peut faire chauffer les moteurs, mais devrait aider à contrôler les oscillations rapides et le propwash.<br /><br />D-term relativement bas donne une réactivité des sticks plus rapide, mais affaiblira les performances de prop-wash et la réaction aux forces extérieures (vent).",
+        "message": "Un gain relativement élevé en D atténuera la réactivité des sticks et peut faire chauffer les moteurs, mais devrait aider à contrôler les oscillations rapides et le propwash.<br /><br />Un D-term relativement bas donne une réactivité des sticks plus rapide, mais affaiblira les performances de prop-wash et la réaction aux forces extérieures (vent).",
         "description": "D gain balance tuning slider helpicon message"
     },
     "pidTuningPIGainSlider": {
@@ -3794,7 +3787,7 @@
         "description": "I-term slider label"
     },
     "pidTuningIGainSliderHelp": {
-        "message": "Augmente ou réduit I. Un I élevé peut améliorer le suivi lors de virages en spirale, d'oribites ou lors de commandes avec gaz coupés. Trop de I, en particulier avec un P insuffisant, peut causer des problèmes d'oscillations ou de rebonds après des flips ou rolls, ou lors de la coupure des gaz.<br /><br />En général, vous voulez le curseur ‘Dérive - Oscillations’ aussi haut que possible pour autoriser les mouvements en spirale etc... mais pas assez afin de ne pas avoir d'oscillations lors de la coupure des gaz.<br /><br /><strong>Note:</strong><br />Si vous avez des rebonds très visibles à un moment, assurez-vous que “I-term Relax” est actif, puis essayez de réduire la valeur de iterm_relax_cutoff.",
+        "message": "Augmente ou réduit I. Un I élevé peut améliorer le suivi lors de virages en spirale, d'orbites ou lors de commandes avec gaz coupés. Trop de I, en particulier avec un P insuffisant, peut causer des problèmes d'oscillations ou de rebonds après des flips ou des rolls, ou lors de la coupure des gaz.<br /><br />En général, vous voulez le curseur ‘Dérive - Oscillations’ aussi haut que possible pour autoriser les mouvements en spirale etc... mais pas assez afin de ne pas avoir d'oscillations lors de la coupure des gaz.<br /><br /><strong>Note:</strong><br />Si vous avez des rebonds très visibles à un moment, assurez-vous que “I-term Relax” est actif, puis essayez de réduire la valeur de iterm_relax_cutoff.",
         "description": "I-gain Gain tuning slider helpicon message"
     },
     "pidTuningDMaxGainSlider": {
@@ -4628,6 +4621,10 @@
         "message": "NTSC",
         "description": "Option for the video format in the OSD"
     },
+    "osdSetupVideoFormatOptionHd": {
+        "message": "HD",
+        "description": "Option for the video format in the OSD"
+    },
     "osdSetupUnitsTitle": {
         "message": "Unités"
     },
@@ -4653,7 +4650,7 @@
         "message": "Statistiques de vol"
     },
     "osdSetupVtxTitle": {
-        "message": "Réglages VTX"
+        "message": "VTX : Réglages"
     },
     "osdSetupCraftNameTitle": {
         "message": "Nom du modèle"
@@ -4742,7 +4739,7 @@
         "message": "Tension instantanée de la batterie principale (clignote lorsque le seuil d'alarme est atteint)"
     },
     "osdTextElementRssiValue": {
-        "message": "Valeur RSSI",
+        "message": "RSSI : Valeur",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRssiValue": {
@@ -4770,11 +4767,19 @@
         "message": "Utilisation CPU actuelle"
     },
     "osdTextElementVtxChannel": {
-        "message": "Canal VTX",
+        "message": "VTX : Canal",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementVtxChannel": {
         "message": "Canal et puissance VTX actuels"
+    },
+    "osdTextElementVTXchannelVariantPower": {
+        "message": "VTX : Puissance",
+        "description": "One of the variants of the VTX channel element of the OSD"
+    },
+    "osdTextElementVTXchannelVariantFull": {
+        "message": "Bande:Canal:Puissance:Pit",
+        "description": "One of the variants of the VTX channel element of the OSD"
     },
     "osdTextElementVoltageWarning": {
         "message": "Avertissement de tension batterie",
@@ -4832,12 +4837,104 @@
     "osdDescElementMahDrawn": {
         "message": "Capacité total utilisée de la batterie utilisée"
     },
+    "osdTextElementWhDrawn": {
+        "message": "Wh de la batterie consommé",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementWhDrawn": {
+        "message": "Capacité totale de la batterie utilisée en Wh"
+    },
+    "osdDescElementAuxValue": {
+        "message": "Valeur auxiliaire",
+        "description": "Displays a receiver AUX channel see PR 10789"
+    },
+    "osdTextElementAuxValue": {
+        "message": "Valeur auxiliaire",
+        "description": "One of the elements of the OSD"
+    },
+    "osdTextElementSysGoggleVoltage": {
+        "message": "Goggle : Tension",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleVoltage": {
+        "message": "Tension des goggles rendue par les goggles"
+    },
+    "osdTextElementSysVtxVoltage": {
+        "message": "VTX : Tension",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxVoltage": {
+        "message": "Tension des goggles rendue par les goggles"
+    },
+    "osdTextElementSysBitrate": {
+        "message": "VTX : Débit",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysBitrate": {
+        "message": "Débit vidéo rendu par les goggles"
+    },
+    "osdTextElementSysDelay": {
+        "message": "VTX : Délai",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDelay": {
+        "message": "Délais de la vidéo rendue par les goggles"
+    },
+    "osdTextElementSysDistance": {
+        "message": "VTX : Distance",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysDistance": {
+        "message": "Distance de transmission vidéo rendue par les goggles"
+    },
+    "osdTextElementSysLQ": {
+        "message": "Goggle :  Qualité du lien",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysLQ": {
+        "message": "Qualité du lien vidéo rendue par les goggles"
+    },
+    "osdTextElementSysGoggleDVR": {
+        "message": "Goggle : Statut DVR ",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysGoggleDVR": {
+        "message": "Statut DVR des goggles rendu par les goggles"
+    },
+    "osdTextElementSysVtxDVR": {
+        "message": "VTX : Statut DVR",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxDVR": {
+        "message": "Statut DVR VTX rendu par les goggles"
+    },
+    "osdTextElementSysWarnings": {
+        "message": "Goggle : Avertissements système",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysWarnings": {
+        "message": "Avertissements du système vidéo rendus par les goggles"
+    },
+    "osdTextElementSysVtxTemp": {
+        "message": "VTX : Température",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysVtxTemp": {
+        "message": "Température du VTX rendue par les goggles"
+    },
+    "osdTextElementSysFanSpeed": {
+        "message": "Goggle : Vitesse du ventilateur",
+        "description": "One of the system elements of the OSD"
+    },
+    "osdDescElementSysFanSpeed": {
+        "message": "Vitesse du ventilateur rendue par les goggles"
+    },
     "osdTextElementCraftName": {
         "message": "Nom de l'appareil",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementCraftName": {
-        "message": "Nom du modèle comme indiqué dans le configurateur"
+        "message": "Nom de l'appareil tel que défini dans l'onglet Paramètres.</br>Peut également être défini via la variable CLI \"craft_name\"."
     },
     "osdTextElementAltitude": {
         "message": "Altitude",
@@ -4876,28 +4973,28 @@
         "message": "Mode de vol"
     },
     "osdTextElementGPSSpeed": {
-        "message": "Vitesse GPS",
+        "message": "GPS : Vitesse",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementGPSSpeed": {
         "message": "Vitesse fournie par le GPS"
     },
     "osdTextElementGPSSats": {
-        "message": "Satellites GPS",
+        "message": "GPS : Satellites",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementGPSSats": {
         "message": "Nombre de satellites GPS"
     },
     "osdTextElementGPSLon": {
-        "message": "Longitude GPS",
+        "message": "GPS : Longitude",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementGPSLon": {
         "message": "Longitude GPS"
     },
     "osdTextElementGPSLat": {
-        "message": "Latitude GPS",
+        "message": "GPS : Latitude",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementGPSLat": {
@@ -5062,14 +5159,14 @@
         "message": "Alertes (par exemple: batterie faible), Avertissements (par exemple: raisons de ne pas armer, batterie critique) et signal sonore (4 astérisques clignotants)."
     },
     "osdTextElementEscTemperature": {
-        "message": "Température ESC",
+        "message": "ESC : Température",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscTemperature": {
         "message": "Température reportée par la télémétrie des ESC"
     },
     "osdTextElementEscRpm": {
-        "message": "RPM ESC",
+        "message": "ESC : RPM",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpm": {
@@ -5185,10 +5282,17 @@
         "description": "One of the elements of the OSD"
     },
     "osdDescElementDisplayName": {
-        "message": "Afficher le nom comme défini par la commande cli \"display_name\""
+        "message": "Peut également être défini via la variable CLI \"display_name\"."
+    },
+    "osdTextElementPilotName": {
+        "message": "Nom du pilote",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementPilotName": {
+        "message": "Nom du pilote tel que défini dans l'onglet Paramètres.</br>Peut également être défini via la variable CLI \"pilot_name\"."
     },
     "osdTextElementEscRpmFreq": {
-        "message": "Fréquence RPM ESC",
+        "message": "ESC : Fréquence RPM",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementEscRpmFreq": {
@@ -5216,7 +5320,7 @@
         "message": "Nom du profil OSD tel que défini dans les variables CLI \"osd_profile_1_name\", \"osd_profile_2_name\" et \"osd_profile_3_name\""
     },
     "osdTextElementRssiDbmValue": {
-        "message": "Valeur dBm RSSI",
+        "message": "RSSI : Valeur dBm",
         "description": "One of the elements of the OSD"
     },
     "osdDescElementRssiDbmValue": {
@@ -5264,6 +5368,20 @@
     "osdDescTxUplinkPower": {
         "message": "Affiche une valeur de la puissance Tx (mW ou W). Utile lorsque la <i>Puissance Dynamique</i> est activée pour les radios compatibles"
     },
+    "osdTextElementReadyMode": {
+        "message": "Mode READY",
+        "description": "When active READY will be displayed until flying"
+    },
+    "osdDescElementReadyMode": {
+        "message": "Lorsque activé, READY sera affiché pendant le vol"
+    },
+    "osdTextElementRSNRValue": {
+        "message": "Valeur RSNR",
+        "description": "One of the elements of the OSD"
+    },
+    "osdDescElementRSNRValue": {
+        "message": "Valeur RSNR"
+    },
     "osdTextElementUnknown": {
         "message": "Inconnu $1",
         "description": "One of the elements of the OSD"
@@ -5305,6 +5423,13 @@
     },
     "osdDescStatUsedMah": {
         "message": "Capacité de la batterie utilisée"
+    },
+    "osdTextStatUsedWh": {
+        "message": "Wh de la batterie utilisé",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatUsedWh": {
+        "message": "Capacité de la batterie consommée en Wh"
     },
     "osdTextStatMaxAltitude": {
         "message": "Altitude maximum",
@@ -5452,6 +5577,13 @@
     },
     "osdDescStatMinRssiDbm": {
         "message": "Valeur minimum du RSSI en dBm"
+    },
+    "osdTextStatMinRSNR": {
+        "message": "Valeur minimum du RSNR",
+        "description": "One of the statistics that can be shown at the end of the flight in the OSD"
+    },
+    "osdDescStatMinRSNR": {
+        "message": "Valeur minimum du RSNR"
     },
     "osdTextStatUnknown": {
         "message": "Inconnu $1",
@@ -5646,6 +5778,13 @@
     "osdWarningOverCap": {
         "message": "Alerte lorsque le mAh consommé dépasse la limite de capacité configurée"
     },
+    "osdWarningTextRSNR": {
+        "message": "RSNR",
+        "description": "One of the warnings that can be selected to be shown in the OSD"
+    },
+    "osdWarningRSNR": {
+        "message": "Alerte quand la valeur du RSNR est inférieur au paramètre d'alarme"
+    },
     "osdWarningTextUnknown": {
         "message": "Inconnu $1"
     },
@@ -5736,6 +5875,10 @@
     },
     "vtxType_4": {
         "message": "Tramp",
+        "description": "Text for one of the types of the VTX type in VTX tab"
+    },
+    "vtxType_5": {
+        "message": "MSP",
         "description": "Text for one of the types of the VTX type in VTX tab"
     },
     "vtxType_255": {
@@ -5898,6 +6041,14 @@
         "message": "<span class=\"message-negative\">Erreur</span> lors de la sauvegarde du fichier de Config VTX",
         "description": "Message in the GUI log when the VTX Config file is saved"
     },
+    "vtxSavedLuaFileOk": {
+        "message": "Fichier de configuration lua du VTX <span class=\"message-positive\">sauvegardé</span>",
+        "description": "Message in the GUI log when the lua VTX Config file is saved"
+    },
+    "vtxSavedLuaFileKo": {
+        "message": "<span class=\"message-negative\">Erreur</span> lors de la sauvegarde du fichier de Configuration lua du VTX",
+        "description": "Message in the GUI log when the lua VTX Config file saving has failed"
+    },
     "vtxLoadFileOk": {
         "message": "Fichier de configuration VTX <span class=\"message-positive\">chargé</span>",
         "description": "Message in the GUI log when the VTX Config file is loaded"
@@ -5937,6 +6088,10 @@
     "vtxButtonSave": {
         "message": "Enregistrer",
         "description": "Save button in the VTX tab"
+    },
+    "vtxButtonSaving": {
+        "message": "Sauvegarde",
+        "description": "Show state of the Save button in the VTX tab"
     },
     "vtxButtonSaved": {
         "message": "Enregistré",
@@ -6092,6 +6247,15 @@
     },
     "craftName": {
         "message": "Nom du modèle"
+    },
+    "configurationCraftNameHelp": {
+        "message": "Peut être affiché dans les logs, les noms de fichiers de sauvegarde et l'OSD.</br>Peut être défini via la variable CLI <b>craft_name</b>."
+    },
+    "configurationPilotName": {
+        "message": "Nom du pilote"
+    },
+    "configurationPilotNameHelp": {
+        "message": "Peut être affiché dans l'OSD.</br>Peut être défini via la variable CLI <b>pilot_name</b>."
     },
     "configurationFpvCamAngleDegrees": {
         "message": "Angle Caméra FPV (degrés)"
@@ -6503,5 +6667,50 @@
     "presetsReviewOptionsWarning": {
         "message": "Veuillez vérifier la liste d'options avant de choisir ce préréglage.",
         "description": "Dialog text to prompt user to review options for the preset"
+    },
+    "firmwareFlasherBuildConfigurationHead": {
+        "message": "Générer la configuration"
+    },
+    "firmwareFlasherBuildOptions": {
+        "message": "Autres Options"
+    },
+    "firmwareFlasherBuildRadioProtocols": {
+        "message": "Protocoles Radio"
+    },
+    "firmwareFlasherBuildTelemetryProtocols": {
+        "message": "Protocoles de télémétrie"
+    },
+    "firmwareFlasherBuildMotorProtocols": {
+        "message": "Protocoles du Moteur"
+    },
+    "firmwareFlasherConfigurationFile": {
+        "message": "Nom du fichier de configuration :"
+    },
+    "firmwareFlasherRadioProtocolDescription": {
+        "message": "Sélectionnez les protocoles radio que vous souhaitez inclure dans cette version. Notez que ceci une liste déroulante et plusieurs éléments peuvent être sélectionnés."
+    },
+    "firmwareFlasherTelemetryProtocolDescription": {
+        "message": "Sélectionnez les protocoles de télémétrie que vous souhaitez inclure dans cette compilation. Notez que ceci est une liste déroulante, et que plusieurs éléments peuvent être sélectionnés. Il y a aussi certains protocoles de télémétrie qui seront activés, indépendamment de votre sélection ici basée sur le protocole radio sélectionné, par exemple CRSF."
+    },
+    "firmwareFlasherOptionsDescription": {
+        "message": "Sélectionnez les options génériques que vous souhaitez inclure dans cette compilation. Notez qu'il s'agit d'une liste déroulante et plusieurs éléments peuvent être sélectionnés. Ces éléments comme des correctifs, par exemple AKK VTX, sont inclus ici."
+    },
+    "firmwareFlasherMotorProtocolDescription": {
+        "message": "Sélectionnez les protocoles du moteur (ESC) que vous souhaitez inclure dans cette build. Notez que c'est une liste déroulante, et plusieurs éléments peuvent être sélectionnés."
+    },
+    "firmwareFlasherBranchDescription": {
+        "message": "Particulièrement utile pour les développeurs, vous pouvez sélectionner une PR fusionnée, spécifier un commit sha, ou spécifiez un PR 'encore à fusionner' en tapant dans: pull/{PR number}/head."
+    },
+    "firmwareFlasherCustomDefinesDescription": {
+        "message": "Pour les développeurs, vous pouvez ajouter les définitions dont vous avez besoin, séparées par un `espace`, mais sans le préfixe `USE_`, il sera ajouté automatiquement pour vous."
+    },
+    "firmwareFlasherBuildCustomDefines": {
+        "message": "Définitions personnalisées"
+    },
+    "classicBuild": {
+        "message": "Mode Classique"
+    },
+    "classicBuildModeDescription": {
+        "message": "Ce mode ignore tous les paramètres ici, à l'exception du commit. Cela est essentiellement le même que les nightlies classiques, et est fourni pour la commodité."
     }
 }

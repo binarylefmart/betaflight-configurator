@@ -1,10 +1,10 @@
-'use strict';
+import { i18n } from '../localization';
 
-TABS.setup = {
+const setup = {
     yaw_fix: 0.0,
 };
 
-TABS.setup.initialize = function (callback) {
+setup.initialize = function (callback) {
     const self = this;
 
     if (GUI.active_tab != 'setup') {
@@ -25,10 +25,7 @@ TABS.setup.initialize = function (callback) {
 
     MSP.send_message(MSPCodes.MSP_ACC_TRIM, false, false, load_status);
 
-    function process_html() {
-        // translate to user-selected language
-        i18n.localizePage();
-
+    function experimentalBackupRestore() {
         const backupButton = $('#content .backup');
         const restoreButton = $('#content .restore');
 
@@ -41,23 +38,23 @@ TABS.setup.initialize = function (callback) {
             GUI.log(i18n.getMessage('initialSetupRestoreSuccess'));
         }));
 
-        if (semver.lt(FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED_BACKUP_RESTORE)) {
-            backupButton.addClass('disabled');
-            restoreButton.addClass('disabled');
-
-            GUI.log(i18n.getMessage('initialSetupBackupAndRestoreApiVersion', [FC.CONFIG.apiVersion, CONFIGURATOR.API_VERSION_MIN_SUPPORTED_BACKUP_RESTORE]));
-        }
-
         if (CONFIGURATOR.virtualMode) {
             // saving and uploading an imaginary config to hardware is a bad idea
             backupButton.addClass('disabled');
-        } else if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
+        } else {
             restoreButton.addClass('disabled');
 
-            if (!PortHandler.showVirtualMode) {
+            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
                 $('.backupRestore').hide();
             }
         }
+    }
+
+    function process_html() {
+        // translate to user-selected language
+        i18n.localizePage();
+
+        experimentalBackupRestore();
 
         // initialize 3D Model
         self.initModel();
@@ -84,21 +81,17 @@ TABS.setup.initialize = function (callback) {
 
         $('#arming-disable-flag').attr('title', i18n.getMessage('initialSetupArmingDisableFlagsTooltip'));
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
-            if (isExpertModeEnabled()) {
-                $('.initialSetupRebootBootloader').show();
-            } else {
-                $('.initialSetupRebootBootloader').hide();
-            }
-
-            $('a.rebootBootloader').click(function () {
-                const buffer = [];
-                buffer.push(FC.boardHasFlashBootloader() ? mspHelper.REBOOT_TYPES.BOOTLOADER_FLASH : mspHelper.REBOOT_TYPES.BOOTLOADER);
-                MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
-            });
+        if (isExpertModeEnabled()) {
+            $('.initialSetupRebootBootloader').show();
         } else {
             $('.initialSetupRebootBootloader').hide();
         }
+
+        $('a.rebootBootloader').click(function () {
+            const buffer = [];
+            buffer.push(FC.boardHasFlashBootloader() ? mspHelper.REBOOT_TYPES.BOOTLOADER_FLASH : mspHelper.REBOOT_TYPES.BOOTLOADER);
+            MSP.send_message(MSPCodes.MSP_SET_REBOOT, buffer, false);
+        });
 
         // UI Hooks
         $('a.calibrateAccel').click(function () {
@@ -194,10 +187,6 @@ TABS.setup.initialize = function (callback) {
             pitch_e = $('dd.pitch'),
             heading_e = $('dd.heading');
 
-        if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-            arming_disable_flags_e.hide();
-        }
-
         // DISARM FLAGS
         // We add all the arming/disarming flags available, and show/hide them if needed.
         const prepareDisarmFlags = function() {
@@ -221,25 +210,20 @@ TABS.setup.initialize = function (callback) {
                 'MSP',
             ];
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_38)) {
-                disarmFlagElements.splice(disarmFlagElements.indexOf('THROTTLE'), 0, 'RUNAWAY_TAKEOFF');
-            }
+            disarmFlagElements.splice(disarmFlagElements.indexOf('THROTTLE'), 0, 'RUNAWAY_TAKEOFF');
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                disarmFlagElements = disarmFlagElements.concat(['PARALYZE',
-                                                                'GPS']);
-            }
+            disarmFlagElements = disarmFlagElements.concat(['PARALYZE', 'GPS']);
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                disarmFlagElements.splice(disarmFlagElements.indexOf('OSD_MENU'), 1);
-                disarmFlagElements = disarmFlagElements.concat(['RESC']);
-                disarmFlagElements = disarmFlagElements.concat(['RPMFILTER']);
-            }
+            disarmFlagElements.splice(disarmFlagElements.indexOf('OSD_MENU'), 1);
+            disarmFlagElements = disarmFlagElements.concat(['RESC']);
+            disarmFlagElements = disarmFlagElements.concat(['RPMFILTER']);
+
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
                 disarmFlagElements.splice(disarmFlagElements.indexOf('THROTTLE'), 0, 'CRASH');
                 disarmFlagElements = disarmFlagElements.concat(['REBOOT_REQD',
                                                                 'DSHOT_BBANG']);
             }
+
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
                 disarmFlagElements = disarmFlagElements.concat(['NO_ACC_CAL', 'MOTOR_PROTO']);
             }
@@ -273,7 +257,7 @@ TABS.setup.initialize = function (callback) {
 
         function get_slow_data() {
 
-            MSP.send_message(MSPCodes.MSP_STATUS, false, false, function() {
+            MSP.send_message(MSPCodes.MSP_STATUS_EX, false, false, function() {
 
                 $('#initialSetupArmingAllowed').toggle(FC.CONFIG.armingDisableFlags == 0);
 
@@ -318,7 +302,7 @@ TABS.setup.initialize = function (callback) {
     }
 };
 
-TABS.setup.initializeInstruments = function() {
+setup.initializeInstruments = function() {
     const options = {size:90, showBox : false, img_directory: 'images/flightindicators/'};
     const attitude = $.flightIndicator('#attitude', 'attitude', options);
     const heading = $.flightIndicator('#heading', 'heading', options);
@@ -330,13 +314,13 @@ TABS.setup.initializeInstruments = function() {
     };
 };
 
-TABS.setup.initModel = function () {
+setup.initModel = function () {
     this.model = new Model($('.model-and-info #canvas_wrapper'), $('.model-and-info #canvas'));
 
     $(window).on('resize', $.proxy(this.model.resize, this.model));
 };
 
-TABS.setup.renderModel = function () {
+setup.renderModel = function () {
     const x = (FC.SENSOR_DATA.kinematics[1] * -1.0) * 0.017453292519943295,
         y = ((FC.SENSOR_DATA.kinematics[2] * -1.0) - this.yaw_fix) * 0.017453292519943295,
         z = (FC.SENSOR_DATA.kinematics[0] * -1.0) * 0.017453292519943295;
@@ -344,7 +328,7 @@ TABS.setup.renderModel = function () {
     this.model.rotateTo(x, y, z);
 };
 
-TABS.setup.cleanup = function (callback) {
+setup.cleanup = function (callback) {
     if (this.model) {
         $(window).off('resize', $.proxy(this.model.resize, this.model));
         this.model.dispose();
@@ -352,3 +336,7 @@ TABS.setup.cleanup = function (callback) {
 
     if (callback) callback();
 };
+
+window.TABS.setup = setup;
+
+export { setup };

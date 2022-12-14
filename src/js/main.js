@@ -1,4 +1,5 @@
-import { i18n } from './localization';
+import '../components/init.js';
+import { i18n } from './localization.js';
 
 $(document).ready(function () {
 
@@ -194,7 +195,7 @@ function startProcess() {
     GUI.log(i18n.getMessage('infoVersionConfigurator', { configuratorVersion: CONFIGURATOR.getDisplayVersion() }));
 
     if (GUI.isNWJS()) {
-        let nwWindow = GUI.nwGui.Window.get();
+        const nwWindow = GUI.nwGui.Window.get();
         nwWindow.on('new-win-policy', function(frame, url, policy) {
             // do not open the window
             policy.ignore();
@@ -202,13 +203,6 @@ function startProcess() {
             GUI.nwGui.Shell.openExternal(url);
         });
         nwWindow.on('close', closeHandler);
-        // TODO: Remove visibilitychange Listener when upgrading to NW2
-        // capture Command H on MacOS and change it to minimize
-        document.addEventListener("visibilitychange", function() {
-            if (GUI.operating_system === "MacOS" && document.visibilityState === "hidden") {
-                nwWindow.minimize();
-            }
-        }, false);
     } else if (GUI.isCordova()) {
         window.addEventListener('beforeunload', closeHandler);
         document.addEventListener('backbutton', function(e) {
@@ -350,73 +344,119 @@ function startProcess() {
                         );
                         break;
                     case 'help':
-                        import('./tabs/help').then(({ help }) => help.initialize(content_ready));
+                        import("./tabs/help").then(({ help }) =>
+                            help.initialize(content_ready),
+                        );
                         break;
                     case 'auxiliary':
-                        TABS.auxiliary.initialize(content_ready);
+                        import("./tabs/auxiliary").then(({ auxiliary }) =>
+                            auxiliary.initialize(content_ready),
+                        );
                         break;
                     case 'adjustments':
-                        TABS.adjustments.initialize(content_ready);
+                        import("./tabs/adjustments").then(({ adjustments }) =>
+                            adjustments.initialize(content_ready),
+                        );
                         break;
                     case 'ports':
-                        TABS.ports.initialize(content_ready);
+                        import("./tabs/ports").then(({ ports }) =>
+                            ports.initialize(content_ready),
+                        );
                         break;
                     case 'led_strip':
-                        TABS.led_strip.initialize(content_ready);
+                        import("./tabs/led_strip").then(({ led_strip }) =>
+                            led_strip.initialize(content_ready),
+                        );
                         break;
                     case 'failsafe':
-                        TABS.failsafe.initialize(content_ready);
+                        import("./tabs/failsafe").then(({ failsafe }) =>
+                            failsafe.initialize(content_ready),
+                        );
                         break;
                     case 'transponder':
-                        TABS.transponder.initialize(content_ready);
+                        import("./tabs/transponder").then(({ transponder }) =>
+                            transponder.initialize(content_ready),
+                        );
                         break;
                     case 'osd':
-                        TABS.osd.initialize(content_ready);
+                        import("./tabs/osd").then(({ osd }) =>
+                            osd.initialize(content_ready),
+                        );
                         break;
                     case 'vtx':
-                        TABS.vtx.initialize(content_ready);
+                        import("./tabs/vtx").then(({ vtx }) =>
+                            vtx.initialize(content_ready),
+                        );
                         break;
                     case 'power':
-                        TABS.power.initialize(content_ready);
+                        import("./tabs/power").then(({ power }) =>
+                            power.initialize(content_ready),
+                        );
                         break;
                     case 'setup':
-                        TABS.setup.initialize(content_ready);
+                        import("./tabs/setup").then(({ setup }) =>
+                            setup.initialize(content_ready),
+                        );
                         break;
                     case 'setup_osd':
-                        TABS.setup_osd.initialize(content_ready);
+                        import("./tabs/setup_osd").then(({ setup_osd }) =>
+                            setup_osd.initialize(content_ready),
+                        );
                         break;
                     case 'configuration':
-                        TABS.configuration.initialize(content_ready);
+                        import("./tabs/configuration").then(({ configuration }) =>
+                            configuration.initialize(content_ready),
+                        );
                         break;
                     case 'pid_tuning':
-                        TABS.pid_tuning.initialize(content_ready);
+                        import("./tabs/pid_tuning").then(({ pid_tuning }) =>
+                            pid_tuning.initialize(content_ready),
+                        );
                         break;
                     case 'receiver':
-                        TABS.receiver.initialize(content_ready);
+                        import("./tabs/receiver").then(({ receiver }) =>
+                            receiver.initialize(content_ready),
+                        );
                         break;
                     case 'servos':
-                        TABS.servos.initialize(content_ready);
+                        import("./tabs/servos").then(({ servos }) =>
+                            servos.initialize(content_ready),
+                        );
                         break;
                     case 'gps':
-                        TABS.gps.initialize(content_ready);
+                        import("./tabs/gps").then(({ gps }) =>
+                            gps.initialize(content_ready),
+                        );
                         break;
                     case 'motors':
-                        TABS.motors.initialize(content_ready);
+                        import("./tabs/motors").then(({ motors }) =>
+                            motors.initialize(content_ready),
+                        );
                         break;
                     case 'sensors':
-                        TABS.sensors.initialize(content_ready);
+                        import("./tabs/sensors").then(({ sensors }) =>
+                            sensors.initialize(content_ready),
+                        );
                         break;
                     case 'logging':
-                        TABS.logging.initialize(content_ready);
+                        import("./tabs/logging").then(({ logging }) =>
+                            logging.initialize(content_ready),
+                        );
                         break;
                     case 'onboard_logging':
-                        TABS.onboard_logging.initialize(content_ready);
+                        import("./tabs/onboard_logging").then(({ onboard_logging }) =>
+                            onboard_logging.initialize(content_ready),
+                        );
                         break;
                     case 'cli':
-                        TABS.cli.initialize(content_ready, GUI.nwGui);
+                        import("./tabs/cli").then(({ cli }) =>
+                            cli.initialize(content_ready),
+                        );
                         break;
                     case 'presets':
-                        TABS.presets.initialize(content_ready, GUI.nwGui);
+                        import("../tabs/presets/presets").then(({ presets }) =>
+                            presets.initialize(content_ready),
+                        );
                         break;
 
                     default:
@@ -549,7 +589,7 @@ function startProcess() {
     $(expertModeCheckbox).trigger("change");
 
     result = ConfigStorage.get('cliAutoComplete');
-    CliAutoComplete.setEnabled(typeof result.cliAutoComplete === undefined || result.cliAutoComplete); // On by default
+    CliAutoComplete.setEnabled(typeof result.cliAutoComplete === "undefined" || result.cliAutoComplete); // On by default
 
     result = ConfigStorage.get('darkTheme');
     if (result.darkTheme === undefined || typeof result.darkTheme !== "number") {
@@ -598,6 +638,12 @@ function notifyOutdatedVersion(releaseData) {
     if (result.checkForConfiguratorUnstableVersions) {
         showUnstableReleases = true;
     }
+
+    if (releaseData === undefined) {
+        console.log('No releaseData');
+        return false;
+    }
+
     const versions = releaseData.filter(function (version) {
         const semVerVersion = semver.parse(version.tag_name);
         if (semVerVersion && (showUnstableReleases || semVerVersion.prerelease.length === 0)) {
@@ -684,11 +730,7 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_osd').hide();
     }
 
-    if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-        $('#tabs ul.mode-connected li.tab_power').show();
-    } else {
-        $('#tabs ul.mode-connected li.tab_power').hide();
-    }
+    $('#tabs ul.mode-connected li.tab_power').show();
 
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
         $('#tabs ul.mode-connected li.tab_vtx').show();
@@ -717,8 +759,11 @@ function generateFilename(prefix, suffix) {
         if (FC.CONFIG.flightControllerIdentifier) {
             filename = `${FC.CONFIG.flightControllerIdentifier}_${filename}`;
         }
-        if(FC.CONFIG.name && FC.CONFIG.name.trim() !== '') {
-            filename = `${filename}_${FC.CONFIG.name.trim().replace(' ', '_')}`;
+        const craftName = semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)
+            ? FC.CONFIG.craftName
+            : FC.CONFIG.name;
+        if (craftName.trim() !== '') {
+            filename = `${filename}_${craftName.trim().replace(' ', '_')}`;
         }
     }
 

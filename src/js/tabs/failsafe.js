@@ -1,9 +1,8 @@
-'use strict';
+import { i18n } from "../localization";
 
-TABS.failsafe = {};
+const failsafe = {};
 
-TABS.failsafe.initialize = function (callback, scrollPosition) {
-    const self = this;
+failsafe.initialize = function (callback) {
 
     if (GUI.active_tab != 'failsafe') {
         GUI.active_tab = 'failsafe';
@@ -18,8 +17,7 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
     }
 
     function load_rxfail_config() {
-        MSP.send_message(MSPCodes.MSP_RXFAIL_CONFIG, false, false,
-                semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41) ? load_gps_rescue : get_box_names);
+        MSP.send_message(MSPCodes.MSP_RXFAIL_CONFIG, false, false, load_gps_rescue);
     }
 
     function load_gps_rescue() {
@@ -135,37 +133,21 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
 
         for (let i = 0; i < FC.RXFAIL_CONFIG.length; i++) {
             if (i < channelNames.length) {
-                if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                    fullChannels_e.append(`\
-                        <div class="number">\
-                            <div class="channelprimary">\
-                                <span>${channelNames[i]}</span>\
-                            </div>\
-                            <div class="cf_tip channelsetting" title="${i18n.getMessage("failsafeChannelFallbackSettingsAuto")}">\
-                                <select class="aux_set" id="${i}">\
-                                    <option value="0">Auto</option>\
-                                    <option value="1">Hold</option>\
-                                </select>\
-                            </div>\
+                fullChannels_e.append(`\
+                    <div class="number">\
+                        <div class="channelprimary">\
+                            <span>${channelNames[i]}</span>\
                         </div>\
-                    `);
-                } else {
-                    fullChannels_e.append(`\
-                        <div class="number">\
-                            <div class="channelprimary">\
-                                <span>${channelNames[i]}</span>\
-                            </div>\
-                            <div class="cf_tip channelsetting" title="${i18n.getMessage("failsafeChannelFallbackSettingsAuto")}">\
-                                <select class="aux_set" id="${i}">\
-                                    <option value="0">Auto</option>\
-                                    <option value="1">Hold</option>\
-                                    <option value="2">Set</option>\
-                                </select>\
-                            </div>\
-                            <div class="auxiliary"><input type="number" name="aux_value" min="750" max="2250" step="25" id="${i}"/></div>\
+                        <div class="cf_tip channelsetting" title="${i18n.getMessage("failsafeChannelFallbackSettingsAuto")}">\
+                            <select class="aux_set" id="${i}">\
+                                <option value="0">Auto</option>\
+                                <option value="1">Hold</option>\
+                                <option value="2">Set</option>\
+                            </select>\
                         </div>\
-                    `);
-                }
+                        <div class="auxiliary"><input type="number" name="aux_value" min="750" max="2250" step="25" id="${i}"/></div>\
+                    </div>\
+                `);
             } else {
                 const messageKey = `controlAxisAux${aux_index++}`;
                 fullChannels_e.append(`\
@@ -219,11 +201,6 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
             FC.RXFAIL_CONFIG[i].value = parseInt($(this).val());
         });
 
-        // for some odd reason chrome 38+ changes scroll according to the touched select element
-        // i am guessing this is a bug, since this wasn't happening on 37
-        // code below is a temporary fix, which we will be able to remove in the future (hopefully)
-        $('#content').scrollTop((scrollPosition) ? scrollPosition : 0);
-
         // fill stage 1 Valid Pulse Range Settings
         $('input[name="rx_min_usec"]').val(FC.RX_CONFIG.rx_min_usec);
         $('input[name="rx_max_usec"]').val(FC.RX_CONFIG.rx_max_usec);
@@ -237,16 +214,8 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
 
         FC.FEATURE_CONFIG.features.generateElements($('.tab-failsafe .featuresNew'));
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_36)) {
-          $('tbody.rxFailsafe').hide();
-          toggleStage2(true);
-        } else {
-          const failsafeFeature = $('input[name="FAILSAFE"]');
-          failsafeFeature.change(function () {
-              toggleStage2($(this).is(':checked'));
-          });
-          toggleStage2(FC.FEATURE_CONFIG.features.isEnabled('FAILSAFE'));
-        }
+        $('tbody.rxFailsafe').hide();
+        toggleStage2(true);
 
         $('input[name="failsafe_throttle"]').val(FC.FAILSAFE_CONFIG.failsafe_throttle);
         $('input[name="failsafe_off_delay"]').val((FC.FAILSAFE_CONFIG.failsafe_off_delay / 10.0).toFixed(1));
@@ -279,62 +248,45 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
                 break;
         }
 
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-            // `failsafe_kill_switch` has been renamed to `failsafe_switch_mode`.
-            // It is backwards compatible with `failsafe_kill_switch`
-            $('select[name="failsafe_switch_mode"]').val(FC.FAILSAFE_CONFIG.failsafe_switch_mode);
-            $('div.kill_switch').hide();
-        }
-        else {
-            $('input[name="failsafe_kill_switch"]').prop('checked', FC.FAILSAFE_CONFIG.failsafe_switch_mode);
-            $('div.failsafe_switch').hide();
-        }
+        // `failsafe_kill_switch` has been renamed to `failsafe_switch_mode`.
+        // It is backwards compatible with `failsafe_kill_switch`
+        $('select[name="failsafe_switch_mode"]').val(FC.FAILSAFE_CONFIG.failsafe_switch_mode);
+        $('div.kill_switch').hide();
 
         // The GPS Rescue tab is only available for 1.40 or later, and the parameters for 1.41
-        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_40)) {
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                // Load GPS Rescue parameters
-                $('input[name="gps_rescue_angle"]').val(FC.GPS_RESCUE.angle);
-                $('input[name="gps_rescue_initial_altitude"]').val(FC.GPS_RESCUE.initialAltitudeM);
-                $('input[name="gps_rescue_descent_distance"]').val(FC.GPS_RESCUE.descentDistanceM);
-                $('input[name="gps_rescue_ground_speed"]').val((FC.GPS_RESCUE.rescueGroundspeed / 100).toFixed(2));
-                $('input[name="gps_rescue_throttle_min"]').val(FC.GPS_RESCUE.throttleMin);
-                $('input[name="gps_rescue_throttle_max"]').val(FC.GPS_RESCUE.throttleMax);
-                $('input[name="gps_rescue_throttle_hover"]').val(FC.GPS_RESCUE.throttleHover);
-                $('input[name="gps_rescue_min_sats"]').val(FC.GPS_RESCUE.minSats);
-                $('select[name="gps_rescue_sanity_checks"]').val(FC.GPS_RESCUE.sanityChecks);
+        // Load GPS Rescue parameters
+        $('input[name="gps_rescue_angle"]').val(FC.GPS_RESCUE.angle);
+        $('input[name="gps_rescue_initial_altitude"]').val(FC.GPS_RESCUE.initialAltitudeM);
+        $('input[name="gps_rescue_descent_distance"]').val(FC.GPS_RESCUE.descentDistanceM);
+        $('input[name="gps_rescue_ground_speed"]').val((FC.GPS_RESCUE.rescueGroundspeed / 100).toFixed(2));
+        $('input[name="gps_rescue_throttle_min"]').val(FC.GPS_RESCUE.throttleMin);
+        $('input[name="gps_rescue_throttle_max"]').val(FC.GPS_RESCUE.throttleMax);
+        $('input[name="gps_rescue_throttle_hover"]').val(FC.GPS_RESCUE.throttleHover);
+        $('input[name="gps_rescue_min_sats"]').val(FC.GPS_RESCUE.minSats);
+        $('select[name="gps_rescue_sanity_checks"]').val(FC.GPS_RESCUE.sanityChecks);
 
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
-                    $('input[name="gps_rescue_ascend_rate"]').val((FC.GPS_RESCUE.ascendRate / 100).toFixed(2));
-                    $('input[name="gps_rescue_descend_rate"]').val((FC.GPS_RESCUE.descendRate / 100).toFixed(2));
-                    $('input[name="gps_rescue_allow_arming_without_fix"]').prop('checked', FC.GPS_RESCUE.allowArmingWithoutFix > 0);
-                    $('select[name="gps_rescue_altitude_mode"]').val(FC.GPS_RESCUE.altitudeMode);
-                } else {
-                    $('input[name="gps_rescue_ascend_rate"]').closest('.number').hide();
-                    $('input[name="gps_rescue_descend_rate"]').closest('.number').hide();
-                    $('input[name="gps_rescue_allow_arming_without_fix"]').closest('.number').hide();
-                    $('select[name="gps_rescue_altitude_mode"]').closest('.number').hide();
-                }
-
-                if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
-                    $('input[name="gps_rescue_min_dth"]').val(FC.GPS_RESCUE.minRescueDth);
-                } else {
-                    $('input[name="gps_rescue_min_dth"]').closest('.number').hide();
-                }
-
-            } else {
-                // GPS Rescue Parameters not available
-                $('.pro4 > .proceduresettings').hide();
-            }
-
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
+            $('input[name="gps_rescue_ascend_rate"]').val((FC.GPS_RESCUE.ascendRate / 100).toFixed(2));
+            $('input[name="gps_rescue_descend_rate"]').val((FC.GPS_RESCUE.descendRate / 100).toFixed(2));
+            $('input[name="gps_rescue_allow_arming_without_fix"]').prop('checked', FC.GPS_RESCUE.allowArmingWithoutFix > 0);
+            $('select[name="gps_rescue_altitude_mode"]').val(FC.GPS_RESCUE.altitudeMode);
         } else {
-            // GPS Rescue option not available
-            $('.pro4').hide();
+            $('input[name="gps_rescue_ascend_rate"]').closest('.number').hide();
+            $('input[name="gps_rescue_descend_rate"]').closest('.number').hide();
+            $('input[name="gps_rescue_allow_arming_without_fix"]').closest('.number').hide();
+            $('select[name="gps_rescue_altitude_mode"]').closest('.number').hide();
         }
 
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_44)) {
+            $('input[name="gps_rescue_min_dth"]').val(FC.GPS_RESCUE.minRescueDth);
+        } else {
+            $('input[name="gps_rescue_min_dth"]').closest('.number').hide();
+        }
 
-
+        if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)) {
+            $('input[name="gps_rescue_min_dth"]').attr("min", 20);
+        }
 
         $('a.save').click(function () {
             // gather data that doesn't have automatic change event bound
@@ -357,25 +309,18 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
                 FC.FAILSAFE_CONFIG.failsafe_procedure = 2;
             }
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                FC.FAILSAFE_CONFIG.failsafe_switch_mode = $('select[name="failsafe_switch_mode"]').val();
-            }
-            else {
-                FC.FAILSAFE_CONFIG.failsafe_switch_mode = $('input[name="failsafe_kill_switch"]').is(':checked') ? 1 : 0;
-            }
+            FC.FAILSAFE_CONFIG.failsafe_switch_mode = $('select[name="failsafe_switch_mode"]').val();
 
-            if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                // Load GPS Rescue parameters
-                FC.GPS_RESCUE.angle             = $('input[name="gps_rescue_angle"]').val();
-                FC.GPS_RESCUE.initialAltitudeM  = $('input[name="gps_rescue_initial_altitude"]').val();
-                FC.GPS_RESCUE.descentDistanceM  = $('input[name="gps_rescue_descent_distance"]').val();
-                FC.GPS_RESCUE.rescueGroundspeed = $('input[name="gps_rescue_ground_speed"]').val() * 100;
-                FC.GPS_RESCUE.throttleMin       = $('input[name="gps_rescue_throttle_min"]').val();
-                FC.GPS_RESCUE.throttleMax       = $('input[name="gps_rescue_throttle_max"]').val();
-                FC.GPS_RESCUE.throttleHover     = $('input[name="gps_rescue_throttle_hover"]').val();
-                FC.GPS_RESCUE.minSats           = $('input[name="gps_rescue_min_sats"]').val();
-                FC.GPS_RESCUE.sanityChecks      = $('select[name="gps_rescue_sanity_checks"]').val();
-            }
+            // Load GPS Rescue parameters
+            FC.GPS_RESCUE.angle             = $('input[name="gps_rescue_angle"]').val();
+            FC.GPS_RESCUE.initialAltitudeM  = $('input[name="gps_rescue_initial_altitude"]').val();
+            FC.GPS_RESCUE.descentDistanceM  = $('input[name="gps_rescue_descent_distance"]').val();
+            FC.GPS_RESCUE.rescueGroundspeed = $('input[name="gps_rescue_ground_speed"]').val() * 100;
+            FC.GPS_RESCUE.throttleMin       = $('input[name="gps_rescue_throttle_min"]').val();
+            FC.GPS_RESCUE.throttleMax       = $('input[name="gps_rescue_throttle_max"]').val();
+            FC.GPS_RESCUE.throttleHover     = $('input[name="gps_rescue_throttle_hover"]').val();
+            FC.GPS_RESCUE.minSats           = $('input[name="gps_rescue_min_sats"]').val();
+            FC.GPS_RESCUE.sanityChecks      = $('select[name="gps_rescue_sanity_checks"]').val();
 
             if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
                 FC.GPS_RESCUE.ascendRate = $('input[name="gps_rescue_ascend_rate"]').val() * 100;
@@ -397,8 +342,7 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
             }
 
             function save_feature_config() {
-                MSP.send_message(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG), false,
-                        semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_41) ? save_gps_rescue : save_to_eeprom);
+                MSP.send_message(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG), false, save_gps_rescue);
             }
 
             function save_gps_rescue() {
@@ -413,7 +357,7 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
                 GUI.log(i18n.getMessage('configurationEepromSaved'));
 
                 GUI.tab_switch_cleanup(function() {
-                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false, reinitializeConnection(self));
+                    MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false, reinitializeConnection);
                 });
             }
 
@@ -432,6 +376,11 @@ TABS.failsafe.initialize = function (callback, scrollPosition) {
     }
 };
 
-TABS.failsafe.cleanup = function (callback) {
+failsafe.cleanup = function (callback) {
     if (callback) callback();
+};
+
+window.TABS.failsafe = failsafe;
+export {
+    failsafe,
 };

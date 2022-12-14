@@ -1,7 +1,7 @@
-'use strict';
+import { i18n } from "../localization";
 
-TABS.gps = {};
-TABS.gps.initialize = function (callback) {
+const gps = {};
+gps.initialize = function (callback) {
 
     if (GUI.active_tab !== 'gps') {
         GUI.active_tab = 'gps';
@@ -54,9 +54,6 @@ TABS.gps.initialize = function (callback) {
             const usedArray = ['gnssUsedUnused', 'gnssUsedUsed'];
             const healthyArray = ['gnssHealthyUnknown', 'gnssHealthyHealthy', 'gnssHealthyUnhealthy', 'gnssHealthyUnknown'];
             let alt = FC.GPS_DATA.alt;
-            if (semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_39)) {
-                alt = alt / 10;
-            }
 
             $('.GPS_info td.fix').html((FC.GPS_DATA.fix) ? i18n.getMessage('gpsFixTrue') : i18n.getMessage('gpsFixFalse'));
             $('.GPS_info td.alt').text(`${alt} m`);
@@ -219,6 +216,11 @@ TABS.gps.initialize = function (callback) {
 
 };
 
-TABS.gps.cleanup = function (callback) {
+gps.cleanup = function (callback) {
     if (callback) callback();
+};
+
+window.TABS.gps = gps;
+export {
+    gps,
 };

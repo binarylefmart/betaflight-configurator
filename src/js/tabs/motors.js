@@ -1,6 +1,6 @@
-'use strict';
+import { i18n } from "../localization";
 
-TABS.motors = {
+const motors = {
     previousDshotBidir: null,
     previousFilterDynQ: null,
     previousFilterDynCount: null,
@@ -15,6 +15,11 @@ TABS.motors = {
     sensorAccelScale: 2,
     sensorSelectValues: {
         "gyroScale": {
+            "1" : 1,
+            "2" : 2,
+            "3" : 3,
+            "4" : 4,
+            "5" : 5,
             "10" : 10,
             "25" : 25,
             "50" : 50,
@@ -44,7 +49,7 @@ TABS.motors = {
     DSHOT_3D_NEUTRAL: 1500,
 };
 
-TABS.motors.initialize = async function (callback) {
+motors.initialize = async function (callback) {
     const self = this;
 
     self.armed = false;
@@ -55,9 +60,7 @@ TABS.motors.initialize = async function (callback) {
     // Update filtering defaults based on API version
     const FILTER_DEFAULT = FC.getFilterDefaults();
 
-    if (GUI.active_tab != 'motors') {
-        GUI.active_tab = 'motors';
-    }
+    GUI.active_tab = 'motors';
 
     await MSP.promise(MSPCodes.MSP_STATUS);
     await MSP.promise(MSPCodes.MSP_PID_ADVANCED);
@@ -73,9 +76,7 @@ TABS.motors.initialize = async function (callback) {
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_42)) {
         await MSP.promise(MSPCodes.MSP_FILTER_CONFIG);
     }
-    if (semver.gte(FC.CONFIG.apiVersion, "1.8.0")) {
-        await MSP.promise(MSPCodes.MSP_ARMING_CONFIG);
-    }
+    await MSP.promise(MSPCodes.MSP_ARMING_CONFIG);
 
     load_html();
 
@@ -210,7 +211,7 @@ TABS.motors.initialize = async function (callback) {
     }
 
     function update_model(mixer) {
-        const imgSrc = getMixerImageSrc(mixer, FC.MIXER_CONFIG.reverseMotorDir, FC.CONFIG.apiVersion);
+        const imgSrc = getMixerImageSrc(mixer, FC.MIXER_CONFIG.reverseMotorDir);
         $('.mixerPreview img').attr('src', imgSrc);
 
         const motorOutputReorderConfig = new MotorOutputReorderConfig(100);
@@ -371,17 +372,17 @@ TABS.motors.initialize = async function (callback) {
         function validateMixerOutputs() {
             MSP.promise(MSPCodes.MSP_MOTOR).then(() => {
                 const mixer = FC.MIXER_CONFIG.mixer;
-                const motors = mixerList[mixer - 1].motors;
+                const motorCount = mixerList[mixer - 1].motors;
                 // initialize for models with zero motors
-                self.numberOfValidOutputs = motors;
+                self.numberOfValidOutputs = motorCount;
 
                 for (let i = 0; i < FC.MOTOR_DATA.length; i++) {
                     if (FC.MOTOR_DATA[i] === 0) {
                         self.numberOfValidOutputs = i;
-                        if (motors > self.numberOfValidOutputs && motors > 0) {
+                        if (motorCount > self.numberOfValidOutputs && motorCount > 0) {
                             const msg = i18n.getMessage('motorsDialogMixerReset', {
                                 mixerName: mixerList[mixer - 1].name,
-                                mixerMotors: motors,
+                                mixerMotors: motorCount,
                                 outputs: self.numberOfValidOutputs,
                             });
                             showDialogMixerReset(msg);
@@ -884,7 +885,7 @@ TABS.motors.initialize = async function (callback) {
         ];
 
         motorsEnableTestModeElement.on('change', function () {
-            let enabled = $(this).is(':checked');
+            let enabled = motorsEnableTestModeElement.is(':checked');
             // prevent or disable testing if configHasChanged flag is set.
             if (self.configHasChanged) {
                 if (enabled) {
@@ -900,17 +901,23 @@ TABS.motors.initialize = async function (callback) {
                 if (motorsEnableTestModeElement.is(':checked')) {
                     if (!ignoreKeys.includes(e.code)) {
                         motorsEnableTestModeElement.prop('checked', false).trigger('change');
+                        document.removeEventListener('keydown', evt => disableMotorTest(evt));
                     }
                 }
             }
 
             if (enabled) {
+                // Send enable extended dshot telemetry command
+                const buffer = [];
+
+                buffer.push8(DshotCommand.dshotCommandType_e.DSHOT_CMD_TYPE_BLOCKING);
+                buffer.push8(255);  // Send to all escs
+                buffer.push8(1);    // 1 command
+                buffer.push8(13);   // Enable extended dshot telemetry
+
+                MSP.send_message(MSPCodes.MSP2_SEND_DSHOT_COMMAND, buffer);
+
                 document.addEventListener('keydown', e => disableMotorTest(e));
-                // enable Status and Motor data pulling
-                GUI.interval_add('motor_and_status_pull', get_status, 50, true);
-            } else {
-                document.removeEventListener('keydown', e => disableMotorTest(e));
-                GUI.interval_remove("motor_and_status_pull");
             }
 
             setContentButtons(enabled);
@@ -1002,7 +1009,7 @@ TABS.motors.initialize = async function (callback) {
 
         // data pulling functions used inside interval timer
 
-        function get_status() {
+        function getStatus() {
             // status needed for arming flag
             MSP.send_message(MSPCodes.MSP_STATUS, false, false, get_motor_data);
         }
@@ -1077,7 +1084,7 @@ TABS.motors.initialize = async function (callback) {
                         telemetryText += "</span>";
                     }
 
-                    if (FC.MOTOR_CONFIG.use_esc_sensor) {
+                    if (FC.MOTOR_CONFIG.use_dshot_telemetry || FC.MOTOR_CONFIG.use_esc_sensor) {
 
                         let escTemperature = FC.MOTOR_TELEMETRY_DATA.temperature[i];
                         escTemperature = escTemperature.toString().padStart(MAX_VALUE_SIZE);
@@ -1119,10 +1126,6 @@ TABS.motors.initialize = async function (callback) {
             FC.PID_ADVANCED_CONFIG.motor_pwm_rate = parseInt($('input[name="unsyncedpwmfreq"]').val());
             FC.PID_ADVANCED_CONFIG.digitalIdlePercent = parseFloat($('input[name="digitalIdlePercent"]').val());
 
-            if (semver.gte(FC.CONFIG.apiVersion, "1.25.0") && semver.lt(FC.CONFIG.apiVersion, API_VERSION_1_41)) {
-                FC.PID_ADVANCED_CONFIG.gyroUse32kHz = $('input[id="gyroUse32kHz"]').is(':checked') ? 1 : 0;
-            }
-
             await MSP.promise(MSPCodes.MSP_SET_FEATURE_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_FEATURE_CONFIG));
             await MSP.promise(MSPCodes.MSP_SET_MIXER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MIXER_CONFIG));
             await MSP.promise(MSPCodes.MSP_SET_MOTOR_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_MOTOR_CONFIG));
@@ -1143,8 +1146,8 @@ TABS.motors.initialize = async function (callback) {
 
         $('a.stop').on('click', () => motorsEnableTestModeElement.prop('checked', false).trigger('change'));
 
-        // get initial motor status values
-        get_status();
+        // enable Status and Motor data pulling
+        GUI.interval_add('motor_and_status_pull', getStatus, 50, true);
 
         setup_motor_output_reordering_dialog(SetupEscDshotDirectionDialogCallback, zeroThrottleValue);
 
@@ -1159,10 +1162,9 @@ TABS.motors.initialize = async function (callback) {
         content_ready();
     }
 
-    async function reboot() {
+    function reboot() {
         GUI.log(i18n.getMessage('configurationEepromSaved'));
-        await MSP.promise(MSPCodes.MSP_SET_REBOOT);
-        reinitializeConnection(self);
+        MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false, reinitializeConnection);
     }
 
     function showDialogMixerReset(message) {
@@ -1268,7 +1270,7 @@ TABS.motors.initialize = async function (callback) {
     }
 };
 
-TABS.motors.refresh = function (callback) {
+motors.refresh = function (callback) {
     const self = this;
 
     GUI.tab_switch_cleanup(function() {
@@ -1280,6 +1282,11 @@ TABS.motors.refresh = function (callback) {
     });
 };
 
-TABS.motors.cleanup = function (callback) {
+motors.cleanup = function (callback) {
     if (callback) callback();
+};
+
+window.TABS.motors = motors;
+export {
+    motors,
 };

@@ -1,4 +1,12 @@
 .tab-firmware_flasher {
+	.build-options-wrapper {
+		.select2-container {
+			width: calc(100% - 30px)!important;
+		}
+		.helpicon {
+			margin-top: 8px;
+		}
+	}
 	.info {
 		padding: 2px 18px;
 		position: relative;
@@ -123,7 +131,19 @@
 			}
 		}
 	}
-	.release_info {
+    .build_configuration {
+        .select2-selection__choice {
+            margin: auto;
+            color: #3f4241;
+        }
+		input {
+			border: solid 1px var(--subtleAccent);
+			border-radius: 3px;
+			min-height: 20px;
+			padding: 2px 4px 2px 4px;
+		}
+    }
+    .release_info, .build_configuration {
 		display: none;
 		.title {
 			line-height: 20px;
@@ -144,9 +164,6 @@
 					text-decoration: underline;
 				}
 			}
-		}
-		.notes {
-			padding: 5px;
 		}
 	}
 	.git_info {
@@ -179,6 +196,12 @@
 			font-size: 11px;
 		}
 	}
+	.build_configuration_toggle_wrapper {
+		float: left;
+		position: absolute;
+		padding-left: 15px;
+		padding-top: 4px;
+	}
 }
 .btn {
 	.disabled {
@@ -202,4 +225,25 @@
 			margin-bottom: 5px;
 		}
 	}
+}
+#branchInfo {
+	.select2-selection__rendered {
+		line-height: 30px !important;
+	}
+	.select2-container .select2-selection--single {
+		height: 32px !important;
+	}
+	.select2-selection__arrow {
+		height: 32px !important;
+		width: 32px;
+	}
+}
+#customDefines {
+	width: calc(100% - 40px);
+	height: 26px;
+}
+#build_configuration_toggle_label_text {
+	margin-left: 6px;
+	padding-top: 2px;
+	margin-right: 10px;
 }

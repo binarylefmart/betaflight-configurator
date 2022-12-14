@@ -1,11 +1,10 @@
-'use strict';
+import { i18n } from "../localization";
 
-
-TABS.transponder = {
+const transponder = {
     available: false,
 };
 
-TABS.transponder.initialize = function(callback, scrollPosition) {
+transponder.initialize = function(callback) {
 
     let _persistentInputValues = {};
 
@@ -109,14 +108,13 @@ TABS.transponder.initialize = function(callback, scrollPosition) {
     };
     /////////////////////////////////////////////
 
-    if ( GUI.active_tab != 'transponder' ) {
-        GUI.active_tab = 'transponder';
-        // Disabled on merge into betaflight-configurator
-        //googleAnalytics.sendAppView('Transponder');
-    }
+    GUI.active_tab = 'transponder';
+    // Disabled on merge into betaflight-configurator
+    //googleAnalytics.sendAppView('Transponder');
+
     // transponder supported added in MSP API Version 1.16.0
-    if ( FC.CONFIG ) {
-        TABS.transponder.available = semver.gte(FC.CONFIG.apiVersion, "1.16.0");
+    if (FC.CONFIG) {
+        TABS.transponder.available = true;
     }
     //////////////
     if ( !TABS.transponder.available ) {
@@ -303,7 +301,7 @@ TABS.transponder.initialize = function(callback, scrollPosition) {
                         GUI.log(i18n.getMessage('transponderEepromSaved'));
                         if ( $(_this).hasClass('reboot') ) {
                             GUI.tab_switch_cleanup(function() {
-                                MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false, reinitializeConnection(self));
+                                MSP.send_message(MSPCodes.MSP_SET_REBOOT, false, false, reinitializeConnection);
                             });
                         }
                     });
@@ -323,6 +321,11 @@ TABS.transponder.initialize = function(callback, scrollPosition) {
     }
 };
 
-TABS.transponder.cleanup = function(callback) {
+transponder.cleanup = function(callback) {
     if ( callback ) callback();
+};
+
+window.TABS.transponder = transponder;
+export {
+    transponder,
 };

@@ -203,21 +203,6 @@
     "deviceReady": {
         "message": "Gerät - <span class=\"message-positive\">Bereit</span>"
     },
-    "backupFileIncompatible": {
-        "message": "Die Backupdatei wurde mit einer älteren Version erstellt und ist leider nicht mit dem neuen Konfigurator kompatibel. Das tut uns leid :("
-    },
-    "backupFileUnmigratable": {
-        "message": "Die Backupdatei wurde mit einer älteren Version erstellt und kann leider nicht automatisch migriert werden."
-    },
-    "configMigrationFrom": {
-        "message": "Migriere die Konfigurationsdatei von Konfigurator: $1"
-    },
-    "configMigratedTo": {
-        "message": "Konfiguration erfolgreich für Konfigurator: $1 migriert"
-    },
-    "configMigrationSuccessful": {
-        "message": "Migrierung erfolgreich, Änderungen eingespielt: $1"
-    },
     "tabFirmwareFlasher": {
         "message": "Firmware Flasher"
     },
@@ -599,9 +584,6 @@
     "defaultWelcomeHead": {
         "message": "Hardware"
     },
-    "defaultWelcomeText": {
-        "message": "Diese Anwendung unterstützt sämtliche Hardware, auf der Betaflight laufen kann. Klicke auf den Flash-Tab, um auf eine vollständige Liste der unterstützten Hardware zugreifen zu können.<br /><br /> <a href=\"https://github.com/betaflight/blackbox-log-viewer/releases\" target=\"_blank\" rel=\"noopener noreferrer\">Lade dir hier den Betaflight-Blackbox-Viewer runter.</a><br /><br />Den Betaflight Sourcecode finden Sie <a href=\"https://github.com/betaflight/betaflight\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a>.<br /><br />Die neusten <b>STM USB VCP Treiber</b> können <a href=\"http://www.st.com/web/en/catalog/tools/PF257938\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> heruntergeladen werden.<br />Für Hardware, die einen CP210x USB-zu-Seriell-Chip benutzt:<br />Die neusten <b>CP210x Treiber</b> können von <a href=\"https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers\" target=\"_blank\" rel=\"noopener noreferrer\">hier</a> heruntergeladen werden.<br />Die neusten <b>Zadig</b> Windows-USB-Treiber-Installationsdatei kann von <a href=\"http://zadig.akeo.ie/\" target=\"_blank\" rel=\"noopener noreferrer\">dieser</a> Seite heruntergeladen werden.<br />"
-    },
     "defaultContributingHead": {
         "message": "Mitmachen"
     },
@@ -675,9 +657,6 @@
     "defaultSupport5": {
         "message": "<a href=\"https://slack.betaflight.com\" target=\"_blank\" rel=\"noopener noreferrer\">Betaflight Entwickler auf Slack</a>"
     },
-    "initialSetupBackupAndRestoreApiVersion": {
-        "message": "<span class=\"message-negative\">Backup and restore functionality disabled.</span> You have firmware with API version <span class=\"message-negative\">$1</span>, backup and restore requires <span class=\"message-positive\">$2</span>. Please backup your settings via the CLI, see Betaflight documentation for procedure."
-    },
     "initialSetupButtonCalibrateAccel": {
         "message": "Beschleunigungssensor kalibieren"
     },
@@ -699,29 +678,11 @@
     "initialSetupResetText": {
         "message": "Auf Werkseinstellungen <strong>zurücksetzen</strong>"
     },
-    "initialSetupButtonBackup": {
-        "message": "JSON Backup"
-    },
-    "initialSetupButtonRestore": {
-        "message": "JSON Backup laden"
-    },
     "initialSetupButtonRebootBootloader": {
         "message": "Boot-Loader/DFU aktivieren"
     },
-    "initialSetupBackupRestoreHeader": {
-        "message": "Experimentelle Sicherung und Wiederherstellung"
-    },
-    "initialSetupBackupRestoreText": {
-        "message": "<strong>Sichere</strong> deine Einstellungen für den Fall der Fälle. <strong>Kommandozeilen-Einstellungen</strong> sind <span class=\"message-negative\">nicht</span> enthalten. Siehe den \"diff\" Kommandozeilenbefehl."
-    },
     "initialSetupRebootBootloaderText": {
         "message": "Starte im <strong>Boot-Loader/DFU Modus</strong>."
-    },
-    "initialSetupBackupSuccess": {
-        "message": "Backup <span class=\"message-positive\">erfolgreich</span> gespeichert"
-    },
-    "initialSetupRestoreSuccess": {
-        "message": "Konfiguration <span class=\"message-positive\">erfolgreich</span> wieder hergestellt"
     },
     "initialSetupButtonResetZaxis": {
         "message": "Z Achse zurücksetzen, Abweichung: 0 Grad"
@@ -2919,9 +2880,6 @@
     "sdcardStatusUnknown": {
         "message": "Unbekannter Status $1"
     },
-    "firmwareFlasherReleaseSummaryHead": {
-        "message": "Update Info"
-    },
     "firmwareFlasherReleaseManufacturer": {
         "message": "Herstellerkennung:"
     },
@@ -2939,18 +2897,6 @@
     },
     "firmwareFlasherReleaseTarget": {
         "message": "Ziel:"
-    },
-    "firmwareFlasherReleaseFile": {
-        "message": "Binär:"
-    },
-    "firmwareFlasherUnifiedTargetName": {
-        "message": "Eindeutiges Target:"
-    },
-    "firmwareFlasherUnifiedTargetFileUrl": {
-        "message": "Zeige Konfiguration."
-    },
-    "firmwareFlasherUnifiedTargetDate": {
-        "message": "Datum:"
     },
     "firmwareFlasherReleaseFileUrl": {
         "message": "Manuell herunterladen."
@@ -3564,9 +3510,6 @@
     "pidTuningCellCount": {
         "message": "Anzahl Zellen für automatischen Profil-Wechsel"
     },
-    "pidTuningCellCountHelp": {
-        "message": "Aktiviert automatisch das erste Profil, das eine Zellanzahl hat, die der angeschlossenen Batterie entspricht."
-    },
     "pidTuningNonProfileFilterSettings": {
         "message": "Profilunabhängige Filtereinstellungen"
     },
@@ -3652,7 +3595,7 @@
     },
     "pidTuningSlidersExpertSettingsDetectedNote": {
         "message": "<strong>Hinweis:</strong> Schieberegler sind deaktiviert, da sich die aktuellen Werte außerhalb des Bereichs der Grundeinstllungen befinden. Zum Expertenmodus wechseln",
-        "desciption": "Slider expert settings detected while in non-expert mode"
+        "description": "Slider expert settings detected while in non-expert mode"
     },
     "pidTuningSliderLow": {
         "message": "Gering",
@@ -3702,10 +3645,6 @@
         "message": "Dämpfung:<br /><i><small>D Verstärkung(Gain)</small></i>",
         "description": "D Gain (Damping) tuning slider label"
     },
-    "pidTuningDGainSliderHelp": {
-        "message": "Ein relativ hoher D-Wert dämpft die Reaktion der Sticks und kann die Motoren heiß werden lassen, sollte jedoch helfen Oszillation zu dämpfen, die von hohen P-Werten oder Propwash erzeugt werden.<br /><br />Ein relativ niedriger D-Wert erzeugt eine schnellere Stick Reaktion, kann aber mehr Probleme mit Propwash erzeugen).",
-        "description": "D gain balance tuning slider helpicon message"
-    },
     "pidTuningPIGainSlider": {
         "message": "Nachverfolgung:<br /><i><small>P & I Verstärkung</small></i>",
         "description": "P and I Gain (Stability) tuning slider label"
@@ -3725,10 +3664,6 @@
     "pidTuningIGainSlider": {
         "message": "Drift - Wobble:<br /><i><small>I-Verstärkung</small></i>",
         "description": "I-term slider label"
-    },
-    "pidTuningIGainSliderHelp": {
-        "message": "Erhöht oder verringert I. Höhere I-Werte können das Nachverfolgen in Spiraldrehungen, Orbits oder 0% Throttle-Befehlen. Zu viel I, insbesondere mit nicht genug P, kann nach Flips/Rolls oder beim plötzlichen 0% Throttle Signalen zu Wobbeln oder Bounceback führen.<br /><br />Normalerweise möchtest du den Schieberegler „Drift – Wobble“ so hoch wie möglich halten, um die Quad Nachverfolgung in Spiraldrehungen zu halten, Orbits, etc., aber nicht so hoch, dass Du Wobbles beim 0% Throttle siehst.<br /><br /><strong>Hinweis:</strong><br />Wenn Du zu jeder Zeit einen Bounceback bemerkst, der leicht zu sehen ist, stelle sicher, dass „I-Term Relax“ aktiviert ist und versuche den Wert <b>iterm_relax_cutoff</b> zu senken.",
-        "description": "I-gain Gain tuning slider helpicon message"
     },
     "pidTuningDMaxGainSlider": {
         "message": "Dynamische Dämpfung:<br /><i><small>D Max</small></i>",
@@ -4760,9 +4695,6 @@
         "message": "Modellname",
         "description": "One of the elements of the OSD"
     },
-    "osdDescElementCraftName": {
-        "message": "Name des Fluggerätes (gesetzt im Konfigurationstab)"
-    },
     "osdTextElementAltitude": {
         "message": "Höhe",
         "description": "One of the elements of the OSD"
@@ -5107,9 +5039,6 @@
     "osdTextElementDisplayName": {
         "message": "Anzeigename",
         "description": "One of the elements of the OSD"
-    },
-    "osdDescElementDisplayName": {
-        "message": "Zeigt den Namen, welcher durch den \"display_name\"-cli-Befehl festgelegt wurde."
     },
     "osdTextElementEscRpmFreq": {
         "message": "ESC RPM Frequenz",
@@ -6403,10 +6332,6 @@
     "presetsWarningWrongVersionConfirmation": {
         "message": "Ausgewählte Voreinstellung erfordert Firmware-Version $1<br/> Aktuelle Firmware-Version ist $2",
         "description": "Warning message that shows up at the top of the preset sources dialog"
-    },
-    "presetsNoPresetsFound": {
-        "message": "Kein Preset für die angegebenen Suchparameter gefunden",
-        "description": "Message that apprears on presets tab if no presets were found"
     },
     "presetsTooManyPresetsFound": {
         "message": "Maximale Anzahl der angezeigten Presets erreicht",
