@@ -124,16 +124,13 @@
                     </div>
                     <!-- END MAXIMUM ARMING ANGLE-->
 
-                    <!-- OTHER FEATURES -->
-                    <div class="featuresOther">
-                        <div class="gui_box grey">
+                    <div class="altilimiter">
+                        <div class="gui_box grey altilimiter">
                             <div class="gui_box_titlebar">
-                                <div class="spacer_box_title" i18n="configurationFeatures"></div>
+                                <div class="spacer_box_title" i18n="configurationAltiLimitTitle"></div>
+                                <div class="helpicon cf_tip" i18n_title="configurationAltiLimit"></div>
                             </div>
                             <div class="spacer_box">
-                                <div class="note">
-                                    <p i18n="configurationOtherFeaturesHelp"></p>
-                                </div>
                                 <table class="featuresMultiple">
                                     <thead>
                                         <tr>
@@ -142,14 +139,31 @@
                                             <th i18n="configurationFeatureName"></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="features other" id="noline">
+                                    <tbody class="features altilimiter">
                                         <!-- table generated here -->
                                     </tbody>
                                 </table>
+                                <div class="altilimiterSettings">
+                                    <div style="float:left; width:100%;">
+                                        <div class="number ">
+                                            <input type="number" id="configurationAltiStartLimTitle" step="1" min="1"
+                                                max=20000 />
+                                            <span i18n="configurationAltiStartLimTitle"></span>
+                                            <div class="helpicon cf_tip" i18n_title="configurationAltiStartLim"></div>
+                                        </div>
+                                        <div class="number ">
+                                            <input type="number" id="configurationAltiCutOffTitle" step="1" min="1"
+                                                max=20000 />
+                                            <span i18n="configurationAltiCutOffTitle"></span>
+                                            <div class="helpicon cf_tip" i18n_title="configurationAltiCutOff"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- END OTHER FUTURES-->
+                    <!-- JD -->
+                    <!-- ALTILIMIT FEATURES-->
 
                     <!-- GPS -->
                     <div class="gps">
@@ -175,7 +189,14 @@
                                         <div class="note">
                                             <p i18n="configurationGPSHelp"></p>
                                         </div>
-
+                                                                            <!-- GEOFANCING WARNING FEATURE -->
+                                    <div class="number ">
+                                        <input type="number" id="configurationGeofancingWarningTitle" step="1" min="1"
+                                            max=20000 />
+                                        <span i18n="configurationGeofancingWarningTitle"></span>
+                                        <div class="helpicon cf_tip" i18n_title="configurationGeofancingWarning"></div>
+                                    </div>
+                                    <!-- GEOFANCING WARNING FEATURE-->                            
                                         <div class="select line">
                                             <select class="gps_protocol">
                                                 <!-- list generated here -->
@@ -226,6 +247,34 @@
                         </div>
                     </div>
                     <!-- END GPS-->
+
+                    <!-- OTHER FEATURES -->
+                    <div class="featuresOther">
+                        <div class="gui_box grey">
+                            <div class="gui_box_titlebar">
+                                <div class="spacer_box_title" i18n="configurationFeatures"></div>
+                            </div>
+                            <div class="spacer_box">
+                                <div class="note">
+                                    <p i18n="configurationOtherFeaturesHelp"></p>
+                                </div>
+                                <table class="featuresMultiple">
+                                    <thead>
+                                        <tr>
+                                            <th i18n="configurationFeatureEnabled"></th>
+                                            <th i18n="configurationFeatureDescription"></th>
+                                            <th i18n="configurationFeatureName"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="features other" id="noline">
+                                        <!-- table generated here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END OTHER FUTURES-->
+
                 </div> <!-- END grid-col col6 -->
 
                 <div class="grid-col col6">

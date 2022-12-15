@@ -432,6 +432,33 @@ configuration.initialize = function (callback) {
         $('input[id="configurationSmallAngle"]').val(FC.ARMING_CONFIG.small_angle);
 
         // UI hooks
+        $('input[id="ALTILIMITswitch"]').change(function() {
+            if(semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_37)) {
+              const checked = $(this).is(':checked');
+              $('.AltilimSettings').toggle(checked);
+            }
+        }).change();
+
+        function checkUpdateALTILIMControls() {
+            if (FC.FEATURE_CONFIG.features.isEnabled('altiLimiter')) {
+                $('.altilimiterSettings').show();
+            } else {
+                $('.altilimiterSettings').hide();
+            }
+        }
+
+        $('input.feature', features_e).change(function () {
+            const element = $(this);
+
+            FC.FEATURE_CONFIG.features.updateData(element);
+            updateTabList(FC.FEATURE_CONFIG.features);
+
+            if (element.attr('name') === 'altiLimiter') {
+                checkUpdateALTILIMControls();
+            }
+        });
+
+        checkUpdateALTILIMControls();
 
         function checkUpdateGpsControls() {
             if (FC.FEATURE_CONFIG.features.isEnabled('GPS')) {
@@ -516,7 +543,7 @@ configuration.initialize = function (callback) {
             } else {
                 FC.CONFIG.name = $('input[name="craftName"]').val().trim();
             }
-
+            FC.SENSOR_CONFIG.altiLimiter = $('input[id="ALTILIMITswitch"]').is(':checked') ? 0 : 1;
             function save_serial_config() {
                 mspHelper.sendSerialConfig(save_config);
             }

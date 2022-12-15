@@ -6163,6 +6163,42 @@
     "configurationSmallAngleHelp": {
         "message": "L'engin ne sera pas armé s'il est incliné plus que le nombre spécifié en degrés. Ne s'applique que si l'accéléromètre est activé. Le réglage sur 180 désactive le contrôle"
     },
+    "configurationAltiLimit": {
+        "message": "Mode permettant au drone d'avoir une altitude maximale qu'il ne pourra pas dépasser"
+    },
+    "configurationHELPAlti": {
+        "message": "Ne fonctionne que si le baromètre et/ou le gps est activé"
+    },
+    "featurealtiLimiterTip":{
+        "message": "Ne fonctionne que si le baromètre et/ou le gps est activé"
+    },
+    "configurationAltiLimitTitle": {
+        "message": "Limitation Altitude"
+    },
+    "configurationAltiLimitSubTitle": {
+        "message": "Activer limitation altitude"
+    },
+    "featurealtiLimiter": {
+        "message": "Activer limitation altitude"
+    },
+    "configurationAltiStartLimTitle": {
+        "message": "Début limitation d'altitude"
+    },
+    "configurationAltiCutOffTitle": {
+        "message": "Limite coupure moteurs"
+    },
+    "configurationAltiStartLim": {
+        "message": "Hauteur où le drone commencera la limitation d'altitude (en mètres)"
+    },
+    "configurationAltiCutOff": {
+        "message": "Altitude maximale que le drone pourra atteindre (en mètres)"
+    },
+    "configurationGeofancingWarningTitle": {
+        "message": "Alerte limitation distance"
+    },
+    "configurationGeofancingWarning": {
+        "message": "Alerte indiquant au pilote que la distance maximale de sa zone est atteinte (en mètres)"
+    },   
     "configurationBatteryVoltage": {
         "message": "Tension batterie"
     },
