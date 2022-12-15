@@ -1690,6 +1690,11 @@ OSD.constants = {
             text: 'osdWarningTextCrashFlipMode',
             desc: 'osdWarningCrashFlipMode',
         },
+        DJI: {
+            name: 'DJI',
+            text: 'osdWarningTextDji',
+            desc: 'osdWarningDji',
+        },
         ESC_FAIL: {
             name: 'ESC_FAIL',
             text: 'osdWarningTextEscFail',
@@ -1994,6 +1999,7 @@ OSD.chooseFields = function() {
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_43)) {
         OSD.constants.WARNINGS = OSD.constants.WARNINGS.concat([
             F.OVER_CAP,
+            F.DJI,
         ]);
     }
     if (semver.gte(FC.CONFIG.apiVersion, API_VERSION_1_45)) {
